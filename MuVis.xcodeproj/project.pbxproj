@@ -1,0 +1,578 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		53036D3329B2D9490068BE8A /* PeaksSpectrogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53036D2B29B2D9490068BE8A /* PeaksSpectrogram.swift */; };
+		53036D3629B2D9490068BE8A /* Superposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53036D2E29B2D9490068BE8A /* Superposition.swift */; };
+		53036D3729B2D9490068BE8A /* LavaLamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53036D2F29B2D9490068BE8A /* LavaLamp.swift */; };
+		53036D3829B2D9490068BE8A /* Waterfall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53036D3029B2D9490068BE8A /* Waterfall.swift */; };
+		53036D3B29B2DA140068BE8A /* Lissajous.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53036D3A29B2DA140068BE8A /* Lissajous.swift */; };
+		5312511C2A0683F000E30E9E /* OctaveAlignedSpectrum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5312511B2A0683F000E30E9E /* OctaveAlignedSpectrum.swift */; };
+		5319AB6B2AACEC78007C0356 /* MuSpectrogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5319AB642AACEC78007C0356 /* MuSpectrogram.swift */; };
+		5319AB6F2AACEE34007C0356 /* HarmonicSpectrum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5319AB6E2AACEE34007C0356 /* HarmonicSpectrum.swift */; };
+		5327D12229C7CAFB00660674 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5327D12129C7CAFB00660674 /* README.md */; };
+		532A99DB2A364E8000A24FFA /* Visualizations.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 532A99D92A364E8000A24FFA /* Visualizations.pdf */; };
+		532A99DC2A364E8000A24FFA /* UserGuide.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 532A99DA2A364E8000A24FFA /* UserGuide.pdf */; };
+		5335AD862AB38C42008339A2 /* PeaksSpectrogramCG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5335AD852AB38C42008339A2 /* PeaksSpectrogramCG.swift */; };
+		533712F62A04EDB800BD0188 /* PianoKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533712F52A04EDB800BD0188 /* PianoKeyboard.swift */; };
+		5354DC252B991D6B00118996 /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5354DC242B991D6B00118996 /* music.mp3 */; };
+		53899C8B2A05505000333922 /* VisColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53899C8A2A05505000333922 /* VisColors.swift */; };
+		5395EC5629B004A80008575E /* MusicSpectrum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5395EC5529B004A80008575E /* MusicSpectrum.swift */; };
+		53A1FBDF29BD3FAE00A8553C /* RainbowEllipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1FBDD29BD3FAE00A8553C /* RainbowEllipse.swift */; };
+		53A1FBE229BD401800A8553C /* SpinningEllipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A1FBE129BD401800A8553C /* SpinningEllipse.swift */; };
+		53AB0A2429AEC274002A5EC2 /* MuVisApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB0A2329AEC274002A5EC2 /* MuVisApp.swift */; };
+		53AB0A2629AEC274002A5EC2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB0A2529AEC274002A5EC2 /* ContentView.swift */; };
+		53AB0A2829AEC274002A5EC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53AB0A2729AEC274002A5EC2 /* Assets.xcassets */; };
+		53AB0A2C29AEC274002A5EC2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53AB0A2B29AEC274002A5EC2 /* Preview Assets.xcassets */; };
+		53AB0A3329AEC30A002A5EC2 /* libbass.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 53AB0A3229AEC30A002A5EC2 /* libbass.dylib */; platformFilters = (macos, ); };
+		53AB0A3429AEC317002A5EC2 /* libbass.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 53AB0A3229AEC30A002A5EC2 /* libbass.dylib */; platformFilters = (macos, ); settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		53AB0A3A29AEC4CC002A5EC2 /* bass.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53AB0A3829AEC49A002A5EC2 /* bass.xcframework */; platformFilter = ios; };
+		53AB0A3B29AEC4CC002A5EC2 /* bass.xcframework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 53AB0A3829AEC49A002A5EC2 /* bass.xcframework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		53AB0A4029AEC9FF002A5EC2 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB0A3E29AEC9FF002A5EC2 /* AudioManager.swift */; };
+		53AB0A5929AECC20002A5EC2 /* SpectrumBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB0A4329AECC20002A5EC2 /* SpectrumBars.swift */; };
+		53AB0A5B29AECC20002A5EC2 /* SpiralOAS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB0A4529AECC20002A5EC2 /* SpiralOAS.swift */; };
+		53AB0A5C29AECC20002A5EC2 /* VisUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB0A4629AECC20002A5EC2 /* VisUtilities.swift */; };
+		53AB0A5E29AECC20002A5EC2 /* RainbowOAS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB0A4829AECC20002A5EC2 /* RainbowOAS.swift */; };
+		53AB0A6029AECC20002A5EC2 /* Harmonograph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB0A4A29AECC20002A5EC2 /* Harmonograph.swift */; };
+		53AB0A6629AECC20002A5EC2 /* HarmonicAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB0A5029AECC20002A5EC2 /* HarmonicAlignment.swift */; };
+		53AB0A6729AECC20002A5EC2 /* RainbowSpectrum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB0A5129AECC20002A5EC2 /* RainbowSpectrum.swift */; };
+		53AB0A6829AECC20002A5EC2 /* Spectrum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB0A5229AECC20002A5EC2 /* Spectrum.swift */; };
+		53AB0A6C29AECC20002A5EC2 /* OverlappedOctaves.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB0A5629AECC20002A5EC2 /* OverlappedOctaves.swift */; };
+		53AB0A6D29AECC20002A5EC2 /* MuSpectrum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB0A5729AECC20002A5EC2 /* MuSpectrum.swift */; };
+		53AB0A6E29AECC20002A5EC2 /* EllipticalOAS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB0A5829AECC20002A5EC2 /* EllipticalOAS.swift */; };
+		53AB0A8029AECFD5002A5EC2 /* SpectralEnhancer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB0A7C29AECFD5002A5EC2 /* SpectralEnhancer.swift */; };
+		53AB0A8129AECFD5002A5EC2 /* AnimatableVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB0A7D29AECFD5002A5EC2 /* AnimatableVector.swift */; };
+		53AB0A8229AECFD5002A5EC2 /* PeaksSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB0A7E29AECFD5002A5EC2 /* PeaksSorter.swift */; };
+		53B5DD722A0D2793008986ED /* RabbitHole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B5DD712A0D2793008986ED /* RabbitHole.swift */; };
+		53BA603D2A077FE7001FFE73 /* TriOctSpectrum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BA603C2A077FE7001FFE73 /* TriOctSpectrum.swift */; };
+		53BD340129B6684300433CB6 /* NoteProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BD340029B6684300433CB6 /* NoteProcessing.swift */; };
+		53BD340529B6A9E800433CB6 /* Cymbal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BD340429B6A9E800433CB6 /* Cymbal.swift */; };
+		53DF75222A3E1BDD00B89B37 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF75212A3E1BDD00B89B37 /* Settings.swift */; };
+		53E9AB8D2A0980BA00672CD2 /* OverlappedHarmonics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E9AB8C2A0980BA00672CD2 /* OverlappedHarmonics.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		53AB0A3529AEC317002A5EC2 /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				53AB0A3B29AEC4CC002A5EC2 /* bass.xcframework in Embed Libraries */,
+				53AB0A3429AEC317002A5EC2 /* libbass.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		53036D2B29B2D9490068BE8A /* PeaksSpectrogram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeaksSpectrogram.swift; sourceTree = "<group>"; };
+		53036D2E29B2D9490068BE8A /* Superposition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Superposition.swift; sourceTree = "<group>"; };
+		53036D2F29B2D9490068BE8A /* LavaLamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LavaLamp.swift; sourceTree = "<group>"; };
+		53036D3029B2D9490068BE8A /* Waterfall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Waterfall.swift; sourceTree = "<group>"; };
+		53036D3A29B2DA140068BE8A /* Lissajous.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lissajous.swift; sourceTree = "<group>"; };
+		5312511B2A0683F000E30E9E /* OctaveAlignedSpectrum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OctaveAlignedSpectrum.swift; sourceTree = "<group>"; };
+		5319AB642AACEC78007C0356 /* MuSpectrogram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuSpectrogram.swift; sourceTree = "<group>"; };
+		5319AB6E2AACEE34007C0356 /* HarmonicSpectrum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarmonicSpectrum.swift; sourceTree = "<group>"; };
+		5327D12129C7CAFB00660674 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		5329B31B29BF7DC80038695A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		532A99D92A364E8000A24FFA /* Visualizations.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Visualizations.pdf; sourceTree = "<group>"; };
+		532A99DA2A364E8000A24FFA /* UserGuide.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = UserGuide.pdf; sourceTree = "<group>"; };
+		5335AD852AB38C42008339A2 /* PeaksSpectrogramCG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeaksSpectrogramCG.swift; sourceTree = "<group>"; };
+		533712F52A04EDB800BD0188 /* PianoKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PianoKeyboard.swift; sourceTree = "<group>"; };
+		5354DC242B991D6B00118996 /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
+		53899C8A2A05505000333922 /* VisColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisColors.swift; sourceTree = "<group>"; };
+		5395EC5529B004A80008575E /* MusicSpectrum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicSpectrum.swift; sourceTree = "<group>"; };
+		53A1FBDD29BD3FAE00A8553C /* RainbowEllipse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RainbowEllipse.swift; sourceTree = "<group>"; };
+		53A1FBE129BD401800A8553C /* SpinningEllipse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinningEllipse.swift; sourceTree = "<group>"; };
+		53AB0A2029AEC274002A5EC2 /* MuVis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuVis.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		53AB0A2329AEC274002A5EC2 /* MuVisApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuVisApp.swift; sourceTree = "<group>"; };
+		53AB0A2529AEC274002A5EC2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		53AB0A2729AEC274002A5EC2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		53AB0A2929AEC274002A5EC2 /* MuVis.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MuVis.entitlements; sourceTree = "<group>"; };
+		53AB0A2B29AEC274002A5EC2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		53AB0A3229AEC30A002A5EC2 /* libbass.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libbass.dylib; sourceTree = "<group>"; };
+		53AB0A3629AEC347002A5EC2 /* bass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bass.h; sourceTree = "<group>"; };
+		53AB0A3729AEC3A6002A5EC2 /* bridging-header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "bridging-header.h"; sourceTree = "<group>"; };
+		53AB0A3829AEC49A002A5EC2 /* bass.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = bass.xcframework; sourceTree = "<group>"; };
+		53AB0A3E29AEC9FF002A5EC2 /* AudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
+		53AB0A4329AECC20002A5EC2 /* SpectrumBars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpectrumBars.swift; sourceTree = "<group>"; };
+		53AB0A4529AECC20002A5EC2 /* SpiralOAS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpiralOAS.swift; sourceTree = "<group>"; };
+		53AB0A4629AECC20002A5EC2 /* VisUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisUtilities.swift; sourceTree = "<group>"; };
+		53AB0A4829AECC20002A5EC2 /* RainbowOAS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RainbowOAS.swift; sourceTree = "<group>"; };
+		53AB0A4A29AECC20002A5EC2 /* Harmonograph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Harmonograph.swift; sourceTree = "<group>"; };
+		53AB0A5029AECC20002A5EC2 /* HarmonicAlignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarmonicAlignment.swift; sourceTree = "<group>"; };
+		53AB0A5129AECC20002A5EC2 /* RainbowSpectrum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RainbowSpectrum.swift; sourceTree = "<group>"; };
+		53AB0A5229AECC20002A5EC2 /* Spectrum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spectrum.swift; sourceTree = "<group>"; };
+		53AB0A5629AECC20002A5EC2 /* OverlappedOctaves.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlappedOctaves.swift; sourceTree = "<group>"; };
+		53AB0A5729AECC20002A5EC2 /* MuSpectrum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuSpectrum.swift; sourceTree = "<group>"; };
+		53AB0A5829AECC20002A5EC2 /* EllipticalOAS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EllipticalOAS.swift; sourceTree = "<group>"; };
+		53AB0A7C29AECFD5002A5EC2 /* SpectralEnhancer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpectralEnhancer.swift; sourceTree = "<group>"; };
+		53AB0A7D29AECFD5002A5EC2 /* AnimatableVector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatableVector.swift; sourceTree = "<group>"; };
+		53AB0A7E29AECFD5002A5EC2 /* PeaksSorter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeaksSorter.swift; sourceTree = "<group>"; };
+		53B5DD712A0D2793008986ED /* RabbitHole.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RabbitHole.swift; sourceTree = "<group>"; };
+		53BA603C2A077FE7001FFE73 /* TriOctSpectrum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriOctSpectrum.swift; sourceTree = "<group>"; };
+		53BD340029B6684300433CB6 /* NoteProcessing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteProcessing.swift; sourceTree = "<group>"; };
+		53BD340429B6A9E800433CB6 /* Cymbal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cymbal.swift; sourceTree = "<group>"; };
+		53DF75212A3E1BDD00B89B37 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		53E9AB8C2A0980BA00672CD2 /* OverlappedHarmonics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlappedHarmonics.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		53AB0A1D29AEC274002A5EC2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				53AB0A3A29AEC4CC002A5EC2 /* bass.xcframework in Frameworks */,
+				53AB0A3329AEC30A002A5EC2 /* libbass.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		53AB0A1729AEC274002A5EC2 = {
+			isa = PBXGroup;
+			children = (
+				532A99DA2A364E8000A24FFA /* UserGuide.pdf */,
+				532A99D92A364E8000A24FFA /* Visualizations.pdf */,
+				5327D12129C7CAFB00660674 /* README.md */,
+				5354DC242B991D6B00118996 /* music.mp3 */,
+				53AB0A3829AEC49A002A5EC2 /* bass.xcframework */,
+				53AB0A3729AEC3A6002A5EC2 /* bridging-header.h */,
+				53AB0A3629AEC347002A5EC2 /* bass.h */,
+				53AB0A3229AEC30A002A5EC2 /* libbass.dylib */,
+				53AB0A2229AEC274002A5EC2 /* MuVis */,
+				53AB0A2129AEC274002A5EC2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		53AB0A2129AEC274002A5EC2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				53AB0A2029AEC274002A5EC2 /* MuVis.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		53AB0A2229AEC274002A5EC2 /* MuVis */ = {
+			isa = PBXGroup;
+			children = (
+				5329B31B29BF7DC80038695A /* Info.plist */,
+				53AB0A2329AEC274002A5EC2 /* MuVisApp.swift */,
+				53AB0A2529AEC274002A5EC2 /* ContentView.swift */,
+				53DF75212A3E1BDD00B89B37 /* Settings.swift */,
+				53AB0A3E29AEC9FF002A5EC2 /* AudioManager.swift */,
+				53BD340029B6684300433CB6 /* NoteProcessing.swift */,
+				53AB0A7D29AECFD5002A5EC2 /* AnimatableVector.swift */,
+				53AB0A7E29AECFD5002A5EC2 /* PeaksSorter.swift */,
+				53AB0A7C29AECFD5002A5EC2 /* SpectralEnhancer.swift */,
+				53AB0A4229AECBBA002A5EC2 /* Visualizations */,
+				53AB0A2729AEC274002A5EC2 /* Assets.xcassets */,
+				53AB0A2929AEC274002A5EC2 /* MuVis.entitlements */,
+				53AB0A2A29AEC274002A5EC2 /* Preview Content */,
+			);
+			path = MuVis;
+			sourceTree = "<group>";
+		};
+		53AB0A2A29AEC274002A5EC2 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				53AB0A2B29AEC274002A5EC2 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		53AB0A4229AECBBA002A5EC2 /* Visualizations */ = {
+			isa = PBXGroup;
+			children = (
+				533712F52A04EDB800BD0188 /* PianoKeyboard.swift */,
+				53AB0A5229AECC20002A5EC2 /* Spectrum.swift */,
+				5395EC5529B004A80008575E /* MusicSpectrum.swift */,
+				53AB0A5729AECC20002A5EC2 /* MuSpectrum.swift */,
+				53AB0A4329AECC20002A5EC2 /* SpectrumBars.swift */,
+				53AB0A5629AECC20002A5EC2 /* OverlappedOctaves.swift */,
+				5312511B2A0683F000E30E9E /* OctaveAlignedSpectrum.swift */,
+				53AB0A5829AECC20002A5EC2 /* EllipticalOAS.swift */,
+				53AB0A4529AECC20002A5EC2 /* SpiralOAS.swift */,
+				53AB0A5029AECC20002A5EC2 /* HarmonicAlignment.swift */,
+				5319AB6E2AACEE34007C0356 /* HarmonicSpectrum.swift */,
+				53BA603C2A077FE7001FFE73 /* TriOctSpectrum.swift */,
+				53E9AB8C2A0980BA00672CD2 /* OverlappedHarmonics.swift */,
+				53AB0A4A29AECC20002A5EC2 /* Harmonograph.swift */,
+				53036D3A29B2DA140068BE8A /* Lissajous.swift */,
+				53BD340429B6A9E800433CB6 /* Cymbal.swift */,
+				53036D2F29B2D9490068BE8A /* LavaLamp.swift */,
+				53036D2E29B2D9490068BE8A /* Superposition.swift */,
+				53AB0A5129AECC20002A5EC2 /* RainbowSpectrum.swift */,
+				53036D3029B2D9490068BE8A /* Waterfall.swift */,
+				5319AB642AACEC78007C0356 /* MuSpectrogram.swift */,
+				5335AD852AB38C42008339A2 /* PeaksSpectrogramCG.swift */,
+				53036D2B29B2D9490068BE8A /* PeaksSpectrogram.swift */,
+				53AB0A4829AECC20002A5EC2 /* RainbowOAS.swift */,
+				53A1FBDD29BD3FAE00A8553C /* RainbowEllipse.swift */,
+				53A1FBE129BD401800A8553C /* SpinningEllipse.swift */,
+				53B5DD712A0D2793008986ED /* RabbitHole.swift */,
+				53AB0A4629AECC20002A5EC2 /* VisUtilities.swift */,
+				53899C8A2A05505000333922 /* VisColors.swift */,
+			);
+			path = Visualizations;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		53AB0A1F29AEC274002A5EC2 /* MuVis */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 53AB0A2F29AEC274002A5EC2 /* Build configuration list for PBXNativeTarget "MuVis" */;
+			buildPhases = (
+				53AB0A1C29AEC274002A5EC2 /* Sources */,
+				53AB0A1D29AEC274002A5EC2 /* Frameworks */,
+				53AB0A1E29AEC274002A5EC2 /* Resources */,
+				53AB0A3529AEC317002A5EC2 /* Embed Libraries */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MuVis;
+			productName = MuVis;
+			productReference = 53AB0A2029AEC274002A5EC2 /* MuVis.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		53AB0A1829AEC274002A5EC2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				KnownAssetTags = (
+					New,
+				);
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					53AB0A1F29AEC274002A5EC2 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = 53AB0A1B29AEC274002A5EC2 /* Build configuration list for PBXProject "MuVis" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 53AB0A1729AEC274002A5EC2;
+			productRefGroup = 53AB0A2129AEC274002A5EC2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				53AB0A1F29AEC274002A5EC2 /* MuVis */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		53AB0A1E29AEC274002A5EC2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5354DC252B991D6B00118996 /* music.mp3 in Resources */,
+				53AB0A2C29AEC274002A5EC2 /* Preview Assets.xcassets in Resources */,
+				53AB0A2829AEC274002A5EC2 /* Assets.xcassets in Resources */,
+				532A99DB2A364E8000A24FFA /* Visualizations.pdf in Resources */,
+				532A99DC2A364E8000A24FFA /* UserGuide.pdf in Resources */,
+				5327D12229C7CAFB00660674 /* README.md in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		53AB0A1C29AEC274002A5EC2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				53036D3829B2D9490068BE8A /* Waterfall.swift in Sources */,
+				53AB0A6829AECC20002A5EC2 /* Spectrum.swift in Sources */,
+				53A1FBDF29BD3FAE00A8553C /* RainbowEllipse.swift in Sources */,
+				53AB0A6C29AECC20002A5EC2 /* OverlappedOctaves.swift in Sources */,
+				53E9AB8D2A0980BA00672CD2 /* OverlappedHarmonics.swift in Sources */,
+				53A1FBE229BD401800A8553C /* SpinningEllipse.swift in Sources */,
+				53899C8B2A05505000333922 /* VisColors.swift in Sources */,
+				5319AB6B2AACEC78007C0356 /* MuSpectrogram.swift in Sources */,
+				533712F62A04EDB800BD0188 /* PianoKeyboard.swift in Sources */,
+				53AB0A6629AECC20002A5EC2 /* HarmonicAlignment.swift in Sources */,
+				53036D3329B2D9490068BE8A /* PeaksSpectrogram.swift in Sources */,
+				53AB0A8129AECFD5002A5EC2 /* AnimatableVector.swift in Sources */,
+				5335AD862AB38C42008339A2 /* PeaksSpectrogramCG.swift in Sources */,
+				53AB0A5B29AECC20002A5EC2 /* SpiralOAS.swift in Sources */,
+				53BD340129B6684300433CB6 /* NoteProcessing.swift in Sources */,
+				53AB0A5E29AECC20002A5EC2 /* RainbowOAS.swift in Sources */,
+				53036D3629B2D9490068BE8A /* Superposition.swift in Sources */,
+				5395EC5629B004A80008575E /* MusicSpectrum.swift in Sources */,
+				53DF75222A3E1BDD00B89B37 /* Settings.swift in Sources */,
+				53AB0A6729AECC20002A5EC2 /* RainbowSpectrum.swift in Sources */,
+				53036D3B29B2DA140068BE8A /* Lissajous.swift in Sources */,
+				53AB0A6D29AECC20002A5EC2 /* MuSpectrum.swift in Sources */,
+				53AB0A8029AECFD5002A5EC2 /* SpectralEnhancer.swift in Sources */,
+				5319AB6F2AACEE34007C0356 /* HarmonicSpectrum.swift in Sources */,
+				53AB0A8229AECFD5002A5EC2 /* PeaksSorter.swift in Sources */,
+				53AB0A5C29AECC20002A5EC2 /* VisUtilities.swift in Sources */,
+				53AB0A6E29AECC20002A5EC2 /* EllipticalOAS.swift in Sources */,
+				5312511C2A0683F000E30E9E /* OctaveAlignedSpectrum.swift in Sources */,
+				53BA603D2A077FE7001FFE73 /* TriOctSpectrum.swift in Sources */,
+				53036D3729B2D9490068BE8A /* LavaLamp.swift in Sources */,
+				53AB0A6029AECC20002A5EC2 /* Harmonograph.swift in Sources */,
+				53BD340529B6A9E800433CB6 /* Cymbal.swift in Sources */,
+				53AB0A4029AEC9FF002A5EC2 /* AudioManager.swift in Sources */,
+				53B5DD722A0D2793008986ED /* RabbitHole.swift in Sources */,
+				53AB0A2629AEC274002A5EC2 /* ContentView.swift in Sources */,
+				53AB0A2429AEC274002A5EC2 /* MuVisApp.swift in Sources */,
+				53AB0A5929AECC20002A5EC2 /* SpectrumBars.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		53AB0A2D29AEC274002A5EC2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "bridging-header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		53AB0A2E29AEC274002A5EC2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "bridging-header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		53AB0A3029AEC274002A5EC2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MuVis/MuVis.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 13;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"MuVis/Preview Content\"";
+				DEVELOPMENT_TEAM = 9JF99T9A6L;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MuVis/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MuVis;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music-games";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "MuVis analyzes microphone audio";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 2.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = GZ962756J3.com.me.kbromley.MuVis.Treata;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		53AB0A3129AEC274002A5EC2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MuVis/MuVis.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 13;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"MuVis/Preview Content\"";
+				DEVELOPMENT_TEAM = 9JF99T9A6L;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MuVis/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MuVis;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music-games";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "MuVis analyzes microphone audio";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 2.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = GZ962756J3.com.me.kbromley.MuVis.Treata;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		53AB0A1B29AEC274002A5EC2 /* Build configuration list for PBXProject "MuVis" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				53AB0A2D29AEC274002A5EC2 /* Debug */,
+				53AB0A2E29AEC274002A5EC2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		53AB0A2F29AEC274002A5EC2 /* Build configuration list for PBXNativeTarget "MuVis" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				53AB0A3029AEC274002A5EC2 /* Debug */,
+				53AB0A3129AEC274002A5EC2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 53AB0A1829AEC274002A5EC2 /* Project object */;
+}
