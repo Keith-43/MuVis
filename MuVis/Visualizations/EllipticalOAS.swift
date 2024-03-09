@@ -60,125 +60,14 @@ struct EllipticalOAS: View {
     }
 }
 
+#Preview("EllipticalOAS") {
+    EllipticalOAS()
+        .enhancedPreview()
+}
 
-struct Ellipses: View {
-    @Environment(\.colorScheme) var colorScheme
-    var body: some View {
-        GeometryReader { geometry in
-        
-            let octaveCount: Int = 8  // The FFT provides 8 octaves.
-            let width: CGFloat  = geometry.size.width   // The drawing origin is in the upper left corner.
-            let height: CGFloat = geometry.size.height  // The drawing origin is in the upper left corner.
-            
-            ZStack(alignment: .center) {
-                // Render the 9 ellipses corresponding to the 8 rows of the OAS plus 1.
-                ForEach( 0 ..< octaveCount+1, id: \.self) { row in      //  0 <= row < 8+1
-                    Ellipse()
-                        .stroke(lineWidth: 1.0)
-                        .foregroundColor(.black)
-                        .frame(width: width * CGFloat(row+1) / CGFloat(octaveCount+1),
-                               height: height * CGFloat(row+1) / CGFloat(octaveCount+1))
-                }  // end of ForEach(row)
-            }  // end of ZStack
-        }  // end of GeometryReader
-    }  // end of var body: some View
-}  // end of Ellipses struct
+// MARK: - EllipticalOAS_Live
 
-
-
-struct CenterEllipse: View {
-    @Environment(\.colorScheme) var colorScheme
-    var body: some View {
-        GeometryReader { geometry in
-            let octaveCount: Int = 8  // The FFT provides 8 octaves.
-            let width: CGFloat  = geometry.size.width   // The drawing origin is in the upper left corner.
-            let height: CGFloat = geometry.size.height  // The drawing origin is in the upper left corner.
-            
-            Ellipse()   // Fill the smallest ellipse
-                .foregroundColor( (colorScheme == .light) ? Color.white : Color(red: 60.0/255.0, green: 45.0/255.0, blue: 30.0/255.0) )
-                .frame(width: width / CGFloat(octaveCount+1), height: height / CGFloat(octaveCount+1))
-                .offset(x: width * 8.0/18.0, y: height * 8.0/18.0)
-        }  // end of GeometryReader
-    }  // end of var body: some View
-}  // end of CenterEllipse struct
-    
-
-
-struct GrayTriangles: View {
-    @Environment(\.colorScheme) var colorScheme
-
-    var body: some View {
-        GeometryReader { geometry in
-        
-            let columnCount : Int = 12  // There are 12 notes in an octave
-            let width: CGFloat  = geometry.size.width   // The drawing origin is in the upper left corner.
-            let height: CGFloat = geometry.size.height  // The drawing origin is in the upper left corner.
-            let X0: CGFloat = width  / 2.0  // the origin of the ellipses
-            let Y0: CGFloat = height / 2.0  // the origin of the ellipses
-            let A0: CGFloat = width  / 2.0  // the horizontal radius of the largest ellipse
-            let B0: CGFloat = height / 2.0  // the vertical   radius of the largest ellipse
-            var theta:  Double = 0.0
-            var theta1: Double = 0.0
-            var theta2: Double = 0.0
-            var x: CGFloat = 0.0
-            var y: CGFloat = 0.0
-            let accidentalLine: [Int] = [1, 3, 6, 8, 10]        // line value preceding notes C#, D#, F#, G#, and A#
-            
-            // Draw 5 triangles (representing the 5 accidentals (i.e., sharp/flat notes)):
-            ForEach( 0 ..< accidentalLine.count, id: \.self) { line in  // line = 0,1,2,3,4   accidentalLine = 1, 3, 6, 8, 10
-
-                Path { path in
-                    // First, do a triangle side from the outer ellipse to the center:
-                    theta1 = Double(accidentalLine[line]) / Double(columnCount)  // fraction goes from 0.0 to 1.0
-                    x = X0 + A0 * CGFloat( sin(2.0 * Double.pi * theta1) )       // 0 <= theta1 <= 1
-                    y = Y0 - B0 * CGFloat( cos(2.0 * Double.pi * theta1) )       // 0 <= theta1 <= 1
-                    path.move(   to: CGPoint(x: x,  y: y  ) )   // from outer ellipse
-                    path.addLine(to: CGPoint(x: X0, y: Y0 ) )   // to the center
-                    
-                    // Second, do the subsequent triangle side from the center to the outer ellipse:
-                    theta2 = Double(accidentalLine[line] + 1) / Double(columnCount) // fraction goes from 0.0 to 1.0
-                    x = X0 + A0 * CGFloat( sin(2.0 * Double.pi * theta2) )         // 0 <= theta2 <= 1
-                    y = Y0 - B0 * CGFloat( cos(2.0 * Double.pi * theta2) )         // 0 <= theta2 <= 1
-                    path.addLine(to: CGPoint(x: x,  y: y ) )    // to the outer ellipse
-
-                    // Third, add a line to a point on the outside ellipse that is halfway between these two angles:
-                    theta = (theta1 + theta2) * 0.5
-                    x = X0 + A0 * CGFloat( sin(2.0 * Double.pi * theta) )         // 0 <= theta <= 1
-                    y = Y0 - B0 * CGFloat( cos(2.0 * Double.pi * theta) )         // 0 <= theta <= 1
-                    path.addLine(to: CGPoint(x: x,  y: y ) )
-                    path.closeSubpath()
-                }
-                .fill( (colorScheme == .light) ? Color.lightGray.opacity(0.25) : Color.black.opacity(0.25) )
-                
-            }  // end of ForEach(accidentalLine)
-            
-            // Calculate the x,y coordinate where the 12 radial lines meet the outermost ellipse
-            // and render the radial gridlines dividing each ellipse into 12 increments.
-            // Each center between consecutive radial lines represents the center frequency of a musical note.
-            // The angles will only be correct if we make the rendering pane square (i.e., make the ellipses into circles).
-            ForEach( 0 ..< notesPerOctave, id: \.self) { note in      //  0 <= note < 12
-
-                Path { path in
-                    theta = Double(note) / Double(notesPerOctave)  // fraction goes from 0.0 to 1.0
-                    theta = min(max(0.0, theta), 1.0);                      // Limit over and under saturation.
-                    x = X0 + A0 * CGFloat( sin(2.0 * Double.pi * theta) )       // 0 <= theta <= 1
-                    y = Y0 - B0 * CGFloat( cos(2.0 * Double.pi * theta) )       // 0 <= theta <= 1
-                
-                    path.move(   to: CGPoint(x: X0, y: Y0 ) )
-                    path.addLine(to: CGPoint(x: x,  y: y ) )
-                }
-                .stroke(lineWidth: 1.0)
-                .foregroundColor(.black)
-
-            }  // end of ForEach(note)
-            
-        }  // end of GeometryReader
-    }  // end of var body: some View
-}  // end of GrayTriangles struct
-    
-
-
-struct EllipticalOAS_Live: View {
+private struct EllipticalOAS_Live: View {
     @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView.
     @EnvironmentObject var settings: Settings
     let noteProc = NoteProcessing()
@@ -289,3 +178,140 @@ struct EllipticalOAS_Live: View {
         }  // end of GeometryReader
     }  // end of var body: some View
 }  // end of EllipticalOAS_Live struct
+
+#Preview("EllipticalOAS_Live") {
+    EllipticalOAS_Live()
+        .enhancedPreview()
+}
+
+// MARK: - Ellipses
+
+private struct Ellipses: View {
+    @Environment(\.colorScheme) var colorScheme
+    var body: some View {
+        GeometryReader { geometry in
+        
+            let octaveCount: Int = 8  // The FFT provides 8 octaves.
+            let width: CGFloat  = geometry.size.width   // The drawing origin is in the upper left corner.
+            let height: CGFloat = geometry.size.height  // The drawing origin is in the upper left corner.
+            
+            ZStack(alignment: .center) {
+                // Render the 9 ellipses corresponding to the 8 rows of the OAS plus 1.
+                ForEach( 0 ..< octaveCount+1, id: \.self) { row in      //  0 <= row < 8+1
+                    Ellipse()
+                        .stroke(lineWidth: 1.0)
+                        .foregroundColor(.black)
+                        .frame(width: width * CGFloat(row+1) / CGFloat(octaveCount+1),
+                               height: height * CGFloat(row+1) / CGFloat(octaveCount+1))
+                }  // end of ForEach(row)
+            }  // end of ZStack
+        }  // end of GeometryReader
+    }  // end of var body: some View
+}  // end of Ellipses struct
+
+#Preview("Ellipses") {
+    Ellipses()
+        .enhancedPreview()
+}
+
+// MARK: - CenterEllipse
+
+private struct CenterEllipse: View {
+    @Environment(\.colorScheme) var colorScheme
+    var body: some View {
+        GeometryReader { geometry in
+            let octaveCount: Int = 8  // The FFT provides 8 octaves.
+            let width: CGFloat  = geometry.size.width   // The drawing origin is in the upper left corner.
+            let height: CGFloat = geometry.size.height  // The drawing origin is in the upper left corner.
+            
+            Ellipse()   // Fill the smallest ellipse
+                .foregroundColor( (colorScheme == .light) ? Color.white : Color(red: 60.0/255.0, green: 45.0/255.0, blue: 30.0/255.0) )
+                .frame(width: width / CGFloat(octaveCount+1), height: height / CGFloat(octaveCount+1))
+                .offset(x: width * 8.0/18.0, y: height * 8.0/18.0)
+        }  // end of GeometryReader
+    }  // end of var body: some View
+}  // end of CenterEllipse struct
+    
+#Preview("CenterEllipse") {
+    CenterEllipse()
+        .enhancedPreview()
+}
+
+// MARK: - GrayTriangles
+
+private struct GrayTriangles: View {
+    @Environment(\.colorScheme) var colorScheme
+
+    var body: some View {
+        GeometryReader { geometry in
+        
+            let columnCount : Int = 12  // There are 12 notes in an octave
+            let width: CGFloat  = geometry.size.width   // The drawing origin is in the upper left corner.
+            let height: CGFloat = geometry.size.height  // The drawing origin is in the upper left corner.
+            let X0: CGFloat = width  / 2.0  // the origin of the ellipses
+            let Y0: CGFloat = height / 2.0  // the origin of the ellipses
+            let A0: CGFloat = width  / 2.0  // the horizontal radius of the largest ellipse
+            let B0: CGFloat = height / 2.0  // the vertical   radius of the largest ellipse
+            var theta:  Double = 0.0
+            var theta1: Double = 0.0
+            var theta2: Double = 0.0
+            var x: CGFloat = 0.0
+            var y: CGFloat = 0.0
+            let accidentalLine: [Int] = [1, 3, 6, 8, 10]        // line value preceding notes C#, D#, F#, G#, and A#
+            
+            // Draw 5 triangles (representing the 5 accidentals (i.e., sharp/flat notes)):
+            ForEach( 0 ..< accidentalLine.count, id: \.self) { line in  // line = 0,1,2,3,4   accidentalLine = 1, 3, 6, 8, 10
+
+                Path { path in
+                    // First, do a triangle side from the outer ellipse to the center:
+                    theta1 = Double(accidentalLine[line]) / Double(columnCount)  // fraction goes from 0.0 to 1.0
+                    x = X0 + A0 * CGFloat( sin(2.0 * Double.pi * theta1) )       // 0 <= theta1 <= 1
+                    y = Y0 - B0 * CGFloat( cos(2.0 * Double.pi * theta1) )       // 0 <= theta1 <= 1
+                    path.move(   to: CGPoint(x: x,  y: y  ) )   // from outer ellipse
+                    path.addLine(to: CGPoint(x: X0, y: Y0 ) )   // to the center
+                    
+                    // Second, do the subsequent triangle side from the center to the outer ellipse:
+                    theta2 = Double(accidentalLine[line] + 1) / Double(columnCount) // fraction goes from 0.0 to 1.0
+                    x = X0 + A0 * CGFloat( sin(2.0 * Double.pi * theta2) )         // 0 <= theta2 <= 1
+                    y = Y0 - B0 * CGFloat( cos(2.0 * Double.pi * theta2) )         // 0 <= theta2 <= 1
+                    path.addLine(to: CGPoint(x: x,  y: y ) )    // to the outer ellipse
+
+                    // Third, add a line to a point on the outside ellipse that is halfway between these two angles:
+                    theta = (theta1 + theta2) * 0.5
+                    x = X0 + A0 * CGFloat( sin(2.0 * Double.pi * theta) )         // 0 <= theta <= 1
+                    y = Y0 - B0 * CGFloat( cos(2.0 * Double.pi * theta) )         // 0 <= theta <= 1
+                    path.addLine(to: CGPoint(x: x,  y: y ) )
+                    path.closeSubpath()
+                }
+                .fill( (colorScheme == .light) ? Color.lightGray.opacity(0.25) : Color.black.opacity(0.25) )
+                
+            }  // end of ForEach(accidentalLine)
+            
+            // Calculate the x,y coordinate where the 12 radial lines meet the outermost ellipse
+            // and render the radial gridlines dividing each ellipse into 12 increments.
+            // Each center between consecutive radial lines represents the center frequency of a musical note.
+            // The angles will only be correct if we make the rendering pane square (i.e., make the ellipses into circles).
+            ForEach( 0 ..< notesPerOctave, id: \.self) { note in      //  0 <= note < 12
+
+                Path { path in
+                    theta = Double(note) / Double(notesPerOctave)  // fraction goes from 0.0 to 1.0
+                    theta = min(max(0.0, theta), 1.0);                      // Limit over and under saturation.
+                    x = X0 + A0 * CGFloat( sin(2.0 * Double.pi * theta) )       // 0 <= theta <= 1
+                    y = Y0 - B0 * CGFloat( cos(2.0 * Double.pi * theta) )       // 0 <= theta <= 1
+                
+                    path.move(   to: CGPoint(x: X0, y: Y0 ) )
+                    path.addLine(to: CGPoint(x: x,  y: y ) )
+                }
+                .stroke(lineWidth: 1.0)
+                .foregroundColor(.black)
+
+            }  // end of ForEach(note)
+            
+        }  // end of GeometryReader
+    }  // end of var body: some View
+}  // end of GrayTriangles struct
+    
+#Preview("GrayTriangles") {
+    GrayTriangles()
+        .enhancedPreview()
+}

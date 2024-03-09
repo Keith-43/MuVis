@@ -30,22 +30,11 @@
 import SwiftUI
 
 
-
 struct RainbowSpectrum: View {
-    @Environment(\.colorScheme) var colorScheme
-
-    var body: some View {
-        RainbowSpectrum_Live()
-            .background( colorScheme == .dark ? Color.black : Color.white )
-            // Toggle between black and white as the View's background color.
-    }
-}
-
-
-
-struct RainbowSpectrum_Live: View {
     @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView.
     @EnvironmentObject var settings: Settings
+    
+    @Environment(\.colorScheme) var colorScheme
 
     static var colorIndex: Int = 0
     
@@ -126,11 +115,11 @@ struct RainbowSpectrum_Live: View {
                     valY = lineRampDown*(quarterHeight-(quarterHeight*CGFloat(vertOffset))) + (lineRampUp*halfHeight)
                 }
                 
-                RainbowSpectrum_Live.colorIndex = ( RainbowSpectrum_Live.colorIndex >= colorSize) ?
+                RainbowSpectrum.colorIndex = ( RainbowSpectrum.colorIndex >= colorSize) ?
                                                     0 :
-                                                    RainbowSpectrum_Live.colorIndex + 1
+                RainbowSpectrum.colorIndex + 1
                 
-                hueLower = Double(RainbowSpectrum_Live.colorIndex) / Double(colorSize)      // 0.0 <= hue < 1.0
+                hueLower = Double(RainbowSpectrum.colorIndex) / Double(colorSize)      // 0.0 <= hue < 1.0
                 hueUpper = hueLower + 0.5
                 if (hueUpper > 1.0) { hueUpper -= 1.0 }
                 
@@ -192,5 +181,11 @@ struct RainbowSpectrum_Live: View {
             }  // end of for(lineNum) loop
 
         }  // end of Canvas
+        .background( colorScheme == .dark ? Color.black : Color.white )
     }  //end of var body: some View
-}  // end of RainbowSpectrum_Live struct
+}  // end of RainbowSpectrum struct
+
+#Preview("RainbowSpectrum") {
+    RainbowSpectrum()
+        .enhancedPreview()
+}

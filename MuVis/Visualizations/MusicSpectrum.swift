@@ -45,9 +45,14 @@ struct MusicSpectrum: View {
     }
 }
 
+#Preview("MusicSpectrum") {
+    MusicSpectrum()
+        .enhancedPreview()
+}
 
+// MARK: - MusicSpectrum_Live
 
-struct MusicSpectrum_Live: View {
+private struct MusicSpectrum_Live: View {
     @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
     @EnvironmentObject var settings: Settings
     let spectralEnhancer = SpectralEnhancer()
@@ -153,7 +158,12 @@ struct MusicSpectrum_Live: View {
     }  // end of var body: some View
 }  // end of MusicSpectrum_Live struct
 
+#Preview("MusicSpectrum_Live") {
+    MusicSpectrum_Live()
+        .enhancedPreview()
+}
 
+// MARK: - MusicSpectrumPeaks
 
 struct MusicSpectrumPeaks: View {
     @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
@@ -184,4 +194,9 @@ struct MusicSpectrumPeaks: View {
             }
         }
     }
+}
+
+#Preview("MusicSpectrumPeaks") {
+    MusicSpectrumPeaks(octaveCount: 6)
+        .enhancedPreview()
 }

@@ -194,3 +194,8 @@ struct RabbitHole: View {
         
     }  // end of var body: some View
 }  // end of RabbitHole struct
+
+#Preview("RabbitHole") {
+    RabbitHole()
+        .enhancedPreview()
+}

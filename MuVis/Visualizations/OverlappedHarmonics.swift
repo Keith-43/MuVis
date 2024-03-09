@@ -79,9 +79,14 @@ struct OverlappedHarmonics: View {
     }
 }
 
+#Preview("OverlappedHarmonics") {
+    OverlappedHarmonics()
+        .enhancedPreview()
+}
 
+// MARK: - OverlappedHarmonics_Live
 
-struct OverlappedHarmonics_Live: View {
+private struct OverlappedHarmonics_Live: View {
     @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
     @EnvironmentObject var settings: Settings
 
@@ -209,3 +214,8 @@ struct OverlappedHarmonics_Live: View {
         }  // end of Canvas
     }  // end of var body: some View
 }  // end of OverlappedHarmonics_Live struct
+
+#Preview("OverlappedHarmonics_Live") {
+    OverlappedHarmonics_Live()
+        .enhancedPreview()
+}

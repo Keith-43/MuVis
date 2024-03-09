@@ -80,8 +80,123 @@ struct SpiralOAS: View {
     }
 }
 
+#Preview("SpiralOAS") {
+    SpiralOAS()
+        .enhancedPreview()
+}
 
-struct SpiralOAS_LayoutBackground: View {
+// MARK: - SpiralOAS_Live
+
+private struct SpiralOAS_Live: View {
+    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
+    @EnvironmentObject var settings: Settings
+    let noteProc = NoteProcessing()
+    
+    let pomegranate = Color(red: 192.0/255.0, green: 57.0/255.0, blue: 43.0/255.0)      // pomegranate red
+    let teal = Color(red: 0.0/255.0, green: 142.0/255.0, blue: 151.0/255.0)             // Miami Dolphins teal
+    let orange = Color(red: 243.0/255.0, green: 108.0/255.0, blue: 33.0/255.0)          // Netherlands orange
+    
+    var body: some View {
+        GeometryReader { geometry in
+        
+            let width: CGFloat  = geometry.size.width   // The drawing origin is in the upper left corner.
+            let height: CGFloat = geometry.size.height  // The drawing origin is in the upper left corner.
+            let X0: CGFloat = width  / 2.0  // the origin of the ellipses
+            let Y0: CGFloat = height / 2.0  // the origin of the ellipses
+            let A0: CGFloat = width  / 2.0  // the horizontal radius of the largest ellipse
+            let B0: CGFloat = height / 2.0  // the vertical   radius of the largest ellipse
+            
+            let octaveCount: Int = 8  // The FFT provides 8 octaves.
+            let radIncA: CGFloat = A0 / CGFloat(octaveCount) // gets 7 octaves in the pane.
+            let radIncB: CGFloat = B0 / CGFloat(octaveCount) // gets 7 octaves in the pane.
+            var theta: Double = 0.0
+            var spiralIndex: Double = 0.0
+            var x: CGFloat = 0.0
+            var y: CGFloat = 0.0
+            
+            var mag: CGFloat = 0.0        // used as a preliminary part of the audio amplitude value
+            var addedDataA: CGFloat = 0.0
+            var addedDataB: CGFloat = 0.0
+            
+            // Make a local copy of the spectrum array so not accessing distant array inside a tight loop:
+            let spectrum = manager.spectrum
+            
+            Path { path in
+                                
+                // Initialize the start of the spiral at the 12 o'clock position at the outermost end of the spiral:
+                spiralIndex = -( Double(octaveCount-1) + 0.99999);  // 0 <= spiralIndex <= rowCount
+                x = X0 + (radIncA * CGFloat(spiralIndex) * CGFloat( sin(2.0 * Double.pi * spiralIndex)))
+                y = Y0 + (radIncB * CGFloat(spiralIndex) * CGFloat( cos(2.0 * Double.pi * spiralIndex)))
+                path.move(   to: CGPoint(x: x, y: y ) )   // from the outer turn
+                
+                // Render the "spiral baseline" from the outside inward:
+                for oct in (0 ..< octaveCount).reversed() {          // oct = 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
+                    for point in (0 ..< pointsPerOctave).reversed() {
+                        theta = Double(point) / Double(pointsPerOctave)     // 0 <= theta <= 1
+                        spiralIndex = -( Double(oct) + theta)               // 0 <= spiralIndex <= octaveCount
+                        x = X0 + (radIncA * CGFloat(spiralIndex) * CGFloat( sin(2.0 * Double.pi * spiralIndex)))
+                        y = Y0 + (radIncB * CGFloat(spiralIndex) * CGFloat( cos(2.0 * Double.pi * spiralIndex)))
+                        path.addLine(to: CGPoint(x: x,  y: y ) )
+                    }
+                }
+
+                // Render the "spiral plus spectral data" from the inside outward:
+                for oct in 0 ..< octaveCount {  //  0 <= oct < 8
+                    for bin in noteProc.octBottomBin[oct] ... noteProc.octTopBin[oct] {
+                        theta = noteProc.binXFactor[bin]    // 0.0 < theta < 1.0
+                        spiralIndex = -( Double(oct) + theta )              // 0 <= spiralIndex <= octaveCount
+
+                        mag = Double( spectrum[bin] )
+                        mag = min(max(0.0, mag), 1.0);  // Limit over- and under-saturation.
+                        addedDataA = radIncA * mag
+                        addedDataB = radIncB * mag
+                        x = X0 + ((radIncA * Double(spiralIndex)) - addedDataA) * Double( sin(2.0 * Double.pi * spiralIndex))
+                        y = Y0 + ((radIncB * Double(spiralIndex)) - addedDataB) * Double( cos(2.0 * Double.pi * spiralIndex))
+                        path.addLine(to: CGPoint(x: x,  y: y ) )
+                    }
+                }
+                // Now close the outer points of these two spirals and fill the resultant blob:
+                path.closeSubpath()
+
+            }  // end of Path
+            .foregroundStyle(
+                (settings.option==1 || settings.option==5 ) ?
+                .angularGradient(   hueGradient,
+                                    center: UnitPoint(x: 0.5, y: 0.5),
+                                    startAngle: Angle.degrees(-90.0),
+                                    endAngle: Angle.degrees(270.0) ) :
+
+                (settings.option==2 || settings.option==6 ) ?
+                .angularGradient(   colors: [pomegranate, pomegranate],
+                                    center: UnitPoint(x: 0.5, y: 0.5),
+                                    startAngle: Angle.degrees(-90.0),
+                                    endAngle: Angle.degrees(270.0) ) :
+
+                (settings.option==3 || settings.option==7 ) ?
+                .angularGradient(   colors: [teal, teal],
+                                    center: UnitPoint(x: 0.5, y: 0.5),
+                                    startAngle: Angle.degrees(-90.0),
+                                    endAngle: Angle.degrees(270.0) ) :
+
+                .angularGradient(   colors: [orange, orange],
+                                    center: UnitPoint(x: 0.5, y: 0.5),
+                                    startAngle: Angle.degrees(-90.0),
+                                    endAngle: Angle.degrees(270.0) ) )
+
+            // In SwiftUI, all angles are measured clockwise from the 3 o'clock position.
+
+        }  // end of GeometryReader
+    }  // end of var body: some View
+}  // end of SpiralOAS_Live struct
+
+#Preview("SpiralOAS_Live") {
+    SpiralOAS_Live()
+        .enhancedPreview()
+}
+
+// MARK: - SpiralOAS_LayoutBackground
+
+private struct SpiralOAS_LayoutBackground: View {
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         GeometryReader { geometry in
@@ -234,106 +349,9 @@ struct SpiralOAS_LayoutBackground: View {
     }  // end of var body: some View
 }  // end of SpiralOAS_LayoutBackground struct
     
-    
+#Preview("SpiralOAS_LayoutBackground") {
+    SpiralOAS_LayoutBackground()
+        .enhancedPreview()
+}
 
-struct SpiralOAS_Live: View {
-    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
-    @EnvironmentObject var settings: Settings
-    let noteProc = NoteProcessing()
-    
-    let pomegranate = Color(red: 192.0/255.0, green: 57.0/255.0, blue: 43.0/255.0)      // pomegranate red
-    let teal = Color(red: 0.0/255.0, green: 142.0/255.0, blue: 151.0/255.0)             // Miami Dolphins teal
-    let orange = Color(red: 243.0/255.0, green: 108.0/255.0, blue: 33.0/255.0)          // Netherlands orange
-    
-    var body: some View {
-        GeometryReader { geometry in
-        
-            let width: CGFloat  = geometry.size.width   // The drawing origin is in the upper left corner.
-            let height: CGFloat = geometry.size.height  // The drawing origin is in the upper left corner.
-            let X0: CGFloat = width  / 2.0  // the origin of the ellipses
-            let Y0: CGFloat = height / 2.0  // the origin of the ellipses
-            let A0: CGFloat = width  / 2.0  // the horizontal radius of the largest ellipse
-            let B0: CGFloat = height / 2.0  // the vertical   radius of the largest ellipse
-            
-            let octaveCount: Int = 8  // The FFT provides 8 octaves.
-            let radIncA: CGFloat = A0 / CGFloat(octaveCount) // gets 7 octaves in the pane.
-            let radIncB: CGFloat = B0 / CGFloat(octaveCount) // gets 7 octaves in the pane.
-            var theta: Double = 0.0
-            var spiralIndex: Double = 0.0
-            var x: CGFloat = 0.0
-            var y: CGFloat = 0.0
-            
-            var mag: CGFloat = 0.0        // used as a preliminary part of the audio amplitude value
-            var addedDataA: CGFloat = 0.0
-            var addedDataB: CGFloat = 0.0
-            
-            // Make a local copy of the spectrum array so not accessing distant array inside a tight loop:
-            let spectrum = manager.spectrum
-            
-            Path { path in
-                                
-                // Initialize the start of the spiral at the 12 o'clock position at the outermost end of the spiral:
-                spiralIndex = -( Double(octaveCount-1) + 0.99999);  // 0 <= spiralIndex <= rowCount
-                x = X0 + (radIncA * CGFloat(spiralIndex) * CGFloat( sin(2.0 * Double.pi * spiralIndex)))
-                y = Y0 + (radIncB * CGFloat(spiralIndex) * CGFloat( cos(2.0 * Double.pi * spiralIndex)))
-                path.move(   to: CGPoint(x: x, y: y ) )   // from the outer turn
-                
-                // Render the "spiral baseline" from the outside inward:
-                for oct in (0 ..< octaveCount).reversed() {          // oct = 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
-                    for point in (0 ..< pointsPerOctave).reversed() {
-                        theta = Double(point) / Double(pointsPerOctave)     // 0 <= theta <= 1
-                        spiralIndex = -( Double(oct) + theta)               // 0 <= spiralIndex <= octaveCount
-                        x = X0 + (radIncA * CGFloat(spiralIndex) * CGFloat( sin(2.0 * Double.pi * spiralIndex)))
-                        y = Y0 + (radIncB * CGFloat(spiralIndex) * CGFloat( cos(2.0 * Double.pi * spiralIndex)))
-                        path.addLine(to: CGPoint(x: x,  y: y ) )
-                    }
-                }
 
-                // Render the "spiral plus spectral data" from the inside outward:
-                for oct in 0 ..< octaveCount {  //  0 <= oct < 8
-                    for bin in noteProc.octBottomBin[oct] ... noteProc.octTopBin[oct] {
-                        theta = noteProc.binXFactor[bin]    // 0.0 < theta < 1.0
-                        spiralIndex = -( Double(oct) + theta )              // 0 <= spiralIndex <= octaveCount
-
-                        mag = Double( spectrum[bin] )
-                        mag = min(max(0.0, mag), 1.0);  // Limit over- and under-saturation.
-                        addedDataA = radIncA * mag
-                        addedDataB = radIncB * mag
-                        x = X0 + ((radIncA * Double(spiralIndex)) - addedDataA) * Double( sin(2.0 * Double.pi * spiralIndex))
-                        y = Y0 + ((radIncB * Double(spiralIndex)) - addedDataB) * Double( cos(2.0 * Double.pi * spiralIndex))
-                        path.addLine(to: CGPoint(x: x,  y: y ) )
-                    }
-                }
-                // Now close the outer points of these two spirals and fill the resultant blob:
-                path.closeSubpath()
-
-            }  // end of Path
-            .foregroundStyle(
-                (settings.option==1 || settings.option==5 ) ?
-                .angularGradient(   hueGradient,
-                                    center: UnitPoint(x: 0.5, y: 0.5),
-                                    startAngle: Angle.degrees(-90.0),
-                                    endAngle: Angle.degrees(270.0) ) :
-
-                (settings.option==2 || settings.option==6 ) ?
-                .angularGradient(   colors: [pomegranate, pomegranate],
-                                    center: UnitPoint(x: 0.5, y: 0.5),
-                                    startAngle: Angle.degrees(-90.0),
-                                    endAngle: Angle.degrees(270.0) ) :
-
-                (settings.option==3 || settings.option==7 ) ?
-                .angularGradient(   colors: [teal, teal],
-                                    center: UnitPoint(x: 0.5, y: 0.5),
-                                    startAngle: Angle.degrees(-90.0),
-                                    endAngle: Angle.degrees(270.0) ) :
-
-                .angularGradient(   colors: [orange, orange],
-                                    center: UnitPoint(x: 0.5, y: 0.5),
-                                    startAngle: Angle.degrees(-90.0),
-                                    endAngle: Angle.degrees(270.0) ) )
-
-            // In SwiftUI, all angles are measured clockwise from the 3 o'clock position.
-
-        }  // end of GeometryReader
-    }  // end of var body: some View
-}  // end of SpiralOAS_Live struct

@@ -262,3 +262,8 @@ struct LavaLamp: View {
     } // end of updateParameters() func
 
 } // end of LavaLamp struct
+
+#Preview("LavaLamp") {
+    LavaLamp()
+        .enhancedPreview()
+}

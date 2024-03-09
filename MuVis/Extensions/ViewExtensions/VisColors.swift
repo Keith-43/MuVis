@@ -14,8 +14,6 @@
 import Foundation
 import SwiftUI
 
-
-
 // Define note colors for the 12 notes of the equal-tempered scale:
 extension Color {
     static let lightGray        = Color(red: 0.8, green: 0.8, blue: 0.8)    // denotes accidental notes in keyboard overlay in light mode
@@ -908,3 +906,24 @@ let hue6GradientX5: Gradient = Gradient(colors: [Color(hue:  0.0,      saturatio
 
 
 //----------------------------------------------------------------------------------------------------------------------
+
+extension Color {
+    /// #SyntacticSugar
+    init(_ red: Double, _ green: Double, _ blue: Double) {
+        self.init(red: red/255, green: green/255, blue: blue/255)
+    }
+}
+    
+extension Color {
+    static let prussianBlue = Color(15, 48, 91)
+    static let blueSapphire = Color(27, 86, 177)
+    static let almond = Color(171, 120, 78)
+    static let caramel = Color(182, 114, 51)
+    static let greenEye = Color(125, 149, 109)
+    static let slateGray = Color(87, 92, 98)
+    static let charcoalGray = Color(53, 55, 57)
+    static let steel = Color(81, 81, 81)
+    static let shadowGray = Color(41, 42, 47)
+    static let midnightGray = Color(36, 39, 48)
+    static let cream = Color(252, 249, 232)
+}

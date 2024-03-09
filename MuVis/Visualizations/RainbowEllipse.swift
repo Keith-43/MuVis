@@ -178,3 +178,8 @@ struct RainbowEllipse: View {
         
     }  // end of var body: some View{}
 }  // end of RainbowEllipse{} struct
+
+#Preview("RainbowEllipse") {
+    RainbowEllipse()
+        .enhancedPreview()
+}

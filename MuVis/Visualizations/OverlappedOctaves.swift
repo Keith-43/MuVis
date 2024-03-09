@@ -56,9 +56,14 @@ struct OverlappedOctaves: View {
     }
 }
 
+#Preview("OverlappedOctaves") {
+    OverlappedOctaves()
+        .enhancedPreview()
+}
 
+// MARK: - OverlappedOctaves_Live
 
-struct OverlappedOctaves_Live: View {
+private struct OverlappedOctaves_Live: View {
     @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
     @EnvironmentObject var settings: Settings
     @Environment(\.colorScheme) var colorScheme
@@ -156,5 +161,10 @@ struct OverlappedOctaves_Live: View {
             }  // end of for(oct) loop
 
         }  // end of Canvas
-    }  // end of var body: some View
-}  // end of OverlappedOctaves_Live struct
+    }  
+}
+
+#Preview("OverlappedOctaves_Live") {
+    OverlappedOctaves_Live()
+        .enhancedPreview()
+}

@@ -158,3 +158,8 @@ struct Lissajous : View {
 
     }  // end of var body: some View
 }  // end of Lissajous struct
+
+#Preview("Lissajous") {
+    Lissajous()
+        .enhancedPreview()
+}

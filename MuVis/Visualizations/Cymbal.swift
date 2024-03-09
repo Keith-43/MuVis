@@ -114,3 +114,8 @@ struct Cymbal: View {
         
     }  // end of var body: some View{}
 }  // end of Cymbal struct
+
+#Preview("Cymbal") {
+    Cymbal()
+        .enhancedPreview()
+}

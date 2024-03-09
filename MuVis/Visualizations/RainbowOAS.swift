@@ -188,3 +188,8 @@ struct RainbowOAS: View {
         
     }  //end of var body: some View{}
 }  // end of RainbowOAS struct
+
+#Preview("RainbowOAS") {
+    RainbowOAS()
+        .enhancedPreview()
+}

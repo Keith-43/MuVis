@@ -195,3 +195,8 @@ struct SpinningEllipse: View {
         
     }  // end of var body: some View
 }  // end of SpinningEllipse struct
+
+#Preview("SpinningEllipse") {
+    SpinningEllipse()
+        .enhancedPreview()
+}

@@ -30,9 +30,11 @@ import SwiftUI
 struct MuSpectrogramCG: View {
     @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView.
     @EnvironmentObject var settings: Settings
+    
     @Environment(\.displayScale) var displayScale: CGFloat
     @Environment(\.colorScheme) var colorScheme
-    @State var drawingPane = DrawingPane()
+    
+    @State private var drawingPane = DrawingPane()
 
     var body: some View {
         let option = settings.option
@@ -48,9 +50,14 @@ struct MuSpectrogramCG: View {
     }
 }
 
+#Preview("MuSpectrogramCG") {
+    MuSpectrogramCG()
+        .enhancedPreview()
+}
 
+// MARK: - DrawingPane
 
-struct DrawingPane {
+private struct DrawingPane {
     static let myHistCount: Int = 1_000                         // 1,000 horizontal pixels
     let octaveCount: Int = 6                                    // This visualization will cover 6 octaves.
     static var counter: Int = 0

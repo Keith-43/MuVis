@@ -54,6 +54,8 @@
 		53BD340529B6A9E800433CB6 /* Cymbal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BD340429B6A9E800433CB6 /* Cymbal.swift */; };
 		53DF75222A3E1BDD00B89B37 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF75212A3E1BDD00B89B37 /* Settings.swift */; };
 		53E9AB8D2A0980BA00672CD2 /* OverlappedHarmonics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E9AB8C2A0980BA00672CD2 /* OverlappedHarmonics.swift */; };
+		6123A94D2B9CF7DC0067A598 /* ViewUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6123A94C2B9CF7DC0067A598 /* ViewUtilities.swift */; };
+		61885C462B9B98B200F85261 /* Miscellaneous.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61885C452B9B98B200F85261 /* Miscellaneous.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -122,6 +124,8 @@
 		53BD340429B6A9E800433CB6 /* Cymbal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cymbal.swift; sourceTree = "<group>"; };
 		53DF75212A3E1BDD00B89B37 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		53E9AB8C2A0980BA00672CD2 /* OverlappedHarmonics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlappedHarmonics.swift; sourceTree = "<group>"; };
+		6123A94C2B9CF7DC0067A598 /* ViewUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtilities.swift; sourceTree = "<group>"; };
+		61885C452B9B98B200F85261 /* Miscellaneous.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Miscellaneous.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +178,7 @@
 				53AB0A7E29AECFD5002A5EC2 /* PeaksSorter.swift */,
 				53AB0A7C29AECFD5002A5EC2 /* SpectralEnhancer.swift */,
 				53AB0A4229AECBBA002A5EC2 /* Visualizations */,
+				61885C432B9B988C00F85261 /* Extensions */,
 				53AB0A2729AEC274002A5EC2 /* Assets.xcassets */,
 				53AB0A2929AEC274002A5EC2 /* MuVis.entitlements */,
 				53AB0A2A29AEC274002A5EC2 /* Preview Content */,
@@ -220,9 +225,26 @@
 				53A1FBE129BD401800A8553C /* SpinningEllipse.swift */,
 				53B5DD712A0D2793008986ED /* RabbitHole.swift */,
 				53AB0A4629AECC20002A5EC2 /* VisUtilities.swift */,
-				53899C8A2A05505000333922 /* VisColors.swift */,
 			);
 			path = Visualizations;
+			sourceTree = "<group>";
+		};
+		61885C432B9B988C00F85261 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				61885C442B9B989600F85261 /* ViewExtensions */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		61885C442B9B989600F85261 /* ViewExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				61885C452B9B98B200F85261 /* Miscellaneous.swift */,
+				53899C8A2A05505000333922 /* VisColors.swift */,
+				6123A94C2B9CF7DC0067A598 /* ViewUtilities.swift */,
+			);
+			path = ViewExtensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -331,6 +353,8 @@
 				53AB0A5C29AECC20002A5EC2 /* VisUtilities.swift in Sources */,
 				53AB0A6E29AECC20002A5EC2 /* EllipticalOAS.swift in Sources */,
 				5312511C2A0683F000E30E9E /* OctaveAlignedSpectrum.swift in Sources */,
+				61885C462B9B98B200F85261 /* Miscellaneous.swift in Sources */,
+				6123A94D2B9CF7DC0067A598 /* ViewUtilities.swift in Sources */,
 				53BA603D2A077FE7001FFE73 /* TriOctSpectrum.swift in Sources */,
 				53036D3729B2D9490068BE8A /* LavaLamp.swift in Sources */,
 				53AB0A6029AECC20002A5EC2 /* Harmonograph.swift in Sources */,

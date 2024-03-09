@@ -53,9 +53,14 @@ struct Spectrum: View {
     }
 }
 
+#Preview("Spectrum") {
+    Spectrum()
+        .enhancedPreview()
+}
 
+// MARK: - Spectrum_Live
 
-struct Spectrum_Live: View {
+private struct Spectrum_Live: View {
     @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
     @EnvironmentObject var settings: Settings
     let spectralEnhancer = SpectralEnhancer()
@@ -132,7 +137,12 @@ struct Spectrum_Live: View {
     }  // end of var body: some View
 }  // end of Spectrum_Live struct
 
+#Preview("Spectrum_Live") {
+    Spectrum_Live()
+        .enhancedPreview()
+}
 
+// MARK: - DecibelSpectrum_Live
 
 struct DecibelSpectrum_Live: View {
     @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
@@ -200,10 +210,15 @@ struct DecibelSpectrum_Live: View {
     }  // end of var body: some View
 }  // end of DecibelSpectrum_Live struct
 
+#Preview("DecibelSpectrum_Live") {
+    DecibelSpectrum_Live()
+        .enhancedPreview()
+}
 
+// MARK: - SpectrumPeaks
 
 // Render the peaks in black or white at the top of the view:
-struct SpectrumPeaks: View {
+private struct SpectrumPeaks: View {
     @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
     @EnvironmentObject var settings: Settings
     @Environment(\.colorScheme) var colorScheme
@@ -233,8 +248,12 @@ struct SpectrumPeaks: View {
     }
 }  // end of SpectrumPeaks struct
 
+#Preview("SpectrumPeaks") {
+    SpectrumPeaks()
+        .enhancedPreview()
+}
 
-
+// TODO: New File?
 // The ampToDecibels() func is used in the Spectrum and MusicSpectrum visualizations.
 public func ampToDecibels(inputArray: [Float]) -> ([Float]) {
     var dB: Float = 0.0
@@ -255,9 +274,9 @@ public func ampToDecibels(inputArray: [Float]) -> ([Float]) {
     return outputArray
 }
 
+// MARK: - GrayVertRects
 
-
-struct GrayVertRects: View {
+private struct GrayVertRects: View {
     @Environment(\.colorScheme) var colorScheme
     let noteProc = NoteProcessing()
     
@@ -303,3 +322,8 @@ struct GrayVertRects: View {
         }
     }
 }  // end of struct GrayVertRects
+
+#Preview("GrayVertRects") {
+    GrayVertRects()
+        .enhancedPreview()
+}

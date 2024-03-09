@@ -97,9 +97,14 @@ struct Superposition: View {
     }
 } // end of Superposition struct
 
+#Preview("Superposition") {
+    Superposition()
+        .enhancedPreview()
+}
 
+// MARK: - Superposition
 
-struct Superposition_Shape: Shape {
+private struct Superposition_Shape: Shape {
     var myDataLength: Int
     var vector: AnimatableVector        // Declare a variable called vector of type Animatable vector
 
@@ -136,8 +141,7 @@ struct Superposition_Shape: Shape {
     }
 }
 
-
-
+// TODO: New File?
 public func generateWaveform(binNumbers: [Int], myDataLength: Int) -> ([Float]) {
     var outputArray: [Float] = [Float] (repeating: 0.0, count: myDataLength)
     var waveform: [Float] = [Float] (repeating: 0.0, count: myDataLength)

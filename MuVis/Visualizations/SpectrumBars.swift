@@ -58,9 +58,14 @@ struct SpectrumBars: View {
     }
 }  // end of SpectrumBars struct
 
+#Preview("SpectrumBars") {
+    SpectrumBars()
+        .enhancedPreview()
+}
 
+// MARK: - AmplitudeBar
 
-struct AmplitudeBar: View {
+private struct AmplitudeBar: View {
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var settings: Settings
     var amplitude: Float

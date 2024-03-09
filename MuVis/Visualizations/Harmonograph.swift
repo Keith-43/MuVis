@@ -47,9 +47,14 @@ struct Harmonograph: View {
     }
 }
 
+#Preview("Harmonograph") {
+    Harmonograph()
+        .enhancedPreview()
+}
 
+// MARK: - Harmonograph_DoubleSpectrum
 
-struct Harmonograph_DoubleSpectrum : View {
+private struct Harmonograph_DoubleSpectrum : View {
     @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
     @Environment(\.colorScheme) var colorScheme
     
@@ -138,10 +143,14 @@ struct Harmonograph_DoubleSpectrum : View {
     }  // end of var body: some View
 }  // end of DoubleSpectrum struct
 
+#Preview("Harmonograph_DoubleSpectrum") {
+    Harmonograph_DoubleSpectrum()
+        .enhancedPreview()
+}
 
+// MARK: - LissajousFigure
 
-// ---------------------------------------------------------------------------------------------------------------------
-struct LissajousFigure : View {
+private struct LissajousFigure : View {
     @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
     @EnvironmentObject var settings: Settings
     var spectralEnhancer = SpectralEnhancer()
@@ -343,3 +352,8 @@ struct LissajousFigure : View {
 
     }  // end of var body: some View
 }  // end of LissajousFigure struct
+
+#Preview("LissajousFigure") {
+    LissajousFigure()
+        .enhancedPreview()
+}

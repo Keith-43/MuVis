@@ -45,12 +45,19 @@ struct PianoKeyboard: View {
     }
 }
 
+#Preview("PianoKeyboard") {
+    PianoKeyboard()
+        .enhancedPreview()
+}
 
+// MARK: - PianoKeyboard_Live
 
 struct PianoKeyboard_Live: View {
-    @EnvironmentObject var manager: AudioManager  // Observe instance of AudioManager passed from ContentView
+    @EnvironmentObject var manager: AudioManager
     @EnvironmentObject var settings: Settings
+    
     @Environment(\.colorScheme) var colorScheme
+    
     let noteProc = NoteProcessing()
     
     var body: some View {
@@ -108,6 +115,9 @@ struct PianoKeyboard_Live: View {
                 }
                 path.addLine( to: CGPoint( x: width, y: halfHeight ) )  // right midpoint
                 
+                // TODO: Reduntant code below; Room for optimization!
+                // Mirror the upper half of the screen on the bottom half.
+                
                 // Render the upper 2 octaves of the spectrum along the lower right-half of the horizontal axis:
                 for bin in (lowerBin ... upperBin).reversed() {
                     x = width * noteProc.binXFactor6[bin]
@@ -139,6 +149,12 @@ struct PianoKeyboard_Live: View {
     }  // end of var body: some View
 }  // end of PianoKeyboard_Live struct
 
+#Preview("PianoKeyboard_Live") {
+    PianoKeyboard_Live()
+        .enhancedPreview()
+}
+
+// MARK: - Notes
 
 // This View shows the best computed estimate of actual notes as gray heavy vertical lines:
 // The currentNote array will contain 8 noteNums (0-71).  If the element is 99, it is not a playing currentNote.
@@ -166,11 +182,19 @@ struct Notes: View {
     }
 }
 
+#Preview("Notes") {
+    Notes(noteCount: 72)
+        .enhancedPreview()
+}
+
+// MARK: - Peaks72
 
 // This View shows the 16 loudest spectral peaks as "blips" at the pane top and bottom:
-struct Peaks72: View {
+fileprivate struct Peaks72: View {
     @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
+    
     @Environment(\.colorScheme) var colorScheme
+    
     var noteProc = NoteProcessing()
     
     var body: some View {
@@ -191,4 +215,9 @@ struct Peaks72: View {
             }
         }
     }
+}
+
+#Preview("Peaks72") {
+    Peaks72()
+        .enhancedPreview()
 }

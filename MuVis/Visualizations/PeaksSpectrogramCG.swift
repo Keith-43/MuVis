@@ -30,9 +30,11 @@ import SwiftUI
 struct PeaksSpectrogramCG: View {
     @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView.
     @EnvironmentObject var settings: Settings
+    
     @Environment(\.displayScale) var displayScale: CGFloat
     @Environment(\.colorScheme) var colorScheme
-    var pane = Pane()
+    
+    private var pane = Pane()
 
     var body: some View {
         ZStack {
@@ -50,9 +52,14 @@ struct PeaksSpectrogramCG: View {
     }
 }
 
+#Preview("PeaksSpectrogramCG") {
+    PeaksSpectrogramCG()
+        .enhancedPreview()
+}
 
+// MARK: - Pane
 
-struct Pane {
+private struct Pane {
     let noteProc = NoteProcessing()
     static let myHistCount: Int = 1_000                         // 1,000 horizontal pixels
     let octaveCount: Int = 6                                    // This visualization will cover 6 octaves.

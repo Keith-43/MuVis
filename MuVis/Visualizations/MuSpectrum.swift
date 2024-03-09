@@ -43,9 +43,14 @@ struct MuSpectrum: View {
     }
 }
 
+#Preview("MuSpectrum") {
+    MuSpectrum()
+        .enhancedPreview()
+}
 
+// MARK: - MuSpectrum_Live
 
-struct MuSpectrum_Live: View {
+private struct MuSpectrum_Live: View {
 
     @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
     @EnvironmentObject var settings: Settings
@@ -165,3 +170,9 @@ struct MuSpectrum_Live: View {
         
     }  // end of var body: some View
 }  // end of MuSpectrum struct
+
+#Preview("MuSpectrum_Live") {
+    MuSpectrum_Live()
+        .enhancedPreview()
+}
+
