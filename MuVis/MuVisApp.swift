@@ -37,14 +37,18 @@ let accidentalNotes: [Bool] = [ false, true, false, true, false, false, true, fa
                                 false, true, false, true, false, false, true, false, true, false, true, false,
                                 false, true, false, true, false, false, true, false, true, false, true, false ]
 
+// MARK: - Main
 
 @main
 struct MuVisApp: App {
+    @Bindable var manager = AudioManager()
+    @Bindable var settings = Settings()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(AudioManager.manager)
-                .environmentObject(Settings.settings)
+            ContentView(manager: manager, settings: settings)
+                .environment(manager)
+                .environment(settings)
                 .frame( minWidth:  400.0, idealWidth: 1000.0, maxWidth:  .infinity,
                         minHeight: 300.0, idealHeight: 800.0, maxHeight: .infinity, alignment: .center)
         }

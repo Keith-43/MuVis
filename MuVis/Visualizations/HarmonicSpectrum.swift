@@ -53,7 +53,8 @@ import SwiftUI
 
 
 struct HarmonicSpectrum: View {
-    @EnvironmentObject var settings: Settings
+    @Environment(Settings.self) private var settings: Settings
+    
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
@@ -83,8 +84,9 @@ struct HarmonicSpectrum: View {
 // MARK: - HarmonicSpectrum_Live
 
 private struct HarmonicSpectrum_Live: View {
-    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
+    
     @Environment(\.colorScheme) var colorScheme
     let noteProc = NoteProcessing()
     

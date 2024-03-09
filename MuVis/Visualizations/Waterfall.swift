@@ -18,8 +18,9 @@ import SwiftUI
 
 
 struct Waterfall: View {
-    @EnvironmentObject var manager: AudioManager    // Observe instance of AudioManager passed to us from ContentView.
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
+    
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
@@ -45,8 +46,8 @@ struct Waterfall: View {
 // MARK: - Waterfall
 
 private struct Waterfall_Live: View {
-    @EnvironmentObject var manager: AudioManager  // Observe instance of AudioManager passed from ContentView.
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
 
     static var colorIndex: Int = 0
 

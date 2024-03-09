@@ -28,8 +28,8 @@ import SwiftUI
 
 
 struct PianoKeyboard: View {
-    @EnvironmentObject var manager: AudioManager    // Observe instance of AudioManager passed from ContentView
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
 
     var body: some View {
         let option = settings.option                // Use local short name to improve code readablity.
@@ -53,8 +53,8 @@ struct PianoKeyboard: View {
 // MARK: - PianoKeyboard_Live
 
 struct PianoKeyboard_Live: View {
-    @EnvironmentObject var manager: AudioManager
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
     
     @Environment(\.colorScheme) var colorScheme
     
@@ -159,7 +159,8 @@ struct PianoKeyboard_Live: View {
 // This View shows the best computed estimate of actual notes as gray heavy vertical lines:
 // The currentNote array will contain 8 noteNums (0-71).  If the element is 99, it is not a playing currentNote.
 struct Notes: View {
-    @EnvironmentObject var manager: AudioManager
+    @Environment(AudioManager.self) private var manager: AudioManager
+    
     @Environment(\.colorScheme) var colorScheme
     var noteCount: Int
     
@@ -191,7 +192,7 @@ struct Notes: View {
 
 // This View shows the 16 loudest spectral peaks as "blips" at the pane top and bottom:
 fileprivate struct Peaks72: View {
-    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
+    @Environment(AudioManager.self) private var manager: AudioManager
     
     @Environment(\.colorScheme) var colorScheme
     

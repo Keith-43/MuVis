@@ -63,8 +63,9 @@ import SwiftUI
 
 
 struct HarmonicAlignment: View {
-    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
+    
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
@@ -95,8 +96,8 @@ struct HarmonicAlignment: View {
 // MARK: - HarmonicAlignment_Live
 
 private struct HarmonicAlignment_Live: View {
-    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
     
     var body: some View {
         let option = settings.option     // Use local short name to improve code readablity.

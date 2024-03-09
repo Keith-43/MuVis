@@ -29,8 +29,9 @@ import SwiftUI
 
 
 struct MuSpectrum: View {
-    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
+    
     var body: some View {
         let option = settings.option     // Use local short name to improve code readablity.
         ZStack {
@@ -52,8 +53,9 @@ struct MuSpectrum: View {
 
 private struct MuSpectrum_Live: View {
 
-    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
+    
     let spectralEnhancer = SpectralEnhancer()
     @Environment(\.colorScheme) var colorScheme
     

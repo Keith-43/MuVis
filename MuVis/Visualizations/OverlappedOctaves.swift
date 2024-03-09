@@ -35,7 +35,8 @@ import SwiftUI
 
 
 struct OverlappedOctaves: View {
-    @EnvironmentObject var settings: Settings
+    @Environment(Settings.self) private var settings: Settings
+    
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
@@ -64,8 +65,9 @@ struct OverlappedOctaves: View {
 // MARK: - OverlappedOctaves_Live
 
 private struct OverlappedOctaves_Live: View {
-    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
+    
     @Environment(\.colorScheme) var colorScheme
     let noteProc = NoteProcessing()
     let pomegranate = Color(red: 192.0/255.0, green: 57.0/255.0, blue: 43.0/255.0)

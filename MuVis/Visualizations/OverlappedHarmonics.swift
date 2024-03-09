@@ -56,8 +56,9 @@ import SwiftUI
 
 
 struct OverlappedHarmonics: View {
-    @EnvironmentObject var manager: AudioManager    // Observe the instance of AudioManager passed from ContentView
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
+    
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
@@ -87,8 +88,8 @@ struct OverlappedHarmonics: View {
 // MARK: - OverlappedHarmonics_Live
 
 private struct OverlappedHarmonics_Live: View {
-    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
 
     var body: some View {
         

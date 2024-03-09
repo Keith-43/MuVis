@@ -24,8 +24,9 @@ import SwiftUI
 
 
 struct SpectrumBars: View {
-    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
+    
     @Environment(\.colorScheme) var colorScheme
     
     var linearGradient : LinearGradient = LinearGradient( gradient: Gradient(colors: [.red, .yellow, .green]),
@@ -67,7 +68,10 @@ struct SpectrumBars: View {
 
 private struct AmplitudeBar: View {
     @Environment(\.colorScheme) var colorScheme
-    @EnvironmentObject var settings: Settings
+    
+    
+    @Environment(Settings.self) private var settings: Settings
+    
     var amplitude: Float
     var linearGradient : LinearGradient
     var paddingFraction: CGFloat = 0.2

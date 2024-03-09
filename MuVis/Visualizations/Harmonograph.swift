@@ -34,8 +34,8 @@ import SwiftUI
 
 
 struct Harmonograph: View {
-    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
 
     var body: some View {
         let option = settings.option     // Use local short name to improve code readablity.
@@ -55,7 +55,8 @@ struct Harmonograph: View {
 // MARK: - Harmonograph_DoubleSpectrum
 
 private struct Harmonograph_DoubleSpectrum : View {
-    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
+    @Environment(AudioManager.self) private var manager: AudioManager
+
     @Environment(\.colorScheme) var colorScheme
     
     static var colorIndex: Int = 0
@@ -151,8 +152,9 @@ private struct Harmonograph_DoubleSpectrum : View {
 // MARK: - LissajousFigure
 
 private struct LissajousFigure : View {
-    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
+    
     var spectralEnhancer = SpectralEnhancer()
     @Environment(\.colorScheme) var colorScheme
 

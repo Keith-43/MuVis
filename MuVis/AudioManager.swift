@@ -25,9 +25,10 @@
 ///  Created by Keith Bromley on 2/24/23.
 
 import Accelerate
-import SwiftUI
+import Observation
 
-class AudioManager: ObservableObject {
+@Observable
+class AudioManager {
     
     static let manager = AudioManager() // This singleton instantiates the AudioManager class and runs setupAudio()
     let spectralEnhancer = SpectralEnhancer()
@@ -41,55 +42,55 @@ class AudioManager: ObservableObject {
 
     static let binFreqWidth: Double = (sampleRate/2.0 ) / Double(binCount) //binFreqWidth = (44100/2)/8192  = 2.69165 Hz
 
-    var isPaused: Bool = false      // When paused, don't overwrite the previous rendering with all-zeroes:
-    var micOn: Bool = false         // true means microphone is on and its audio is being captured.
+    @ObservationIgnored var isPaused: Bool = false      // When paused, don't overwrite the previous rendering with all-zeroes:
+    @ObservationIgnored var micOn: Bool = false         // true means microphone is on and its audio is being captured.
 
     // Play this song when the MuVis app starts:
-    var filePath = Bundle.main.path(forResource: "music", ofType: "mp3")    // changed in ContentView by Button("Song")
+    @ObservationIgnored var filePath = Bundle.main.path(forResource: "music", ofType: "mp3")    // changed in ContentView by Button("Song")
     
-    var userGain: Float = getGain()         // The getGain() func is located at the bottom of this file.
-    var userSlope: Float = getSlope()       // The getSlope() func is located at the bottom of this file.
-    var onlyPeaks: Bool = getOnlyPeaks()    // The getOnlyPeaks() func is located at the bottom of this file.
+    @ObservationIgnored var userGain: Float = getGain()         // The getGain() func is located at the bottom of this file.
+    @ObservationIgnored var userSlope: Float = getSlope()       // The getSlope() func is located at the bottom of this file.
+    @ObservationIgnored var onlyPeaks: Bool = getOnlyPeaks()    // The getOnlyPeaks() func is located at the bottom of this file.
 
-    var skipHist: Int = 0       // number of muSpectra to skip between adding to muSpecHistory array
-    var skipCounter: Int = 0    // temporary counter to decide skipping in adding to muSpecHistory array
+    @ObservationIgnored var skipHist: Int = 0       // number of muSpectra to skip between adding to muSpecHistory array
+    @ObservationIgnored var skipCounter: Int = 0    // temporary counter to decide skipping in adding to muSpecHistory array
 
     // Declare arrays of the final values (for this frame) that we will publish to the various visualizations:
     
     // Declare an array to contain the first 3,022 binValues of the current window of audio spectral data:
-    @Published var spectrum: [Float] = [Float](repeating: 0.0, count: NoteProcessing.binCount8)   // binCount8 = 3,022
+    var spectrum: [Float] = [Float](repeating: 0.0, count: NoteProcessing.binCount8)   // binCount8 = 3,022
     
     // Declare an array to contain the 96 * 12 = 1,152 points of the current muSpectrum of the audio data:
-    @Published var muSpectrum = [Float](repeating: 0.0, count: eightOctPointCount)
+    var muSpectrum = [Float](repeating: 0.0, count: eightOctPointCount)
     
     // Declare two arrays to store the 16 loudest peak bin numbers and their amplitudes of the spectrum:
-    @Published var peakBinNumbers  = [Int] (repeating: 0,   count: peakCount)   // bin numbers of the spectral peaks
-    @Published var peakAmps  = [Double] (repeating: 0.0, count: peakCount)      // amplitudes of the spectral peaks
-    @Published var currentNotes  = [Int] (repeating: 0, count: 8)               // estimate of notes currently playing
+    var peakBinNumbers  = [Int] (repeating: 0,   count: peakCount)   // bin numbers of the spectral peaks
+    var peakAmps  = [Double] (repeating: 0.0, count: peakCount)      // amplitudes of the spectral peaks
+    var currentNotes  = [Int] (repeating: 0, count: 8)               // estimate of notes currently playing
     
     // Declare a circular buffer to store the past 48 blocks of the first six octaves of the spectrum.
     // It stores 48 * 756 = 36,288 bins
-    @Published var spectrumHistory: [Float] = [Float](repeating: 0.0, count: historyCount * NoteProcessing.binCount6)
+    var spectrumHistory: [Float] = [Float](repeating: 0.0, count: historyCount * NoteProcessing.binCount6)
     
     // Declare a circular array to store the past 48 blocks of the first six octaves of the muSpectrum.
     // It stores 48 * 72 * 12 = 41,472 points
-    @Published var muSpecHistory: [Float] = [Float](repeating: 0.0, count: historyCount * sixOctPointCount)
+    var muSpecHistory: [Float] = [Float](repeating: 0.0, count: historyCount * sixOctPointCount)
     
     // Declare a circular array to store the past 100 blocks of the 16 loudest peak bin numbers of the spectrum:
     // It stores 100 * 16 = 1,600 bin numbers
-    @Published var peaksHistory: [Int] = [Int](repeating: 0, count: peaksHistCount * peakCount)
+    var peaksHistory: [Int] = [Int](repeating: 0, count: peaksHistCount * peakCount)
     
     // Declare a circular array to store the past 100 blocks of the 8 current (estimated) notes:
     // It stores 100 * 8 = 800 note numbers
-    @Published var notesHistory: [Int] = [Int](repeating: 0, count: peaksHistCount * 8)
+    var notesHistory: [Int] = [Int](repeating: 0, count: peaksHistCount * 8)
     
     // Variables used for performance monitoring:
-    var startTime: Date = Date()
-    var endTime: Date = Date()
-    var averageTime: Double = 0.0
-    var durationArray: [Double] = [Double](repeating: 0.0, count: 100) // an array of the 10 most-recent interval durations
+    @ObservationIgnored var startTime: Date = Date()
+    @ObservationIgnored var endTime: Date = Date()
+    @ObservationIgnored var averageTime: Double = 0.0
+    @ObservationIgnored var durationArray: [Double] = [Double](repeating: 0.0, count: 100) // an array of the 10 most-recent interval durations
     
-    var stream: HSTREAM = 0
+    @ObservationIgnored var stream: HSTREAM = 0
     
     func startMusicPlay() { BASS_Start() }
     func pauseMusicPlay() { BASS_Pause() }
@@ -97,9 +98,9 @@ class AudioManager: ObservableObject {
 
     init() { processAudio() }
 
-
-    // ----------------------------------------------------------------------------------------------------------------
-    func processAudio(){
+// MARK: - processAudio
+   
+    func processAudio() {
 
         //--------------------------------------------------------------------------------------------------------------
         

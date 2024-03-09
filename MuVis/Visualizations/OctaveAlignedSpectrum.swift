@@ -40,8 +40,9 @@ import SwiftUI
 
 
 struct OctaveAlignedSpectrum: View {
-    @EnvironmentObject var manager: AudioManager  // Observe instance of AudioManager passed from ContentView
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
+    
     var body: some View {
         let option = settings.option     // Use local short name to improve code readablity.
         ZStack {
@@ -62,9 +63,11 @@ struct OctaveAlignedSpectrum: View {
 // MARK: - OctaveAlignedSpectrum_Live
 
 private struct OctaveAlignedSpectrum_Live: View {
-    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView.
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
+    
     @Environment(\.colorScheme) var colorScheme
+    
     let noteProc = NoteProcessing()
     let pomegranate = Color(red: 192.0/255.0, green: 57.0/255.0, blue: 43.0/255.0)	// pomegranate red
     let teal = Color(red: 0.0/255.0, green: 142.0/255.0, blue: 151.0/255.0)			// Miami Dolphins teal

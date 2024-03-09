@@ -28,8 +28,8 @@ import SwiftUI
 
 
 struct PeaksSpectrogramCG: View {
-    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView.
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
     
     @Environment(\.displayScale) var displayScale: CGFloat
     @Environment(\.colorScheme) var colorScheme

@@ -40,8 +40,9 @@ import SwiftUI
 
 
 struct Spectrum: View {
-    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
+    
     var body: some View {
         let option = settings.option     // Use local short name to improve code readablity.
         ZStack {
@@ -61,10 +62,12 @@ struct Spectrum: View {
 // MARK: - Spectrum_Live
 
 private struct Spectrum_Live: View {
-    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
+    
     let spectralEnhancer = SpectralEnhancer()
     let noteProc = NoteProcessing()
+    
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
@@ -145,9 +148,11 @@ private struct Spectrum_Live: View {
 // MARK: - DecibelSpectrum_Live
 
 struct DecibelSpectrum_Live: View {
-    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
+    @Environment(AudioManager.self) private var manager: AudioManager
+    
     let spectralEnhancer = SpectralEnhancer()
     let noteProc = NoteProcessing()
+    
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
@@ -219,8 +224,9 @@ struct DecibelSpectrum_Live: View {
 
 // Render the peaks in black or white at the top of the view:
 private struct SpectrumPeaks: View {
-    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
+    
     @Environment(\.colorScheme) var colorScheme
     let noteProc = NoteProcessing()
     

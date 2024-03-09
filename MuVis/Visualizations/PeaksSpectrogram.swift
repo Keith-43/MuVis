@@ -30,8 +30,9 @@
 import SwiftUI
 
 struct PeaksSpectrogram: View {
-    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
+    
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
@@ -68,8 +69,9 @@ struct PeaksSpectrogram: View {
 // MARK: - PeaksSpectrogram_Live
 
 private struct PeaksSpectrogram_Live: View {
-    @EnvironmentObject var manager: AudioManager        // Observe the instance of AudioManager passed from ContentView
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
+    
     let noteProc = NoteProcessing()
     
     var body: some View {

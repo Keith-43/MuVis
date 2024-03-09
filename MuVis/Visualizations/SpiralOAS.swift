@@ -66,8 +66,8 @@ import SwiftUI
 
 
 struct SpiralOAS: View {
-    @EnvironmentObject var manager: AudioManager    // Observe the instance of AudioManager passed from ContentView.
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
     
     var body: some View {
         let option = settings.option                // Use local short name to improve code readablity.
@@ -88,8 +88,9 @@ struct SpiralOAS: View {
 // MARK: - SpiralOAS_Live
 
 private struct SpiralOAS_Live: View {
-    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
+    
     let noteProc = NoteProcessing()
     
     let pomegranate = Color(red: 192.0/255.0, green: 57.0/255.0, blue: 43.0/255.0)      // pomegranate red

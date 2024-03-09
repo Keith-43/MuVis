@@ -47,8 +47,9 @@ import SwiftUI
 
 
 struct TriOctSpectrum: View {
-    @EnvironmentObject var manager: AudioManager  // We observe the instance of AudioManager passed from ContentView.
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
+    
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
@@ -81,8 +82,9 @@ struct TriOctSpectrum: View {
 // MARK: - TriOctSpectrum_Live
 
 private struct TriOctSpectrum_Live : View {
-    @EnvironmentObject var manager: AudioManager  // We observe the instance of AudioManager passed from ContentView.
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
+    
     var noteProc = NoteProcessing()
 
     var body: some View {
@@ -156,7 +158,8 @@ private struct TriOctSpectrum_Live : View {
 // MARK: - Notes36
 
 private struct Notes36 : View {
-    @EnvironmentObject var manager: AudioManager  // We observe the instance of AudioManager passed from ContentView.
+    @Environment(AudioManager.self) private var manager: AudioManager
+    
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
@@ -169,9 +172,9 @@ private struct Notes36 : View {
             
             // Paint the note with it's noteColor if it has sufficient noteScore (up to 8 current notes)
             for i in 0 ..< 8 {
-                if(currentNotes[i] == 99) {break}
+                if (currentNotes[i] == 99) {break}
 
-                if(currentNotes[i] <= 36) {                                             // lower 3 octaves
+                if (currentNotes[i] <= 36) {                                             // lower 3 octaves
                     let tempX: Double = Double(currentNotes[i]) * columnWidth
                     context.fill(
                         Path(CGRect(x: tempX, y: halfHeight, width: columnWidth, height: height)),
@@ -195,7 +198,8 @@ private struct Notes36 : View {
 // MARK: - Peaks36
 
 private struct Peaks36: View {
-    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
+    @Environment(AudioManager.self) private var manager: AudioManager
+    
     @Environment(\.colorScheme) var colorScheme
     var noteProc = NoteProcessing()
     
@@ -210,13 +214,13 @@ private struct Peaks36: View {
 
                 if(peakBinNumbers[peakNum] == 0) {break}         // Only render non-zero peaks.
                 
-                if(peakBinNumbers[peakNum] <= 94) {                 // octaves 0, 1, 2          Octave 2 ends at bin 94.
+                if (peakBinNumbers[peakNum] <= 94) {                 // octaves 0, 1, 2          Octave 2 ends at bin 94.
                     // render the spectrum bins from 12 to 94:
                     tempD = noteProc.binXFactor3[manager.peakBinNumbers[peakNum]]
                     context.fill(
                         Path(CGRect(x: tempD * width, y: 0.95 * height, width: 2.0, height: 0.05 * height)),
                         with: .color((colorScheme == .light) ? .black : .white) )
-                }else{                                              // octaves 3, 4, 5        Octave 3 begins at bin 95.
+                } else {                                              // octaves 3, 4, 5        Octave 3 begins at bin 95.
                     // render the spectrum bins from 95 to 755:
                     tempD = noteProc.binXFactor36[manager.peakBinNumbers[peakNum]]
                     context.fill(

@@ -66,9 +66,11 @@ import SwiftUI
 import Combine
 
 struct LavaLamp: View {
-    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
+    
     @Environment(\.colorScheme) var colorScheme
+    
     let noteProc = NoteProcessing()
     
     static let ellipseCount: Int = 10

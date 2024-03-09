@@ -30,8 +30,8 @@ import SwiftUI
 
 
 struct MusicSpectrum: View {
-    @EnvironmentObject var manager: AudioManager    // Observe the instance of AudioManager passed from ContentView
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
     
     var body: some View {
         let option = settings.option                // Use local short name to improve code readablity.
@@ -53,8 +53,9 @@ struct MusicSpectrum: View {
 // MARK: - MusicSpectrum_Live
 
 private struct MusicSpectrum_Live: View {
-    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
+    
     let spectralEnhancer = SpectralEnhancer()
     let noteProc = NoteProcessing()
     @Environment(\.colorScheme) var colorScheme
@@ -166,8 +167,9 @@ private struct MusicSpectrum_Live: View {
 // MARK: - MusicSpectrumPeaks
 
 struct MusicSpectrumPeaks: View {
-    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) private var manager: AudioManager
+    @Environment(Settings.self) private var settings: Settings
+    
     @Environment(\.colorScheme) var colorScheme
     var noteProc = NoteProcessing()
     var octaveCount: Int

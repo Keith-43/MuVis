@@ -16,8 +16,9 @@ import SwiftUI
 import QuickLook
 
 struct ContentView: View {
-    @EnvironmentObject var manager: AudioManager
-    @EnvironmentObject var settings: Settings
+    @Bindable var manager: AudioManager
+    @Bindable var settings: Settings
+    
     @Environment(\.colorScheme) var colorScheme
     
     @State private var visNum: Int = 0      // visualization number - used as an index into the visList array
@@ -83,9 +84,9 @@ struct ContentView: View {
                             RoundedRectangle(cornerRadius: 10)
                                 .strokeBorder(.red, lineWidth: 2)
                         )
-                        .onChange(of: manager.userGain, perform: {value in
+                        .onChange(of: manager.userGain) { _, value in
                             manager.userGain = Float(value)
-                        })
+                        }
                         .help("This slider controls the gain of the visualization.")
 
                     if( showMSPF==true ) { Text("MSPF: \( lround(manager.averageTime) )") }
@@ -95,9 +96,9 @@ struct ContentView: View {
                             RoundedRectangle(cornerRadius: 10)
                                 .strokeBorder(.red, lineWidth: 2)
                         )
-                        .onChange(of: manager.userSlope, perform: {value in
+                        .onChange(of: manager.userSlope) { _, value in
                             manager.userSlope = Float(value)
-                        })
+                        }
                         .help("This slider controls the frequency slope of the visualization.")
 
                     Text("-Treble")
@@ -342,4 +343,4 @@ struct ContentView: View {
             }  // end of if(showBottomToolbar)
         }  // end of VStack
     }  // end of var body: some View
-}  // end of ContentView struct
+}
