@@ -12,12 +12,12 @@ import SwiftUI
 
 @Observable
 class Settings {
+    // This singleton instantiates the Settings class
+    static let shared = Settings()
 
-    static let settings = Settings()  // This singleton instantiates the Settings class
-
-    let optionCount: Int = 8
+    let optionCount = 8
     
-    var option: Int = 0              // 0 <= option < 8
+    var option = 0              // 0 <= option < 8
                                                 // allows user to view variations on each visualization
                                                 // Changed in ContentView; Published to all visualizations
 
