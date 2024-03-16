@@ -342,14 +342,14 @@ class NoteProcessing {
     public func computeMuSpectrum(inputArray: [Float]) -> [Float] {
         // The inputArray is typically an audio spectrum from the AudioManager.
         
-        var outputIndices   = [Float] (repeating: 0, count: eightOctPointCount) // eightOctPointCount = 96*12 = 1,152
-        var pointBuffer     = [Float] (repeating: 0, count: eightOctPointCount) // eightOctPointCount = 96*12 = 1,152
-        let tempFloat1: Float = Float(leftFreqC1)
-        let tempFloat2: Float = Float(notesPerOctave * pointsPerNote)
-        let tempFloat3: Float = Float(AudioManager.binFreqWidth)
+        var outputIndices = [Float](repeating: 0, count: eightOctPointCount) // eightOctPointCount = 96*12 = 1,152
+        var pointBuffer = [Float](repeating: 0, count: eightOctPointCount)   // eightOctPointCount = 96*12 = 1,152
+        let tempFloat1 = Float(leftFreqC1)
+        let tempFloat2 = Float(notesPerOctave * pointsPerNote)
+        let tempFloat3 = Float(AudioManager.binFreqWidth)
 
         for point in 0 ..< eightOctPointCount {
-            outputIndices[point] = ( tempFloat1 * pow( 2, Float(point) / tempFloat2 ) ) / tempFloat3
+            outputIndices[point] = ( tempFloat1 * pow(2, Float(point) / tempFloat2) ) / tempFloat3
         }
         // print(outputIndices)
         
@@ -379,7 +379,7 @@ class NoteProcessing {
         for point in 0 ..< sixOctPointCount {
             for har in 0 ..< harmIncrement.count {
                 let tempPointer: Int = point + ( 12 * harmIncrement[har] )
-                if( tempPointer >= eightOctPointCount-1 ) { break }
+                if tempPointer >= eightOctPointCount-1  { break }
                 harmSumSpectrum[point] += inputArray[ tempPointer ]
             }
         }

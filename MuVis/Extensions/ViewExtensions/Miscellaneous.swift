@@ -23,8 +23,8 @@ extension View {
             self
         }
         // Injecting the ViewModels of the app
-        .environment(AudioManager.manager)
-        .environment(Settings.settings)
+        .environment(AudioManager.shared)
+        .environment(Settings.shared)
         
         // MARK: - Modifying the looks
         #if os(macOS)
