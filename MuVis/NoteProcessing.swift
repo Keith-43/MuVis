@@ -78,25 +78,25 @@ class NoteProcessing {
     let twelfthRoot2      : Float = pow(2, 1 / 12)     // twelfth root of two = 1.059463094359
     let twentyFourthRoot2 : Float = pow(2, 1 / 24)     // twenty-fourth root of two = 1.029302236643
     
-    // variables used to transform the spectrum into an "octave-aligned" spectrum:
+    // Declare variables used to transform the spectrum into an "octave-aligned" spectrum:
     var freqC1: Float = 0         // The lowest note of interest is C1 (about 33 Hz Hz)
     var leftFreqC1: Float = 0
     var leftFreqC2: Float = 0
     var freqB8: Float = 0
     var rightFreqB8: Float = 0
 
-    // To capture 3 octaves, the highest note is B3 =  Hz      rightFreqB3 =  Hz   topBin = 94
-    static let binCount3: Int = 95        // binCount3 = octTopBin[2] + 1 =  94 + 1 =  95
+    // To capture 3 octaves, the highest note is B3 = 247 Hz     rightFreqB3 = 254 Hz    topBin = 94
+    static let binCount3: Int = 95        // binCount3 = octTopBin[2] + 1 =  94 + 1 = 95
     
-    // To capture 6 octaves, the highest note is B6 = 1,976 Hz      rightFreqB6 = 2,033.42 Hz   topBin = 755
-    static let binCount6: Int = 756        // binCount6 = octTopBin[5] + 1 =  755 + 1 =  756
+    // To capture 6 octaves, the highest note is B6 = 1,976 Hz   rightFreqB6 = 2,033 Hz  topBin = 755
+    static let binCount6: Int = 756        // binCount6 = octTopBin[5] + 1 =  755 + 1 = 756
     
-    // To capture 8 octaves, the highest note is B8 = 7,902 Hz      rightFreqB8 = 8,133.68 Hz   topBin = 3,021
+    // To capture 8 octaves, the highest note is B8 = 7,902 Hz   rightFreqB8 = 8,133 Hz  topBin = 3,021
     static let binCount8: Int = 3022        // binCount8 = octTopBin[7] + 1 = 3021 + 1 = 3022
     
     // The 8-octave spectrum covers the range from leftFreqC1 = 31.77 Hz to rightFreqB8 = 8133.84 Hz.
     // That is, from bin = 12 to bin = 3,021
-    // The FFT provides us with 8,192 bins.  We will ignore the bin values above 3,021.
+    // The FFT provides us with 8,192 bins.  We will ignore the bin values above 3,022.
     var lowerOctFreq = [Double](repeating: 0, count: 8)           // frequency at the lower border for a given octave
     var upperOctFreq = [Double](repeating: 0, count: 8)           // frequency at the upper border for a given octave
 
@@ -118,7 +118,8 @@ class NoteProcessing {
     var binXFactor8: [Double] = [Double](repeating: 0, count: binCount8)  // binCount8 = 3,022
     var binXFactor36:[Double] = [Double](repeating: 0, count: 95 + 661)
     // count: 95 + octBinCount[3] + octBinCount[4] + octBinCount[5] = 95 + 94+189+378 = 95 + 661 = 756
-    
+
+    // These variables are used when rendering a muSpectrum around a circle / ellipse:
     var theta: Double = 0                                     // 0 <= theta < 1 is the angle around the ellipse
     let pointIncrement: Double = 1.0 / Double(sixOctPointCount)         // pointIncrement = 1 / 864
     var cos2PiTheta = [Double](repeating: 0, count: sixOctPointCount) // cos(2 * Pi * theta)
@@ -131,12 +132,12 @@ class NoteProcessing {
     func calculateParameters() {
         
         // Calculate the lower bound of our frequencies-of-interest:
-        freqC1 = 55 * pow(twelfthRoot2, -9)         // C1 = 32.7032 Hz          C1 is 9 semitones below A1=55 Hz
+        freqC1 = 55 * pow(twelfthRoot2, -9)         // C1 = 32.7032 Hz          C1 is 9 semitones below A1 = 55 Hz
         leftFreqC1 = freqC1 / twentyFourthRoot2     // leftFreqC1 = 31.772186 Hz
         leftFreqC2 = 2 * leftFreqC1                 // C1 = 32.7032 Hz    C2 = 65.4064 Hz
     
         // Calculate the upper bound of our frequencies-of-interest:
-        freqB8  = 7040 * pow(twelfthRoot2, 2)   // B8 = 7,902.134 Hz        B8 is 2 semitones above A8=7,040 Hz
+        freqB8  = 7040 * pow(twelfthRoot2, 2)       // B8 = 7,902.134 Hz        B8 is 2 semitones above A8 = 7,040 Hz
         rightFreqB8 = freqB8 * twentyFourthRoot2    // rightFreqB8 = 8,133.684 Hz
 
         // Essential to have it run async
@@ -276,7 +277,7 @@ class NoteProcessing {
             }
             
             // Calculate the exponential x-coordinate scaling factor for octaves 3 to 5 (i.e., bins 95 to 755):
-            //var count: Int = 0
+            // var count: Int = 0
             for oct in 3 ... 5 {    // 3 <= oct <= 5
                 for bin in octBottomBin[oct] ... octTopBin[oct] {
                     let binFreq: Double = Double(bin) * binFreqWidth
@@ -308,7 +309,8 @@ class NoteProcessing {
 
 
     // -----------------------------------------------------------------------------------------------------------------
-    
+    // Here are some functions used by various visualizations:
+ 
     // This function converts an input bin number into an output octave number:
     public func binToOctave(inputBin: Int) -> Int {
         var myOctave: Int = 0
@@ -337,9 +339,17 @@ class NoteProcessing {
         return myNote
     }
 
-    
-    // This function calculates the muSpectrum array:
+    /**
+     The spectrum (as calculated in the AudioManager class) uses spectral values on a linear-frequency scale.
+     I have coined the name “muSpectrum” for the exponentially-resampled version of the spectrum to more closely represent the notes of the musical scale.
+     The mathematical problem is to (1) pass this signal through a quadratic smoothing function to interpolate the values between the spectrum samples,
+     and then to (2) resample this signal at points corresponding to the logarithmic-frequency scale of the musical notes.
+     I choose to have 12 points per musical note, and there are 12 notes per octave. Hence we get 144 points per octave.
+     The MuSpectrum visualization covers 8 octaves (or 8 x 144 = 1,152 points).
+     The horizontal axis is linear in terms of points (stretching linearly from 0 on the left to 1,152 on the right).
+    */   
     public func computeMuSpectrum(inputArray: [Float]) -> [Float] {
+        // This function calculates the muSpectrum array:
         // The inputArray is typically an audio spectrum from the AudioManager.
         
         var outputIndices = [Float](repeating: 0, count: eightOctPointCount) // eightOctPointCount = 96*12 = 1,152
@@ -352,7 +362,8 @@ class NoteProcessing {
             outputIndices[point] = ( tempFloat1 * pow(2, Float(point) / tempFloat2) ) / tempFloat3
         }
         // print(outputIndices)
-        
+
+        // The following is a vector-to-vector quadratic interpolation function from Apple's Accelerate vDSP library:
         vDSP_vqint( inputArray,                             // inputVector1
                     &outputIndices,                         // inputVector2 (with indices and fractional parts)
                     vDSP_Stride(1),                         // stride for inputVector2
