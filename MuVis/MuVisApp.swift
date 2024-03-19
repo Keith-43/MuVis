@@ -1,7 +1,17 @@
-//  MuVisApp.swift
-//  MuVis
-//  Created by Keith Bromley on 2/28/23.
-//
+/*
+ MuVisApp.swift
+ MuVis
+ 
+ Created by Keith Bromley on 28 Feb 2023.
+
+ Abstract:
+ The MuVis app runs on Apple's macOS, iOS, and iPadOS. It was developed using Swift, SwiftUI, and Xcode.
+ It consists of three main parts: the audio-capture engine, the user interface, and the several visualizations.
+ 
+ The AudioManager class (1) captures realtime audio samples from the user-designated audio source, (2) applies an FFT computation, and publishes the resulting spectrum to the visualization Views.  It does this 60 times per second, and provides the "heartbeat" for the app.
+ The ContentView struct handles the app's user interface.  It is based on Apple's SwiftUI.  See the UserGuide document for user instructions.
+ The app currently has twenty-nine visualization Views.  Some are scientifically based, some are music-theory based, and some are simply aesthetically pleasing.
+*/
 
 import SwiftUI
 
