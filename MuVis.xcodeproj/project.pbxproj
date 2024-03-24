@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -29,10 +29,6 @@
 		53AB0A2629AEC274002A5EC2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB0A2529AEC274002A5EC2 /* ContentView.swift */; };
 		53AB0A2829AEC274002A5EC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53AB0A2729AEC274002A5EC2 /* Assets.xcassets */; };
 		53AB0A2C29AEC274002A5EC2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53AB0A2B29AEC274002A5EC2 /* Preview Assets.xcassets */; };
-		53AB0A3329AEC30A002A5EC2 /* libbass.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 53AB0A3229AEC30A002A5EC2 /* libbass.dylib */; platformFilters = (macos, ); };
-		53AB0A3429AEC317002A5EC2 /* libbass.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 53AB0A3229AEC30A002A5EC2 /* libbass.dylib */; platformFilters = (macos, ); settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		53AB0A3A29AEC4CC002A5EC2 /* bass.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53AB0A3829AEC49A002A5EC2 /* bass.xcframework */; platformFilter = ios; };
-		53AB0A3B29AEC4CC002A5EC2 /* bass.xcframework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 53AB0A3829AEC49A002A5EC2 /* bass.xcframework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53AB0A4029AEC9FF002A5EC2 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB0A3E29AEC9FF002A5EC2 /* AudioManager.swift */; };
 		53AB0A5929AECC20002A5EC2 /* SpectrumBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB0A4329AECC20002A5EC2 /* SpectrumBars.swift */; };
 		53AB0A5B29AECC20002A5EC2 /* SpiralOAS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB0A4529AECC20002A5EC2 /* SpiralOAS.swift */; };
@@ -55,6 +51,7 @@
 		53DF75222A3E1BDD00B89B37 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF75212A3E1BDD00B89B37 /* Settings.swift */; };
 		53E9AB8D2A0980BA00672CD2 /* OverlappedHarmonics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E9AB8C2A0980BA00672CD2 /* OverlappedHarmonics.swift */; };
 		6123A94D2B9CF7DC0067A598 /* ViewUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6123A94C2B9CF7DC0067A598 /* ViewUtilities.swift */; };
+		617FA5A02BB04324009ABC75 /* CBass in Frameworks */ = {isa = PBXBuildFile; productRef = 617FA59F2BB04324009ABC75 /* CBass */; };
 		61885C462B9B98B200F85261 /* Miscellaneous.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61885C452B9B98B200F85261 /* Miscellaneous.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,8 +62,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				53AB0A3B29AEC4CC002A5EC2 /* bass.xcframework in Embed Libraries */,
-				53AB0A3429AEC317002A5EC2 /* libbass.dylib in Embed Libraries */,
 			);
 			name = "Embed Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,10 +94,6 @@
 		53AB0A2729AEC274002A5EC2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		53AB0A2929AEC274002A5EC2 /* MuVis.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MuVis.entitlements; sourceTree = "<group>"; };
 		53AB0A2B29AEC274002A5EC2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		53AB0A3229AEC30A002A5EC2 /* libbass.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libbass.dylib; sourceTree = "<group>"; };
-		53AB0A3629AEC347002A5EC2 /* bass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bass.h; sourceTree = "<group>"; };
-		53AB0A3729AEC3A6002A5EC2 /* bridging-header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "bridging-header.h"; sourceTree = "<group>"; };
-		53AB0A3829AEC49A002A5EC2 /* bass.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = bass.xcframework; sourceTree = "<group>"; };
 		53AB0A3E29AEC9FF002A5EC2 /* AudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		53AB0A4329AECC20002A5EC2 /* SpectrumBars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpectrumBars.swift; sourceTree = "<group>"; };
 		53AB0A4529AECC20002A5EC2 /* SpiralOAS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpiralOAS.swift; sourceTree = "<group>"; };
@@ -133,8 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53AB0A3A29AEC4CC002A5EC2 /* bass.xcframework in Frameworks */,
-				53AB0A3329AEC30A002A5EC2 /* libbass.dylib in Frameworks */,
+				617FA5A02BB04324009ABC75 /* CBass in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,10 +138,6 @@
 				532A99D92A364E8000A24FFA /* Visualizations.pdf */,
 				5327D12129C7CAFB00660674 /* README.md */,
 				5354DC242B991D6B00118996 /* music.mp3 */,
-				53AB0A3829AEC49A002A5EC2 /* bass.xcframework */,
-				53AB0A3729AEC3A6002A5EC2 /* bridging-header.h */,
-				53AB0A3629AEC347002A5EC2 /* bass.h */,
-				53AB0A3229AEC30A002A5EC2 /* libbass.dylib */,
 				53AB0A2229AEC274002A5EC2 /* MuVis */,
 				53AB0A2129AEC274002A5EC2 /* Products */,
 			);
@@ -264,6 +250,9 @@
 			dependencies = (
 			);
 			name = MuVis;
+			packageProductDependencies = (
+				617FA59F2BB04324009ABC75 /* CBass */,
+			);
 			productName = MuVis;
 			productReference = 53AB0A2029AEC274002A5EC2 /* MuVis.app */;
 			productType = "com.apple.product-type.application";
@@ -295,6 +284,9 @@
 				Base,
 			);
 			mainGroup = 53AB0A1729AEC274002A5EC2;
+			packageReferences = (
+				617FA59E2BB04324009ABC75 /* XCLocalSwiftPackageReference "../CBass" */,
+			);
 			productRefGroup = 53AB0A2129AEC274002A5EC2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -425,8 +417,9 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "bridging-header.h";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
 			};
 			name = Debug;
 		};
@@ -478,8 +471,9 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "bridging-header.h";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
 			};
 			name = Release;
 		};
@@ -597,6 +591,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		617FA59E2BB04324009ABC75 /* XCLocalSwiftPackageReference "../CBass" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../CBass;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		617FA59F2BB04324009ABC75 /* CBass */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CBass;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 53AB0A1829AEC274002A5EC2 /* Project object */;
 }

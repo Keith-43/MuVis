@@ -11,6 +11,7 @@
 
 import Accelerate
 import Observation
+import CBass
 
 /**
  The AudioManager class handles the playing, capture, and processing of audio data in real time.
