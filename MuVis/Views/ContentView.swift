@@ -23,64 +23,21 @@ struct ContentView: View {
     @Environment(\.colorScheme) var colorScheme
     
     @State private var visNum: Int = 0      // visualization number - used as an index into the visList array
-    @State private var enableSongFileSelection: Bool = false
-    @State private var pauseButtonIsPaused: Bool = false
-    @State private var previousAudioURL: URL = URL(string: "https://www.apple.com")!
+    @State private var enableSongFileSelection = false
+    @State private var pauseButtonIsPaused = false
+    @State private var previousAudioURL = URL(string: "https://www.apple.com")!
 
     @State private var userGuideUrl: URL?
     @State private var visualizationsGuideUrl: URL?
 
-    @State private var showTopToolbar: Bool = true
-    @State private var showBottomToolbar: Bool = true
-    
-    struct Visualization {
-        var name: String        // The visualization's name is shown as text in the titlebar
-        var view: AnyView       // A visualization's view is the View that renders it.
-        
-        init(_ name: String, view: AnyView) {
-            self.name = name
-            self.view = view
-        }
-    }
-
-    // Create a list of our 24 visualizations (containing their name and their corresponding View():
-    let visList: [Visualization] =  [
-        Visualization ("PianoKeyboard",               view: AnyView(PianoKeyboard() ) ),
-        Visualization ("Spectrum",                    view: AnyView(Spectrum() ) ),
-        Visualization ("Music Spectrum",              view: AnyView(MusicSpectrum() ) ),
-        Visualization ("MuSpectrum",                  view: AnyView(MuSpectrum() ) ),
-        Visualization ("Spectrum Bars",               view: AnyView(SpectrumBars() ) ),
-        Visualization ("Overlapped Octaves",          view: AnyView(OverlappedOctaves() ) ),
-        Visualization ("Octave-Aligned Spectrum",     view: AnyView(OctaveAlignedSpectrum() ) ),
-        Visualization ("Elliptical OAS",              view: AnyView(EllipticalOAS() ) ),
-        Visualization ("Spiral OAS",                  view: AnyView(SpiralOAS() ) ),
-        Visualization ("Harmonic Alignment",          view: AnyView(HarmonicAlignment() ) ),
-        Visualization ("Harmonic Spectrum",           view: AnyView(HarmonicSpectrum() ) ),
-        Visualization ("TriOct Spectrum",             view: AnyView(TriOctSpectrum() ) ),
-        Visualization ("Overlapped Harmonics",        view: AnyView(OverlappedHarmonics() ) ),
-        Visualization ("Harmonograph",                view: AnyView(Harmonograph() ) ),
-        Visualization ("Lissajous",                   view: AnyView(Lissajous() ) ),
-        Visualization ("Cymbal",                      view: AnyView(Cymbal() ) ),
-        Visualization ("Lava Lamp",                   view: AnyView(LavaLamp() ) ),
-        Visualization ("Superposition",               view: AnyView(Superposition() ) ),
-        Visualization ("Rainbow Spectrum",            view: AnyView(RainbowSpectrum() ) ),
-        Visualization ("Waterfall",                   view: AnyView(Waterfall() ) ),
-        Visualization ("MuSpectrogram CG",            view: AnyView(MuSpectrogramCG() ) ),
-        Visualization ("Peaks Spectrogram CG",        view: AnyView(PeaksSpectrogramCG() ) ),
-        Visualization ("Peaks Spectrogram",           view: AnyView(PeaksSpectrogram() ) ),
-        Visualization ("Rainbow OAS",                 view: AnyView(RainbowOAS() ) ),
-        Visualization ("Rainbow Ellipse",             view: AnyView(RainbowEllipse() ) ),
-        Visualization ("Spinning Ellipse",            view: AnyView(SpinningEllipse() ) ),
-        Visualization ("Rabbit Hole",                 view: AnyView(RabbitHole() ) ),
-        Visualization ("Audio Eclipse",               view: AnyView(AudioEclipseView())),
-    ]
+    @State private var showTopToolbar = true
+    @State private var showBottomToolbar = true
 
     var body: some View {
-
         VStack(spacing: 0) {
 
-//----------------------------------------------------------------------------------------------------------------------
-            if(showTopToolbar) {
+    // MARK: - Top Toolbar
+            if showTopToolbar {
                 // The following HStack constitutes the Top Toolbar:
                 HStack {
 
@@ -104,8 +61,8 @@ struct ContentView: View {
                             RoundedRectangle(cornerRadius: 10)
                                 .strokeBorder(.red, lineWidth: 2)
                         )
-                        .onChange(of: manager.userSlope) { _, value in
-                            manager.userSlope = Float(value)
+                        .onChange(of: manager.userSlope) { _, newValue in
+                            manager.userSlope = Float(newValue)
                         }
                         .help("This slider controls the frequency slope of the visualization.")
 
@@ -115,8 +72,8 @@ struct ContentView: View {
                 }  // end of HStack{}
             }
 
-//----------------------------------------------------------------------------------------------------------------------
-             // The following View constitutes the main visualization rendering pane:
+    // MARK: - The main visualization rendering pane
+            
             visList[visNum].view
                 // .drawingGroup()     // improves graphics performance by utilizing off-screen buffers
                 .navigationTitle("MuVis - Music Visualizer    -    \(visList[visNum].name)")
@@ -139,7 +96,6 @@ struct ContentView: View {
                         }
                     }
                 )
-
                 .gesture(TapGesture(count: 3)
                     .onEnded({
                         #if os(iOS)
@@ -150,6 +106,7 @@ struct ContentView: View {
                             usingBlackHole.toggle()         // macOS only: 3 clicks toggles usingBlackHole
                             manager.stopMusicPlay()
                             manager.processAudio()
+                            print("BlackHole activated")
                         #endif
                     }
                 // To use BlackHole audio driver: SystemSettings | Sound, Input: BlackHole 2ch; Ouput: Multi-Output Device
@@ -157,11 +114,11 @@ struct ContentView: View {
                 ) )
 
             
-//----------------------------------------------------------------------------------------------------------------------
-            if(showBottomToolbar) {
+    // MARK: - Bottom Toolbar
+            if showBottomToolbar {
                 // The following HStack constitutes the Bottom Toolbar:
                 HStack {
-
+                    
                     Group {
                         Button(action: {                    // "Previous Visualization" button
                             // visNum -= 1
@@ -169,9 +126,9 @@ struct ContentView: View {
                             visNum = (visNum <= 0) ? visList.count - 1 : visNum - 1
                             manager.onlyPeaks = false       // Changing the visNum turns off the onlyPeaks variation.
                             settings.option = 0             // Changing the visNum resets the option to option=0.
-                        } ) {
+                        }, label: {
                             Image(systemName: "chevron.left")
-                        }
+                        })
                         .keyboardShortcut(KeyEquivalent.leftArrow, modifiers: [])
                         .help("This button retreats to the previous visualization.")
                         .disabled(pauseButtonIsPaused)      // gray-out "Previous Vis" button if pauseButtonIsPaused is true
@@ -190,9 +147,9 @@ struct ContentView: View {
                             visNum = (visNum >= visList.count-1) ? 0 : visNum + 1
                             manager.onlyPeaks = false       // Changing the visNum turns off the onlyPeaks variation.
                             settings.option = 0             // Changing the visNum resets the option to option=0.
-                        } ) {
+                        }, label: {
                             Image(systemName: "chevron.right")
-                        }
+                        })
                         .keyboardShortcut(KeyEquivalent.rightArrow, modifiers: [])
                         .help("This button advances to the next visualization.")
                         .disabled(pauseButtonIsPaused)      // gray-out "Next Vis" button if pauseButtonIsPaused is true
@@ -208,9 +165,9 @@ struct ContentView: View {
                         Button(action: {                    // "Previous Option" button
                             settings.option -= 1
                             if( settings.option <= -1 ) { settings.option = settings.optionCount - 1 }
-                        } ) {
+                        }, label: {
                             Image(systemName: "chevron.down")
-                        }
+                        })
                         .keyboardShortcut(KeyEquivalent.downArrow, modifiers: [])   // downArrow key decrements the option
                         .help("This button retreats to the previous option.")
                         .disabled(pauseButtonIsPaused)  // gray-out PreviousOption button if pauseButtonIsPaused is true
@@ -225,10 +182,10 @@ struct ContentView: View {
                         
                         Button( action: {                   // "Next Option" button
                             settings.option += 1
-                            if( settings.option >= settings.optionCount ) { settings.option = 0 }
-                        } ) {
+                            if (settings.option >= settings.optionCount) { settings.option = 0 }
+                        }, label: {
                             Image(systemName: "chevron.up")
-                        }
+                        })
                         .keyboardShortcut(KeyEquivalent.upArrow, modifiers: []) // upArrow key increments the option
                         .help("This button advances to the next option.")
                         .disabled(pauseButtonIsPaused)      // gray-out NextOption button if pauseButtonIsPaused is true
@@ -246,68 +203,69 @@ struct ContentView: View {
                             else { manager.pauseMusicPlay() }                   // User clicked on "Pause"
                             manager.isPaused.toggle()
                             pauseButtonIsPaused.toggle()
-                        } ) {
-                            if(pauseButtonIsPaused) {Image(systemName:"play.fill")}else{Image(systemName:"pause.fill")}
-                        }
+                        }, label: {
+                            pauseButtonIsPaused ? Image(systemName:"play.fill") : Image(systemName:"pause.fill")
+                        })
                         .help("This button pauses or resumes the audio.")
                         .disabled(manager.micOn)            // gray-out Pause/Resume button if micOn is true
                         .disabled(usingBlackHole)           // gray-out Pause/Resume button when using BlackHole
                         .padding(.trailing)
                         
-                        if(!usingBlackHole) {
+                        if !usingBlackHole {
                             
-                            Button( action: {                                   // "Microphone On/Off" button
-                                manager.micOn.toggle()      // This is the only place in MuVis that micOn changes.
+                            // "Microphone On/Off" button
+                            // This is the only place in MuVis that micOn changes.
+                            Button(action: {
+                                manager.micOn.toggle()
                                 manager.stopMusicPlay()
                                 manager.processAudio()
-                            } ) {
-                                if(manager.micOn) {Image(systemName:"mic.slash.fill")}else{Image(systemName:"mic.fill")}
-                            }
+                            }, label: {
+                                manager.micOn ? Image(systemName:"mic.slash.fill") : Image(systemName:"mic.fill")
+                            })
                             .help("This button turns the microphone on and off.")
                             .disabled(pauseButtonIsPaused)   // gray-out MicOn/Off button if pauseButtonIsPaused is true
                             .padding(.trailing)
                             
                             Button( action: {                                   // "Select Song" button
                                 previousAudioURL.stopAccessingSecurityScopedResource()
-                                if(!manager.micOn) {enableSongFileSelection = true} } ) {
-                                    Image( systemName: "music.note.list" )
-                                }
-                                .help("This button opens a pop-up pane to select a song file.")
-                                .disabled(manager.micOn)        // gray-out "Select Song" button if mic is enabled
-                                .disabled(pauseButtonIsPaused) // gray-out SelectSong button if pauseButtonIsPaused is true
-                                .fileImporter(
-                                    isPresented: $enableSongFileSelection,
-                                    allowedContentTypes: [.audio],
-                                    allowsMultipleSelection: false
-                                ) { result in
-                                    if case .success = result {
-                                        do {
-                                            let audioURL: URL = try result.get().first!
-                                            previousAudioURL = audioURL
-                                            if audioURL.startAccessingSecurityScopedResource() {
-                                                manager.filePath = audioURL.path
-                                                if(!manager.micOn) {
-                                                    manager.stopMusicPlay()
-                                                    manager.processAudio()
-                                                }
+                                if !manager.micOn { enableSongFileSelection = true }
+                            }, label: {
+                                Image(systemName: "music.note.list")
+                            })
+                            .help("This button opens a pop-up pane to select a song file.")
+                            .disabled(manager.micOn)        // gray-out "Select Song" button if mic is enabled
+                            .disabled(pauseButtonIsPaused) // gray-out SelectSong button if pauseButtonIsPaused is true
+                            .fileImporter(
+                                isPresented: $enableSongFileSelection,
+                                allowedContentTypes: [.audio],
+                                allowsMultipleSelection: false
+                            ) { result in
+                                if case .success = result {
+                                    do {
+                                        let audioURL: URL = try result.get().first!
+                                        previousAudioURL = audioURL
+                                        if audioURL.startAccessingSecurityScopedResource() {
+                                            manager.filePath = audioURL.path
+                                            if(!manager.micOn) {
+                                                manager.stopMusicPlay()
+                                                manager.processAudio()
                                             }
-                                        } catch {
-                                            let nsError = error as NSError
-                                            fatalError("File Import Error \(nsError), \(nsError.userInfo)")
                                         }
-                                    } else {
-                                        print("File Import Failed")
+                                    } catch {
+                                        let nsError = error as NSError
+                                        fatalError("File Import Error \(nsError), \(nsError.userInfo)")
                                     }
+                                } else {
+                                    print("File Import Failed")
                                 }
-                                .padding(.trailing)
+                            }
+                            .padding(.trailing)
                         }  // end of !usingBlackHole
                         
-                        Button(action: { manager.onlyPeaks.toggle() } ) {       // "only Peaks / Normal" button
+                        Button(action: { manager.onlyPeaks.toggle() }, label: {       // "only Peaks / Normal" button
                             // Text( (manager.onlyPeaks == true) ? "Normal" : "Peaks").font(.footnote)
-                            if(manager.onlyPeaks) {
-                                   Image(systemName: "waveform.path" )
-                            }else{ Image(systemName: "waveform.path.badge.minus" ) }
-                        }
+                            manager.onlyPeaks ? Image(systemName: "waveform.path") : Image(systemName: "waveform.path.badge.minus")
+                        })
                         .help("This button enhances the peaks by subtracting the background spectrum.")
                         .disabled(pauseButtonIsPaused)  // gray-out "Peaks/Normal" button if pauseButtonIsPaused is true
                         .padding(.trailing)
@@ -317,8 +275,7 @@ struct ContentView: View {
 
                     Group {
                         Button(action: {                                        // "Display User Guide" button
-                            userGuideUrl = Bundle.main.url( forResource: "UserGuide",
-                                                            withExtension: "pdf" )
+                            userGuideUrl = Bundle.main.url(forResource: "UserGuide", withExtension: "pdf" )
                         } ) {
                             Text("UserG").font(.callout)
                         }
@@ -335,9 +292,9 @@ struct ContentView: View {
                         Button(action: {                                        // "Display Visualizations Guide" button
                             visualizationsGuideUrl = Bundle.main.url( forResource: "Visualizations",
                                                                       withExtension: "pdf" )
-                        } ) {
+                        }, label: {
                             Text("VisG").font(.callout)
-                        }
+                        })
                         .overlay(
                             RoundedRectangle(cornerRadius: 4)
                                 .strokeBorder(.blue, lineWidth: 2)
