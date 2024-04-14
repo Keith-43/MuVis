@@ -49,10 +49,21 @@ class AudioManager {
     static let fftLength: Int = 16384           // The number of audio samples inputted to the FFT operation each frame.
     static let binCount: Int = fftLength/2      // The number of frequency bins provided in the FFT output
                                                 // binCount = 8,192 for fftLength = 16,384
+    // MARK: - Instance Properties
 
     static let binFreqWidth: Double = (sampleRate/2) / Double(binCount) //binFreqWidth = (44100/2)/8192  = 2.69165 Hz
 
-    var isPaused = false      // When paused, don't overwrite the previous rendering with all-zeroes:
+    /// Samples the auido when paused and Invalidates the sampling timer when not
+    var isPaused = false {
+        willSet {
+            if !newValue {
+                if timer == nil { sampleAudio() }
+            } else {
+                self.timer?.invalidate()
+                self.timer = nil
+            }
+        }
+    }
     var micOn = false         // true means microphone is on and its audio is being captured.
 
     /// Play this song when the MuVis app starts:
@@ -101,7 +112,11 @@ class AudioManager {
     @ObservationIgnored var durationArray = [Double](repeating: 0, count: 100) // an array of the 10 most-recent interval durations
     @ObservationIgnored private var fps: Double
     
+    /// Timer object to sample the audio
+    private(set) var timer: Timer?
+    
     // MARK: - BASS Framework
+    
     private var stream: HSTREAM = 0
     
     func startMusicPlay() { BASS_Start() }
@@ -121,6 +136,9 @@ class AudioManager {
     }
 
     // MARK: - processAudio
+    
+    // Declare an array to contain all 8,192 binValues of the current window of audio spectral data:
+    var fullSpectrum = [Float](repeating: 0, count: AudioManager.binCount)   // binCount  = 8,192
    
     func processAudio() {
         // Set up the BASS audio library:
@@ -161,13 +179,14 @@ class AudioManager {
             BASS_ChannelPlay(stream, -1) // starts the output
         }
 
-        //--------------------------------------------------------------------------------------------------------------
+        sampleAudio()
+    }  // end of processAudio() func
 
-        // Declare an array to contain all 8,192 binValues of the current window of audio spectral data:
-        var fullSpectrum = [Float](repeating: 0, count: AudioManager.binCount)   // binCount  = 8,192
-
+    // MARK: - Instance private Methods
+    
+    private func sampleAudio() {
         // Compute the 8,192-bin spectrum of the song waveform every 1/fps seconds:
-        Timer.scheduledTimer(withTimeInterval: 1/fps, repeats: true) { [self] _ in
+        self.timer = Timer.scheduledTimer(withTimeInterval: 1/fps, repeats: true) { [self] _ in
                 BASS_ChannelGetData(self.stream, &fullSpectrum, BASS_DATA_FFT16384)
                 
 //            DispatchQueue.global().async {
@@ -232,8 +251,7 @@ class AudioManager {
             
             
         }  // end of Timer()
-    }  // end of processAudio() func
-
+    }
 
     /// It monitors the millisecond per frame at the cost of some performance drop.
     private func monitorPerformance() async -> Double {

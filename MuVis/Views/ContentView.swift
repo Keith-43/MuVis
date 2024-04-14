@@ -198,9 +198,13 @@ struct ContentView: View {
                     Spacer()
                     
                     Group {
-                        Button(action: {                                        // "Pause / Resume" button
-                            if( manager.isPaused ) { manager.startMusicPlay() } // User clicked on "Resume"
-                            else { manager.pauseMusicPlay() }                   // User clicked on "Pause"
+                        /// "Pause / Resume" button
+                        Button(action: {
+                            if manager.isPaused {
+                                manager.startMusicPlay()
+                            } else {
+                                manager.pauseMusicPlay()
+                            }
                             manager.isPaused.toggle()
                             pauseButtonIsPaused.toggle()
                         }, label: {
