@@ -13,6 +13,7 @@
 
 
 import SwiftUI
+import AudioVisualizer
 import QuickLook
 
 struct ContentView: View {
@@ -35,37 +36,44 @@ struct ContentView: View {
     struct Visualization {
         var name: String        // The visualization's name is shown as text in the titlebar
         var view: AnyView       // A visualization's view is the View that renders it.
+        
+        init(_ name: String, view: AnyView) {
+            self.name = name
+            self.view = view
+        }
     }
 
     // Create a list of our 24 visualizations (containing their name and their corresponding View():
     let visList: [Visualization] =  [
-        Visualization (name: "PianoKeyboard",               view: AnyView(PianoKeyboard() ) ),
-        Visualization (name: "Spectrum",                    view: AnyView(Spectrum() ) ),
-        Visualization (name: "Music Spectrum",              view: AnyView(MusicSpectrum() ) ),
-        Visualization (name: "MuSpectrum",                  view: AnyView(MuSpectrum() ) ),
-        Visualization (name: "Spectrum Bars",               view: AnyView(SpectrumBars() ) ),
-        Visualization (name: "Overlapped Octaves",          view: AnyView(OverlappedOctaves() ) ),
-        Visualization (name: "Octave-Aligned Spectrum",     view: AnyView(OctaveAlignedSpectrum() ) ),
-        Visualization (name: "Elliptical OAS",              view: AnyView(EllipticalOAS() ) ),
-        Visualization (name: "Spiral OAS",                  view: AnyView(SpiralOAS() ) ),
-        Visualization (name: "Harmonic Alignment",          view: AnyView(HarmonicAlignment() ) ),
-        Visualization (name: "Harmonic Spectrum",           view: AnyView(HarmonicSpectrum() ) ),
-        Visualization (name: "TriOct Spectrum",             view: AnyView(TriOctSpectrum() ) ),
-        Visualization (name: "Overlapped Harmonics",        view: AnyView(OverlappedHarmonics() ) ),
-        Visualization (name: "Harmonograph",                view: AnyView(Harmonograph() ) ),
-        Visualization (name: "Lissajous",                   view: AnyView(Lissajous() ) ),
-        Visualization (name: "Cymbal",                      view: AnyView(Cymbal() ) ),
-        Visualization (name: "Lava Lamp",                   view: AnyView(LavaLamp() ) ),
-        Visualization (name: "Superposition",               view: AnyView(Superposition() ) ),
-        Visualization (name: "Rainbow Spectrum",            view: AnyView(RainbowSpectrum() ) ),
-        Visualization (name: "Waterfall",                   view: AnyView(Waterfall() ) ),
-        Visualization (name: "MuSpectrogram CG",            view: AnyView(MuSpectrogramCG() ) ),
-        Visualization (name: "Peaks Spectrogram CG",        view: AnyView(PeaksSpectrogramCG() ) ),
-        Visualization (name: "Peaks Spectrogram",           view: AnyView(PeaksSpectrogram() ) ),
-        Visualization (name: "Rainbow OAS",                 view: AnyView(RainbowOAS() ) ),
-        Visualization (name: "Rainbow Ellipse",             view: AnyView(RainbowEllipse() ) ),
-        Visualization (name: "Spinning Ellipse",            view: AnyView(SpinningEllipse() ) ),
-        Visualization (name: "Rabbit Hole",                 view: AnyView(RabbitHole() ) ) ]
+        Visualization ("PianoKeyboard",               view: AnyView(PianoKeyboard() ) ),
+        Visualization ("Spectrum",                    view: AnyView(Spectrum() ) ),
+        Visualization ("Music Spectrum",              view: AnyView(MusicSpectrum() ) ),
+        Visualization ("MuSpectrum",                  view: AnyView(MuSpectrum() ) ),
+        Visualization ("Spectrum Bars",               view: AnyView(SpectrumBars() ) ),
+        Visualization ("Overlapped Octaves",          view: AnyView(OverlappedOctaves() ) ),
+        Visualization ("Octave-Aligned Spectrum",     view: AnyView(OctaveAlignedSpectrum() ) ),
+        Visualization ("Elliptical OAS",              view: AnyView(EllipticalOAS() ) ),
+        Visualization ("Spiral OAS",                  view: AnyView(SpiralOAS() ) ),
+        Visualization ("Harmonic Alignment",          view: AnyView(HarmonicAlignment() ) ),
+        Visualization ("Harmonic Spectrum",           view: AnyView(HarmonicSpectrum() ) ),
+        Visualization ("TriOct Spectrum",             view: AnyView(TriOctSpectrum() ) ),
+        Visualization ("Overlapped Harmonics",        view: AnyView(OverlappedHarmonics() ) ),
+        Visualization ("Harmonograph",                view: AnyView(Harmonograph() ) ),
+        Visualization ("Lissajous",                   view: AnyView(Lissajous() ) ),
+        Visualization ("Cymbal",                      view: AnyView(Cymbal() ) ),
+        Visualization ("Lava Lamp",                   view: AnyView(LavaLamp() ) ),
+        Visualization ("Superposition",               view: AnyView(Superposition() ) ),
+        Visualization ("Rainbow Spectrum",            view: AnyView(RainbowSpectrum() ) ),
+        Visualization ("Waterfall",                   view: AnyView(Waterfall() ) ),
+        Visualization ("MuSpectrogram CG",            view: AnyView(MuSpectrogramCG() ) ),
+        Visualization ("Peaks Spectrogram CG",        view: AnyView(PeaksSpectrogramCG() ) ),
+        Visualization ("Peaks Spectrogram",           view: AnyView(PeaksSpectrogram() ) ),
+        Visualization ("Rainbow OAS",                 view: AnyView(RainbowOAS() ) ),
+        Visualization ("Rainbow Ellipse",             view: AnyView(RainbowEllipse() ) ),
+        Visualization ("Spinning Ellipse",            view: AnyView(SpinningEllipse() ) ),
+        Visualization ("Rabbit Hole",                 view: AnyView(RabbitHole() ) ),
+        Visualization ("Audio Eclipse",               view: AnyView(AudioEclipseView())),
+    ]
 
     var body: some View {
 

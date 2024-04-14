@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -51,8 +51,16 @@
 		53DF75222A3E1BDD00B89B37 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DF75212A3E1BDD00B89B37 /* Settings.swift */; };
 		53E9AB8D2A0980BA00672CD2 /* OverlappedHarmonics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E9AB8C2A0980BA00672CD2 /* OverlappedHarmonics.swift */; };
 		6123A94D2B9CF7DC0067A598 /* ViewUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6123A94C2B9CF7DC0067A598 /* ViewUtilities.swift */; };
+		615B01742BCBD77600AA785F /* AudioVisualizer in Frameworks */ = {isa = PBXBuildFile; productRef = 615B01732BCBD77600AA785F /* AudioVisualizer */; };
+		615B01762BCBD77600AA785F /* ColorEffect in Frameworks */ = {isa = PBXBuildFile; productRef = 615B01752BCBD77600AA785F /* ColorEffect */; };
+		615B01782BCBD77600AA785F /* DistortionEffect in Frameworks */ = {isa = PBXBuildFile; productRef = 615B01772BCBD77600AA785F /* DistortionEffect */; };
+		615B017A2BCBD77600AA785F /* LayerEffect in Frameworks */ = {isa = PBXBuildFile; productRef = 615B01792BCBD77600AA785F /* LayerEffect */; };
+		615B017C2BCBD77600AA785F /* ShaderArt in Frameworks */ = {isa = PBXBuildFile; productRef = 615B017B2BCBD77600AA785F /* ShaderArt */; };
+		615B017E2BCBD77600AA785F /* Transition in Frameworks */ = {isa = PBXBuildFile; productRef = 615B017D2BCBD77600AA785F /* Transition */; };
+		615B01802BCBD77600AA785F /* iShader in Frameworks */ = {isa = PBXBuildFile; productRef = 615B017F2BCBD77600AA785F /* iShader */; };
+		615B01822BCBD96500AA785F /* AudioEclipseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615B01812BCBD96500AA785F /* AudioEclipseView.swift */; };
 		61885C462B9B98B200F85261 /* Miscellaneous.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61885C452B9B98B200F85261 /* Miscellaneous.swift */; };
-		61C792482BB1FA1300A1F816 /* CBass in Frameworks */ = {isa = PBXBuildFile; productRef = 61C792472BB1FA1300A1F816 /* CBass */; };
+		618C77DC2BB7461000353A1C /* CBass in Frameworks */ = {isa = PBXBuildFile; productRef = 618C77DB2BB7461000353A1C /* CBass */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -116,6 +124,7 @@
 		53DF75212A3E1BDD00B89B37 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		53E9AB8C2A0980BA00672CD2 /* OverlappedHarmonics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlappedHarmonics.swift; sourceTree = "<group>"; };
 		6123A94C2B9CF7DC0067A598 /* ViewUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtilities.swift; sourceTree = "<group>"; };
+		615B01812BCBD96500AA785F /* AudioEclipseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEclipseView.swift; sourceTree = "<group>"; };
 		61885C452B9B98B200F85261 /* Miscellaneous.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Miscellaneous.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,7 +133,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61C792482BB1FA1300A1F816 /* CBass in Frameworks */,
+				615B01782BCBD77600AA785F /* DistortionEffect in Frameworks */,
+				618C77DC2BB7461000353A1C /* CBass in Frameworks */,
+				615B017A2BCBD77600AA785F /* LayerEffect in Frameworks */,
+				615B01742BCBD77600AA785F /* AudioVisualizer in Frameworks */,
+				615B01762BCBD77600AA785F /* ColorEffect in Frameworks */,
+				615B017C2BCBD77600AA785F /* ShaderArt in Frameworks */,
+				615B017E2BCBD77600AA785F /* Transition in Frameworks */,
+				615B01802BCBD77600AA785F /* iShader in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +227,7 @@
 				53A1FBE129BD401800A8553C /* SpinningEllipse.swift */,
 				53B5DD712A0D2793008986ED /* RabbitHole.swift */,
 				53AB0A4629AECC20002A5EC2 /* VisUtilities.swift */,
+				615B01812BCBD96500AA785F /* AudioEclipseView.swift */,
 			);
 			path = Visualizations;
 			sourceTree = "<group>";
@@ -251,7 +268,14 @@
 			);
 			name = MuVis;
 			packageProductDependencies = (
-				61C792472BB1FA1300A1F816 /* CBass */,
+				618C77DB2BB7461000353A1C /* CBass */,
+				615B01732BCBD77600AA785F /* AudioVisualizer */,
+				615B01752BCBD77600AA785F /* ColorEffect */,
+				615B01772BCBD77600AA785F /* DistortionEffect */,
+				615B01792BCBD77600AA785F /* LayerEffect */,
+				615B017B2BCBD77600AA785F /* ShaderArt */,
+				615B017D2BCBD77600AA785F /* Transition */,
+				615B017F2BCBD77600AA785F /* iShader */,
 			);
 			productName = MuVis;
 			productReference = 53AB0A2029AEC274002A5EC2 /* MuVis.app */;
@@ -268,7 +292,7 @@
 					New,
 				);
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					53AB0A1F29AEC274002A5EC2 = {
 						CreatedOnToolsVersion = 14.2;
@@ -285,7 +309,8 @@
 			);
 			mainGroup = 53AB0A1729AEC274002A5EC2;
 			packageReferences = (
-				61C792462BB1FA1300A1F816 /* XCRemoteSwiftPackageReference "CBass" */,
+				618C77DA2BB7461000353A1C /* XCLocalSwiftPackageReference "../CBass" */,
+				615B01722BCBD77600AA785F /* XCRemoteSwiftPackageReference "iShader" */,
 			);
 			productRefGroup = 53AB0A2129AEC274002A5EC2 /* Products */;
 			projectDirPath = "";
@@ -328,6 +353,7 @@
 				533712F62A04EDB800BD0188 /* PianoKeyboard.swift in Sources */,
 				53AB0A6629AECC20002A5EC2 /* HarmonicAlignment.swift in Sources */,
 				53036D3329B2D9490068BE8A /* PeaksSpectrogram.swift in Sources */,
+				615B01822BCBD96500AA785F /* AudioEclipseView.swift in Sources */,
 				53AB0A8129AECFD5002A5EC2 /* AnimatableVector.swift in Sources */,
 				5335AD862AB38C42008339A2 /* PeaksSpectrogramCG.swift in Sources */,
 				53AB0A5B29AECC20002A5EC2 /* SpiralOAS.swift in Sources */,
@@ -366,6 +392,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -399,6 +426,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -425,6 +453,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -458,6 +487,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -588,10 +618,17 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		618C77DA2BB7461000353A1C /* XCLocalSwiftPackageReference "../CBass" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../CBass;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
-		61C792462BB1FA1300A1F816 /* XCRemoteSwiftPackageReference "CBass" */ = {
+		615B01722BCBD77600AA785F /* XCRemoteSwiftPackageReference "iShader" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Treata11/CBass";
+			repositoryURL = "https://github.com/Treata11/iShader/";
 			requirement = {
 				branch = main;
 				kind = branch;
@@ -600,9 +637,43 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		61C792472BB1FA1300A1F816 /* CBass */ = {
+		615B01732BCBD77600AA785F /* AudioVisualizer */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 61C792462BB1FA1300A1F816 /* XCRemoteSwiftPackageReference "CBass" */;
+			package = 615B01722BCBD77600AA785F /* XCRemoteSwiftPackageReference "iShader" */;
+			productName = AudioVisualizer;
+		};
+		615B01752BCBD77600AA785F /* ColorEffect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 615B01722BCBD77600AA785F /* XCRemoteSwiftPackageReference "iShader" */;
+			productName = ColorEffect;
+		};
+		615B01772BCBD77600AA785F /* DistortionEffect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 615B01722BCBD77600AA785F /* XCRemoteSwiftPackageReference "iShader" */;
+			productName = DistortionEffect;
+		};
+		615B01792BCBD77600AA785F /* LayerEffect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 615B01722BCBD77600AA785F /* XCRemoteSwiftPackageReference "iShader" */;
+			productName = LayerEffect;
+		};
+		615B017B2BCBD77600AA785F /* ShaderArt */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 615B01722BCBD77600AA785F /* XCRemoteSwiftPackageReference "iShader" */;
+			productName = ShaderArt;
+		};
+		615B017D2BCBD77600AA785F /* Transition */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 615B01722BCBD77600AA785F /* XCRemoteSwiftPackageReference "iShader" */;
+			productName = Transition;
+		};
+		615B017F2BCBD77600AA785F /* iShader */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 615B01722BCBD77600AA785F /* XCRemoteSwiftPackageReference "iShader" */;
+			productName = iShader;
+		};
+		618C77DB2BB7461000353A1C /* CBass */ = {
+			isa = XCSwiftPackageProductDependency;
 			productName = CBass;
 		};
 /* End XCSwiftPackageProductDependency section */
