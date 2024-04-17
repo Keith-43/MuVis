@@ -62,6 +62,7 @@
 		615B01822BCBD96500AA785F /* AudioEclipseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615B01812BCBD96500AA785F /* AudioEclipseView.swift */; };
 		61885C462B9B98B200F85261 /* Miscellaneous.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61885C452B9B98B200F85261 /* Miscellaneous.swift */; };
 		618C77DC2BB7461000353A1C /* CBass in Frameworks */ = {isa = PBXBuildFile; productRef = 618C77DB2BB7461000353A1C /* CBass */; };
+		61A618012BD0609B006AAFA1 /* Superposition2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A618002BD0609B006AAFA1 /* Superposition2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -128,6 +129,7 @@
 		6123A94C2B9CF7DC0067A598 /* ViewUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtilities.swift; sourceTree = "<group>"; };
 		615B01812BCBD96500AA785F /* AudioEclipseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEclipseView.swift; sourceTree = "<group>"; };
 		61885C452B9B98B200F85261 /* Miscellaneous.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Miscellaneous.swift; sourceTree = "<group>"; };
+		61A618002BD0609B006AAFA1 /* Superposition2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Superposition2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +226,7 @@
 				53B5DD712A0D2793008986ED /* RabbitHole.swift */,
 				53AB0A4629AECC20002A5EC2 /* VisUtilities.swift */,
 				615B01812BCBD96500AA785F /* AudioEclipseView.swift */,
+				61A618002BD0609B006AAFA1 /* Superposition2.swift */,
 			);
 			path = Visualizations;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				53036D3829B2D9490068BE8A /* Waterfall.swift in Sources */,
 				53AB0A6829AECC20002A5EC2 /* Spectrum.swift in Sources */,
 				53A1FBDF29BD3FAE00A8553C /* RainbowEllipse.swift in Sources */,
+				61A618012BD0609B006AAFA1 /* Superposition2.swift in Sources */,
 				53AB0A6C29AECC20002A5EC2 /* OverlappedOctaves.swift in Sources */,
 				53E9AB8D2A0980BA00672CD2 /* OverlappedHarmonics.swift in Sources */,
 				53A1FBE229BD401800A8553C /* SpinningEllipse.swift in Sources */,

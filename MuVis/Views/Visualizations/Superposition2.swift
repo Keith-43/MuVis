@@ -15,8 +15,9 @@
 import SwiftUI
 
 struct Superposition2: View {
-    @EnvironmentObject var manager: AudioManager  // Observe the instance of AudioManager passed from ContentView
-    @EnvironmentObject var settings: Settings
+    @Environment(AudioManager.self) var manager  // Observe the instance of AudioManager passed from ContentView
+    @Environment(Settings.self) var settings
+    
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
@@ -60,3 +61,5 @@ struct Superposition2: View {
         }
     }
 } // end of Superposition2 struct
+
+#Preview("Superposition2") { Superposition2().enhancedPreview() }
