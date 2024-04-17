@@ -40,6 +40,7 @@ let visList: [Visualization] =  [
     Visualization ("Cymbal",                  view: AnyView(Cymbal() ) ),
     Visualization ("Lava Lamp",               view: AnyView(LavaLamp() ) ),
     Visualization ("Superposition",           view: AnyView(Superposition() ) ),
+    Visualization ("Superposition2",          view: AnyView(Superposition2() ) ),
     Visualization ("Rainbow Spectrum",        view: AnyView(RainbowSpectrum() ) ),
     Visualization ("Waterfall",               view: AnyView(Waterfall() ) ),
     Visualization ("MuSpectrogram CG",        view: AnyView(MuSpectrogramCG() ) ),
