@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "cbass",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Treata11/CBass",
+      "state" : {
+        "branch" : "main",
+        "revision" : "d1c290c706b60af7d286f3596152e68404f1e1cb"
+      }
+    },
+    {
       "identity" : "ishader",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Treata11/iShader/",

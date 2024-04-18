@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -52,17 +52,17 @@
 		53E9AB8D2A0980BA00672CD2 /* OverlappedHarmonics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E9AB8C2A0980BA00672CD2 /* OverlappedHarmonics.swift */; };
 		61155A742BCC16AF0046786F /* AudioVisualizers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61155A732BCC16AF0046786F /* AudioVisualizers.swift */; };
 		6123A94D2B9CF7DC0067A598 /* ViewUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6123A94C2B9CF7DC0067A598 /* ViewUtilities.swift */; };
-		615B01742BCBD77600AA785F /* AudioVisualizer in Frameworks */ = {isa = PBXBuildFile; productRef = 615B01732BCBD77600AA785F /* AudioVisualizer */; };
-		615B01762BCBD77600AA785F /* ColorEffect in Frameworks */ = {isa = PBXBuildFile; productRef = 615B01752BCBD77600AA785F /* ColorEffect */; };
-		615B01782BCBD77600AA785F /* DistortionEffect in Frameworks */ = {isa = PBXBuildFile; productRef = 615B01772BCBD77600AA785F /* DistortionEffect */; };
-		615B017A2BCBD77600AA785F /* LayerEffect in Frameworks */ = {isa = PBXBuildFile; productRef = 615B01792BCBD77600AA785F /* LayerEffect */; };
-		615B017C2BCBD77600AA785F /* ShaderArt in Frameworks */ = {isa = PBXBuildFile; productRef = 615B017B2BCBD77600AA785F /* ShaderArt */; };
-		615B017E2BCBD77600AA785F /* Transition in Frameworks */ = {isa = PBXBuildFile; productRef = 615B017D2BCBD77600AA785F /* Transition */; };
-		615B01802BCBD77600AA785F /* iShader in Frameworks */ = {isa = PBXBuildFile; productRef = 615B017F2BCBD77600AA785F /* iShader */; };
 		615B01822BCBD96500AA785F /* AudioEclipseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615B01812BCBD96500AA785F /* AudioEclipseView.swift */; };
 		61885C462B9B98B200F85261 /* Miscellaneous.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61885C452B9B98B200F85261 /* Miscellaneous.swift */; };
-		618C77DC2BB7461000353A1C /* CBass in Frameworks */ = {isa = PBXBuildFile; productRef = 618C77DB2BB7461000353A1C /* CBass */; };
 		61A618012BD0609B006AAFA1 /* Superposition2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A618002BD0609B006AAFA1 /* Superposition2.swift */; };
+		61EF6BCD2BD1101800015EB6 /* CBass in Frameworks */ = {isa = PBXBuildFile; productRef = 61EF6BCC2BD1101800015EB6 /* CBass */; };
+		61EF6BD02BD1104600015EB6 /* AudioVisualizer in Frameworks */ = {isa = PBXBuildFile; productRef = 61EF6BCF2BD1104600015EB6 /* AudioVisualizer */; };
+		61EF6BD22BD1104600015EB6 /* ColorEffect in Frameworks */ = {isa = PBXBuildFile; productRef = 61EF6BD12BD1104600015EB6 /* ColorEffect */; };
+		61EF6BD42BD1104600015EB6 /* DistortionEffect in Frameworks */ = {isa = PBXBuildFile; productRef = 61EF6BD32BD1104600015EB6 /* DistortionEffect */; };
+		61EF6BD62BD1104600015EB6 /* LayerEffect in Frameworks */ = {isa = PBXBuildFile; productRef = 61EF6BD52BD1104600015EB6 /* LayerEffect */; };
+		61EF6BD82BD1104600015EB6 /* ShaderArt in Frameworks */ = {isa = PBXBuildFile; productRef = 61EF6BD72BD1104600015EB6 /* ShaderArt */; };
+		61EF6BDA2BD1104600015EB6 /* Transition in Frameworks */ = {isa = PBXBuildFile; productRef = 61EF6BD92BD1104600015EB6 /* Transition */; };
+		61EF6BDC2BD1104600015EB6 /* iShader in Frameworks */ = {isa = PBXBuildFile; productRef = 61EF6BDB2BD1104600015EB6 /* iShader */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -137,14 +137,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				615B01782BCBD77600AA785F /* DistortionEffect in Frameworks */,
-				618C77DC2BB7461000353A1C /* CBass in Frameworks */,
-				615B017A2BCBD77600AA785F /* LayerEffect in Frameworks */,
-				615B01742BCBD77600AA785F /* AudioVisualizer in Frameworks */,
-				615B01762BCBD77600AA785F /* ColorEffect in Frameworks */,
-				615B017C2BCBD77600AA785F /* ShaderArt in Frameworks */,
-				615B017E2BCBD77600AA785F /* Transition in Frameworks */,
-				615B01802BCBD77600AA785F /* iShader in Frameworks */,
+				61EF6BD42BD1104600015EB6 /* DistortionEffect in Frameworks */,
+				61EF6BCD2BD1101800015EB6 /* CBass in Frameworks */,
+				61EF6BD62BD1104600015EB6 /* LayerEffect in Frameworks */,
+				61EF6BD02BD1104600015EB6 /* AudioVisualizer in Frameworks */,
+				61EF6BD22BD1104600015EB6 /* ColorEffect in Frameworks */,
+				61EF6BD82BD1104600015EB6 /* ShaderArt in Frameworks */,
+				61EF6BDA2BD1104600015EB6 /* Transition in Frameworks */,
+				61EF6BDC2BD1104600015EB6 /* iShader in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,14 +290,14 @@
 			);
 			name = MuVis;
 			packageProductDependencies = (
-				618C77DB2BB7461000353A1C /* CBass */,
-				615B01732BCBD77600AA785F /* AudioVisualizer */,
-				615B01752BCBD77600AA785F /* ColorEffect */,
-				615B01772BCBD77600AA785F /* DistortionEffect */,
-				615B01792BCBD77600AA785F /* LayerEffect */,
-				615B017B2BCBD77600AA785F /* ShaderArt */,
-				615B017D2BCBD77600AA785F /* Transition */,
-				615B017F2BCBD77600AA785F /* iShader */,
+				61EF6BCC2BD1101800015EB6 /* CBass */,
+				61EF6BCF2BD1104600015EB6 /* AudioVisualizer */,
+				61EF6BD12BD1104600015EB6 /* ColorEffect */,
+				61EF6BD32BD1104600015EB6 /* DistortionEffect */,
+				61EF6BD52BD1104600015EB6 /* LayerEffect */,
+				61EF6BD72BD1104600015EB6 /* ShaderArt */,
+				61EF6BD92BD1104600015EB6 /* Transition */,
+				61EF6BDB2BD1104600015EB6 /* iShader */,
 			);
 			productName = MuVis;
 			productReference = 53AB0A2029AEC274002A5EC2 /* MuVis.app */;
@@ -331,8 +331,8 @@
 			);
 			mainGroup = 53AB0A1729AEC274002A5EC2;
 			packageReferences = (
-				618C77DA2BB7461000353A1C /* XCLocalSwiftPackageReference "../CBass" */,
-				615B01722BCBD77600AA785F /* XCRemoteSwiftPackageReference "iShader" */,
+				61EF6BCB2BD1101800015EB6 /* XCRemoteSwiftPackageReference "CBass" */,
+				61EF6BCE2BD1104600015EB6 /* XCRemoteSwiftPackageReference "iShader" */,
 			);
 			productRefGroup = 53AB0A2129AEC274002A5EC2 /* Products */;
 			projectDirPath = "";
@@ -642,15 +642,16 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		618C77DA2BB7461000353A1C /* XCLocalSwiftPackageReference "../CBass" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../CBass;
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
-		615B01722BCBD77600AA785F /* XCRemoteSwiftPackageReference "iShader" */ = {
+		61EF6BCB2BD1101800015EB6 /* XCRemoteSwiftPackageReference "CBass" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Treata11/CBass";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		61EF6BCE2BD1104600015EB6 /* XCRemoteSwiftPackageReference "iShader" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Treata11/iShader/";
 			requirement = {
@@ -661,44 +662,45 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		615B01732BCBD77600AA785F /* AudioVisualizer */ = {
+		61EF6BCC2BD1101800015EB6 /* CBass */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 615B01722BCBD77600AA785F /* XCRemoteSwiftPackageReference "iShader" */;
+			package = 61EF6BCB2BD1101800015EB6 /* XCRemoteSwiftPackageReference "CBass" */;
+			productName = CBass;
+		};
+		61EF6BCF2BD1104600015EB6 /* AudioVisualizer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 61EF6BCE2BD1104600015EB6 /* XCRemoteSwiftPackageReference "iShader" */;
 			productName = AudioVisualizer;
 		};
-		615B01752BCBD77600AA785F /* ColorEffect */ = {
+		61EF6BD12BD1104600015EB6 /* ColorEffect */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 615B01722BCBD77600AA785F /* XCRemoteSwiftPackageReference "iShader" */;
+			package = 61EF6BCE2BD1104600015EB6 /* XCRemoteSwiftPackageReference "iShader" */;
 			productName = ColorEffect;
 		};
-		615B01772BCBD77600AA785F /* DistortionEffect */ = {
+		61EF6BD32BD1104600015EB6 /* DistortionEffect */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 615B01722BCBD77600AA785F /* XCRemoteSwiftPackageReference "iShader" */;
+			package = 61EF6BCE2BD1104600015EB6 /* XCRemoteSwiftPackageReference "iShader" */;
 			productName = DistortionEffect;
 		};
-		615B01792BCBD77600AA785F /* LayerEffect */ = {
+		61EF6BD52BD1104600015EB6 /* LayerEffect */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 615B01722BCBD77600AA785F /* XCRemoteSwiftPackageReference "iShader" */;
+			package = 61EF6BCE2BD1104600015EB6 /* XCRemoteSwiftPackageReference "iShader" */;
 			productName = LayerEffect;
 		};
-		615B017B2BCBD77600AA785F /* ShaderArt */ = {
+		61EF6BD72BD1104600015EB6 /* ShaderArt */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 615B01722BCBD77600AA785F /* XCRemoteSwiftPackageReference "iShader" */;
+			package = 61EF6BCE2BD1104600015EB6 /* XCRemoteSwiftPackageReference "iShader" */;
 			productName = ShaderArt;
 		};
-		615B017D2BCBD77600AA785F /* Transition */ = {
+		61EF6BD92BD1104600015EB6 /* Transition */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 615B01722BCBD77600AA785F /* XCRemoteSwiftPackageReference "iShader" */;
+			package = 61EF6BCE2BD1104600015EB6 /* XCRemoteSwiftPackageReference "iShader" */;
 			productName = Transition;
 		};
-		615B017F2BCBD77600AA785F /* iShader */ = {
+		61EF6BDB2BD1104600015EB6 /* iShader */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 615B01722BCBD77600AA785F /* XCRemoteSwiftPackageReference "iShader" */;
+			package = 61EF6BCE2BD1104600015EB6 /* XCRemoteSwiftPackageReference "iShader" */;
 			productName = iShader;
-		};
-		618C77DB2BB7461000353A1C /* CBass */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = CBass;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
