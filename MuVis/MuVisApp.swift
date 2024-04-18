@@ -51,7 +51,7 @@ let accidentalNotes: [Bool] = [ false, true, false, true, false, false, true, fa
 
 @main
 struct MuVisApp: App {
-#if !DEBUG
+//#if !targetEnvironment(simulator)
     
     @Bindable var manager = AudioManager()
     @Bindable var settings = Settings()
@@ -67,20 +67,20 @@ struct MuVisApp: App {
         }
     }
     
-#else
-    /**
-     When previewing the app with a macOS taget, all the viewModels above would be initialized and held on
-     in the memory, which isn't desirable...
-     That means, running a preview using a macOS window in XCode, would result to installation of the project
-     on the device. It isn't a simulator anymore ...
-     
-     Creating an empty app template is essential to avoid unnecessary instantiations of models and to save resources.
-     */
-    var body: some Scene {
-        WindowGroup {
-            EmptyView()
-        }
-    }
-    
-#endif
+//#else
+//    /**
+//     When previewing the app with a macOS taget, all the viewModels above would be initialized and held on
+//     in the memory, which isn't desirable...
+//     That means, running a preview using a macOS window in XCode, would result to installation of the project
+//     on the device. It isn't a simulator anymore ...
+//     
+//     Creating an empty app template is essential to avoid unnecessary instantiations of models and to save resources.
+//     */
+//    var body: some Scene {
+//        WindowGroup {
+//            EmptyView()
+//        }
+//    }
+//    
+//#endif
 }
