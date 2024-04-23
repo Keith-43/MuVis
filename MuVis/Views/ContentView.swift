@@ -15,6 +15,7 @@
 import SwiftUI
 import AudioVisualizer
 import QuickLook
+import Transition
 
 struct ContentView: View {
     @Bindable var manager: AudioManager
@@ -32,6 +33,11 @@ struct ContentView: View {
 
     @State private var showTopToolbar = true
     @State private var showBottomToolbar = true
+    @State private var nextVis = true
+    
+    var transition: AnyTransition {
+        nextVis ? .crosswarp(rightToLeft: true) : .crosswarp(rightToLeft: false)
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -74,7 +80,15 @@ struct ContentView: View {
 
     // MARK: - The main visualization rendering pane
             
-            visList[visNum].view
+            Group {
+                if visNum % 2 == 1 {
+                    visList[visNum].view
+                        .transition(transition)
+                } else {
+                    visList[visNum].view
+                        .transition(transition)
+                }
+            }
                 // .drawingGroup()     // improves graphics performance by utilizing off-screen buffers
                 .navigationTitle("MuVis - Music Visualizer    -    \(visList[visNum].name)")
                 .gesture(DragGesture(minimumDistance: 3.0, coordinateSpace: .local)
@@ -123,9 +137,12 @@ struct ContentView: View {
                         Button(action: {                    // "Previous Visualization" button
                             // visNum -= 1
                             // if(visNum <= -1) {visNum = visList.count - 1}
-                            visNum = (visNum <= 0) ? visList.count - 1 : visNum - 1
-                            manager.onlyPeaks = false       // Changing the visNum turns off the onlyPeaks variation.
-                            settings.option = 0             // Changing the visNum resets the option to option=0.
+                            nextVis = false
+                            withAnimation(.easeOut(duration: 1.618)) {
+                                visNum = (visNum <= 0) ? visList.count - 1 : visNum - 1
+                                manager.onlyPeaks = false       // Changing the visNum turns off the onlyPeaks variation.
+                                settings.option = 0             // Changing the visNum resets the option to option=0.
+                            }
                         }, label: {
                             Image(systemName: "chevron.left")
                         })
@@ -141,12 +158,15 @@ struct ContentView: View {
 
                         Text("Vis:\(visNum)").font(.callout)
 
-                        Button( action: {                   // "Next Visualization" button
+                        Button(action: {                   // "Next Visualization" button
                             // visNum += 1
                             // if(visNum >= visList.count) {visNum = 0}
-                            visNum = (visNum >= visList.count-1) ? 0 : visNum + 1
-                            manager.onlyPeaks = false       // Changing the visNum turns off the onlyPeaks variation.
-                            settings.option = 0             // Changing the visNum resets the option to option=0.
+                            nextVis = true
+                            withAnimation(.easeOut(duration: 1.618)) {
+                                visNum = (visNum >= visList.count-1) ? 0 : visNum + 1
+                                manager.onlyPeaks = false       // Changing the visNum turns off the onlyPeaks variation.
+                                settings.option = 0             // Changing the visNum resets the option to option=0.
+                            }
                         }, label: {
                             Image(systemName: "chevron.right")
                         })

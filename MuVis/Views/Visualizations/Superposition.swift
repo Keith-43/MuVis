@@ -143,21 +143,22 @@ private struct Superposition_Shape: Shape {
 }
 
 // TODO: New File?
-public func generateWaveform(binNumbers: [Int], myDataLength: Int) -> ([Float]) {
-    var outputArray: [Float] = [Float] (repeating: 0.0, count: myDataLength)
-    var waveform: [Float] = [Float] (repeating: 0.0, count: myDataLength)
+public func generateWaveform(binNumbers: [Int], myDataLength: Int) -> [Float] {
+    var outputArray = [Float](repeating: 0.0, count: myDataLength)
+    var waveform = [Float](repeating: 0.0, count: myDataLength)
     var angle: Double = 0.0
-    let constant: Double = 5.0 * AudioManager.binFreqWidth / AudioManager.sampleRate // The 5.0 is ad hoc for aesthetics.
+    let constant: Double = 5.0 * AudioManager.binFreqWidth / AudioManager.sampleRate // The 5 is ad hoc for aesthetics.
 
     for peakNum in 0 ..< peakCount {
 
-        let amplitude: Float =  0.5 * ( 1.0 + ( Float(peakNum) / Float(peakCount) ) )  // 0.5 <= amplitude <= 1.0
+        let amplitude: Float =  0.5 * (1 + (Float(peakNum) / Float(peakCount)))  // 0.5 <= amplitude <= 1.0
 
         for sample in 0 ..< myDataLength {
-            angle = 2.0 * Double.pi * Double(sample) * Double(binNumbers[peakNum]) * 5.0 * constant
+            angle = 2 * .pi * Double(sample) * Double(binNumbers[peakNum]) * 5 * constant
             waveform[sample] = 0.1 * amplitude * Float(sin(angle)) // The 0.1 is ad hoc for aesthetics.
             outputArray[sample] += waveform[sample]
         }
     }
+    
     return outputArray
 }
