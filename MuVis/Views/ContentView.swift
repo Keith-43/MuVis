@@ -58,19 +58,25 @@ struct ContentView: View {
                 .gesture(DragGesture(minimumDistance: 3.0, coordinateSpace: .local)
                     .onEnded { value in
                         switch(value.translation.width, value.translation.height) {
-                        case ( ...0, -30...30 ):                                                         // left swipe
-                            visNum += 1
-                            if( visNum >= visList.count ) { visNum = 0 }
-                        case ( 0..., -30...30 ):                                                         // right swipe
-                            visNum -= 1
-                            if( visNum <= -1 ) { visNum=visList.count-1 }
-                        case ( -100...100, ...0 ):                                                        // up swipe
+                        case (...0, -30...30):                                                         // left swipe
+                            withAnimation(.easeOut(duration: 1.618)) {
+                                nextVis = true
+                                visNum += 1
+                                if (visNum >= visList.count) { visNum = 0 }
+                            }
+                        case (0..., -30...30):                                                         // right swipe
+                            withAnimation(.easeOut(duration: 1.618)) {
+                                nextVis = false
+                                visNum -= 1
+                                if (visNum <= -1) { visNum=visList.count-1 }
+                            }
+                        case (-100...100, ...0):                                                        // up swipe
                             settings.option += 1
-                            if( settings.option >= settings.optionCount ) { settings.option = 0 }
-                        case ( -100...100, 0... ):                                                        // down swipe
+                            if (settings.option >= settings.optionCount) { settings.option = 0 }
+                        case (-100...100, 0...):                                                        // down swipe
                             settings.option -= 1
-                            if( settings.option <= -1 ) { settings.option = settings.optionCount-1 }
-                        default:  print("Drag gesture not detected properly.")
+                            if (settings.option <= -1) { settings.option = settings.optionCount-1 }
+                        default: print("Drag gesture not detected properly.")
                         }
                     }
                 )
@@ -89,7 +95,8 @@ struct ContentView: View {
                     }
                 // To use BlackHole audio driver: SystemSettings | Sound, Input: BlackHole 2ch; Ouput: Multi-Output Device
                 // To use micOn: SystemSettings | Sound, Input: MacBook Pro Microphone; Ouput: Multi-Output Device
-                ) )
+                ) 
+                )
 
             // Bottom Toolbar
             if showBottomToolbar {
@@ -188,7 +195,7 @@ struct ContentView: View {
             Group {
                 Button(action: {                    // "Previous Option" button
                     settings.option -= 1
-                    if( settings.option <= -1 ) { settings.option = settings.optionCount - 1 }
+                    if (settings.option <= -1) { settings.option = settings.optionCount - 1 }
                 }, label: {
                     Image(systemName: "chevron.down")
                 })
@@ -331,7 +338,6 @@ struct ContentView: View {
                 .quickLookPreview($visualizationsGuideUrl)
                 .padding(.trailing)
             }
-            
         }  // end of HStack
     }
 }
