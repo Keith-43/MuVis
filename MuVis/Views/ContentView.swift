@@ -34,48 +34,12 @@ struct ContentView: View {
     @State private var showTopToolbar = true
     @State private var showBottomToolbar = true
     @State private var nextVis = true
-    
-    var transition: AnyTransition {
-        nextVis ? .crosswarp(rightToLeft: true) : .crosswarp(rightToLeft: false)
-    }
 
     var body: some View {
         VStack(spacing: 0) {
-
-    // MARK: - Top Toolbar
+            // Top Toolbar
             if showTopToolbar {
-                // The following HStack constitutes the Top Toolbar:
-                HStack {
-
-                    Text("Gain-")
-                        .padding(.leading)
-
-                    Slider(value: $manager.userGain, in: 0.0 ... 8.0)  //  0.0 <= userGain <= 8.0
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .strokeBorder(.red, lineWidth: 2)
-                        )
-                        .onChange(of: manager.userGain) { _, value in
-                            manager.userGain = Float(value)
-                        }
-                        .help("This slider controls the gain of the visualization.")
-
-                    if( showMSPF==true ) { Text("MSPF: \( lround(manager.averageTime) )") }
-                    
-                    Slider(value: $manager.userSlope, in: 0.0 ... 0.4)      // 0 <= userSlope <= 0.4
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .strokeBorder(.red, lineWidth: 2)
-                        )
-                        .onChange(of: manager.userSlope) { _, newValue in
-                            manager.userSlope = Float(newValue)
-                        }
-                        .help("This slider controls the frequency slope of the visualization.")
-
-                    Text("-Treble")
-                        .padding(.trailing)
-
-                }  // end of HStack{}
+                topToolbar
             }
 
     // MARK: - The main visualization rendering pane
@@ -83,10 +47,10 @@ struct ContentView: View {
             Group {
                 if visNum % 2 == 1 {
                     visList[visNum].view
-                        .transition(transition)
+                        .transition(.crosswarp(rightToLeft: nextVis))
                 } else {
                     visList[visNum].view
-                        .transition(transition)
+                        .transition(.crosswarp(rightToLeft: nextVis))
                 }
             }
                 // .drawingGroup()     // improves graphics performance by utilizing off-screen buffers
@@ -127,209 +91,247 @@ struct ContentView: View {
                 // To use micOn: SystemSettings | Sound, Input: MacBook Pro Microphone; Ouput: Multi-Output Device
                 ) )
 
-            
-    // MARK: - Bottom Toolbar
+            // Bottom Toolbar
             if showBottomToolbar {
-                // The following HStack constitutes the Bottom Toolbar:
-                HStack {
-                    
-                    Group {
-                        Button(action: {                    // "Previous Visualization" button
-                            // visNum -= 1
-                            // if(visNum <= -1) {visNum = visList.count - 1}
-                            nextVis = false
-                            withAnimation(.easeOut(duration: 1.618)) {
-                                visNum = (visNum <= 0) ? visList.count - 1 : visNum - 1
-                                manager.onlyPeaks = false       // Changing the visNum turns off the onlyPeaks variation.
-                                settings.option = 0             // Changing the visNum resets the option to option=0.
-                            }
-                        }, label: {
-                            Image(systemName: "chevron.left")
-                        })
-                        .keyboardShortcut(KeyEquivalent.leftArrow, modifiers: [])
-                        .help("This button retreats to the previous visualization.")
-                        .disabled(pauseButtonIsPaused)      // gray-out "Previous Vis" button if pauseButtonIsPaused is true
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 4)
-                                .strokeBorder(.blue, lineWidth: 2)
-                                .tint(.pink)
-                        )
-                        .padding(.leading)
-
-                        Text("Vis:\(visNum)").font(.callout)
-
-                        Button(action: {                   // "Next Visualization" button
-                            // visNum += 1
-                            // if(visNum >= visList.count) {visNum = 0}
-                            nextVis = true
-                            withAnimation(.easeOut(duration: 1.618)) {
-                                visNum = (visNum >= visList.count-1) ? 0 : visNum + 1
-                                manager.onlyPeaks = false       // Changing the visNum turns off the onlyPeaks variation.
-                                settings.option = 0             // Changing the visNum resets the option to option=0.
-                            }
-                        }, label: {
-                            Image(systemName: "chevron.right")
-                        })
-                        .keyboardShortcut(KeyEquivalent.rightArrow, modifiers: [])
-                        .help("This button advances to the next visualization.")
-                        .disabled(pauseButtonIsPaused)      // gray-out "Next Vis" button if pauseButtonIsPaused is true
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 4)
-                                .strokeBorder(.blue, lineWidth: 2)
-                        )
-                    }
-
-                    Spacer()
-
-                    Group {
-                        Button(action: {                    // "Previous Option" button
-                            settings.option -= 1
-                            if( settings.option <= -1 ) { settings.option = settings.optionCount - 1 }
-                        }, label: {
-                            Image(systemName: "chevron.down")
-                        })
-                        .keyboardShortcut(KeyEquivalent.downArrow, modifiers: [])   // downArrow key decrements the option
-                        .help("This button retreats to the previous option.")
-                        .disabled(pauseButtonIsPaused)  // gray-out PreviousOption button if pauseButtonIsPaused is true
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 4)
-                                .strokeBorder(.blue, lineWidth: 2)
-                                .tint(.pink)
-                        )
-                        .padding(.leading)
-                        
-                        Text("Option:\(settings.option)").font(.callout)
-                        
-                        Button( action: {                   // "Next Option" button
-                            settings.option += 1
-                            if (settings.option >= settings.optionCount) { settings.option = 0 }
-                        }, label: {
-                            Image(systemName: "chevron.up")
-                        })
-                        .keyboardShortcut(KeyEquivalent.upArrow, modifiers: []) // upArrow key increments the option
-                        .help("This button advances to the next option.")
-                        .disabled(pauseButtonIsPaused)      // gray-out NextOption button if pauseButtonIsPaused is true
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 4)
-                                .strokeBorder(.blue, lineWidth: 2)
-                        )
-                    }
-                    
-                    Spacer()
-                    
-                    Group {
-                        /// "Pause / Resume" button
-                        Button(action: {
-                            if manager.isPaused {
-                                manager.startMusicPlay()
-                            } else {
-                                manager.pauseMusicPlay()
-                            }
-                            manager.isPaused.toggle()
-                            pauseButtonIsPaused.toggle()
-                        }, label: {
-                            pauseButtonIsPaused ? Image(systemName:"play.fill") : Image(systemName:"pause.fill")
-                        })
-                        .help("This button pauses or resumes the audio.")
-                        .disabled(manager.micOn)            // gray-out Pause/Resume button if micOn is true
-                        .disabled(usingBlackHole)           // gray-out Pause/Resume button when using BlackHole
-                        .padding(.trailing)
-                        
-                        if !usingBlackHole {
-                            
-                            // "Microphone On/Off" button
-                            // This is the only place in MuVis that micOn changes.
-                            Button(action: {
-                                manager.micOn.toggle()
-                                manager.stopMusicPlay()
-                                manager.processAudio()
-                            }, label: {
-                                manager.micOn ? Image(systemName:"mic.slash.fill") : Image(systemName:"mic.fill")
-                            })
-                            .help("This button turns the microphone on and off.")
-                            .disabled(pauseButtonIsPaused)   // gray-out MicOn/Off button if pauseButtonIsPaused is true
-                            .padding(.trailing)
-                            
-                            Button( action: {                                   // "Select Song" button
-                                previousAudioURL.stopAccessingSecurityScopedResource()
-                                if !manager.micOn { enableSongFileSelection = true }
-                            }, label: {
-                                Image(systemName: "music.note.list")
-                            })
-                            .help("This button opens a pop-up pane to select a song file.")
-                            .disabled(manager.micOn)        // gray-out "Select Song" button if mic is enabled
-                            .disabled(pauseButtonIsPaused) // gray-out SelectSong button if pauseButtonIsPaused is true
-                            .fileImporter(
-                                isPresented: $enableSongFileSelection,
-                                allowedContentTypes: [.audio],
-                                allowsMultipleSelection: false
-                            ) { result in
-                                if case .success = result {
-                                    do {
-                                        let audioURL: URL = try result.get().first!
-                                        previousAudioURL = audioURL
-                                        if audioURL.startAccessingSecurityScopedResource() {
-                                            manager.filePath = audioURL.path
-                                            if(!manager.micOn) {
-                                                manager.stopMusicPlay()
-                                                manager.processAudio()
-                                            }
-                                        }
-                                    } catch {
-                                        let nsError = error as NSError
-                                        fatalError("File Import Error \(nsError), \(nsError.userInfo)")
-                                    }
-                                } else {
-                                    print("File Import Failed")
-                                }
-                            }
-                            .padding(.trailing)
-                        }  // end of !usingBlackHole
-                        
-                        Button(action: { manager.onlyPeaks.toggle() }, label: {       // "only Peaks / Normal" button
-                            // Text( (manager.onlyPeaks == true) ? "Normal" : "Peaks").font(.footnote)
-                            manager.onlyPeaks ? Image(systemName: "waveform.path") : Image(systemName: "waveform.path.badge.minus")
-                        })
-                        .help("This button enhances the peaks by subtracting the background spectrum.")
-                        .disabled(pauseButtonIsPaused)  // gray-out "Peaks/Normal" button if pauseButtonIsPaused is true
-                        .padding(.trailing)
-                    }
-
-                    Spacer()
-
-                    Group {
-                        Button(action: {                                        // "Display User Guide" button
-                            userGuideUrl = Bundle.main.url(forResource: "UserGuide", withExtension: "pdf" )
-                        } ) {
-                            Text("UserG").font(.callout)
-                        }
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 4)
-                                .strokeBorder(.blue, lineWidth: 2)
-                        )
-                        .help("This button displays the User Guide.")
-                        .quickLookPreview($userGuideUrl)
-                        // https://developer.apple.com/documentation/swiftui/view/quicklookpreview(_:)?language=objc_9
-                        // https://stackoverflow.com/questions/70341461/how-to-use-quicklookpreview-modifier-in-swiftui
-                        .padding(.trailing)
-
-                        Button(action: {                                        // "Display Visualizations Guide" button
-                            visualizationsGuideUrl = Bundle.main.url( forResource: "Visualizations",
-                                                                      withExtension: "pdf" )
-                        }, label: {
-                            Text("VisG").font(.callout)
-                        })
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 4)
-                                .strokeBorder(.blue, lineWidth: 2)
-                        )
-                        .help("This button displays the Visualizations Guide.")
-                        .quickLookPreview($visualizationsGuideUrl)
-                        .padding(.trailing)
-                    }
-                    
-                }  // end of HStack
-            }  // end of if(showBottomToolbar)
+                bottomToolbar
+            }
         }  // end of VStack
     }  // end of var body: some View
+    
+    // MARK: - Top Toolbar
+    
+    var topToolbar: some View {
+        HStack {
+            Text("Gain-")
+                .padding(.leading)
+
+            Slider(value: $manager.userGain, in: 0.0 ... 8.0)  //  0.0 <= userGain <= 8.0
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .strokeBorder(.red, lineWidth: 2)
+                )
+                .onChange(of: manager.userGain) { _, value in
+                    manager.userGain = Float(value)
+                }
+                .help("This slider controls the gain of the visualization.")
+
+            if showMSPF { Text("MSPF: \( lround(manager.averageTime) )") }
+            
+            Slider(value: $manager.userSlope, in: 0.0 ... 0.4)      // 0 <= userSlope <= 0.4
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .strokeBorder(.red, lineWidth: 2)
+                )
+                .onChange(of: manager.userSlope) { _, newValue in
+                    manager.userSlope = Float(newValue)
+                }
+                .help("This slider controls the frequency slope of the visualization.")
+
+            Text("-Treble")
+                .padding(.trailing)
+
+        }  // end of HStack
+    }
+    
+    // MARK: - Bottom Toolbar
+    
+    var bottomToolbar: some View {
+        HStack {
+            Group {
+                Button(action: {                    // "Previous Visualization" button
+                    // visNum -= 1
+                    // if(visNum <= -1) {visNum = visList.count - 1}
+                    nextVis = false
+                    withAnimation(.easeOut(duration: 1.618)) {
+                        visNum = (visNum <= 0) ? visList.count - 1 : visNum - 1
+                        manager.onlyPeaks = false       // Changing the visNum turns off the onlyPeaks variation.
+                        settings.option = 0             // Changing the visNum resets the option to option=0.
+                    }
+                }, label: {
+                    Image(systemName: "chevron.left")
+                })
+                .keyboardShortcut(KeyEquivalent.leftArrow, modifiers: [])
+                .help("This button retreats to the previous visualization.")
+                .disabled(pauseButtonIsPaused)      // gray-out "Previous Vis" button if pauseButtonIsPaused is true
+                .overlay(
+                    RoundedRectangle(cornerRadius: 4)
+                        .strokeBorder(.blue, lineWidth: 2)
+                        .tint(.pink)
+                )
+                .padding(.leading)
+
+                Text("Vis:\(visNum)").font(.callout)
+
+                Button(action: {                   // "Next Visualization" button
+                    // visNum += 1
+                    // if(visNum >= visList.count) {visNum = 0}
+                    nextVis = true
+                    withAnimation(.easeOut(duration: 1.618)) {
+                        visNum = (visNum >= visList.count-1) ? 0 : visNum + 1
+                        manager.onlyPeaks = false       // Changing the visNum turns off the onlyPeaks variation.
+                        settings.option = 0             // Changing the visNum resets the option to option=0.
+                    }
+                }, label: {
+                    Image(systemName: "chevron.right")
+                })
+                .keyboardShortcut(KeyEquivalent.rightArrow, modifiers: [])
+                .help("This button advances to the next visualization.")
+                .disabled(pauseButtonIsPaused)      // gray-out "Next Vis" button if pauseButtonIsPaused is true
+                .overlay(
+                    RoundedRectangle(cornerRadius: 4)
+                        .strokeBorder(.blue, lineWidth: 2)
+                )
+            }
+
+            Spacer()
+
+            Group {
+                Button(action: {                    // "Previous Option" button
+                    settings.option -= 1
+                    if( settings.option <= -1 ) { settings.option = settings.optionCount - 1 }
+                }, label: {
+                    Image(systemName: "chevron.down")
+                })
+                .keyboardShortcut(KeyEquivalent.downArrow, modifiers: [])   // downArrow key decrements the option
+                .help("This button retreats to the previous option.")
+                .disabled(pauseButtonIsPaused)  // gray-out PreviousOption button if pauseButtonIsPaused is true
+                .overlay(
+                    RoundedRectangle(cornerRadius: 4)
+                        .strokeBorder(.blue, lineWidth: 2)
+                        .tint(.pink)
+                )
+                .padding(.leading)
+                
+                Text("Option:\(settings.option)").font(.callout)
+                
+                Button( action: {                   // "Next Option" button
+                    settings.option += 1
+                    if (settings.option >= settings.optionCount) { settings.option = 0 }
+                }, label: {
+                    Image(systemName: "chevron.up")
+                })
+                .keyboardShortcut(KeyEquivalent.upArrow, modifiers: []) // upArrow key increments the option
+                .help("This button advances to the next option.")
+                .disabled(pauseButtonIsPaused)      // gray-out NextOption button if pauseButtonIsPaused is true
+                .overlay(
+                    RoundedRectangle(cornerRadius: 4)
+                        .strokeBorder(.blue, lineWidth: 2)
+                )
+            }
+            
+            Spacer()
+            
+            Group {
+                /// "Pause / Resume" button
+                Button(action: {
+                    if manager.isPaused {
+                        manager.startMusicPlay()
+                    } else {
+                        manager.pauseMusicPlay()
+                    }
+                    manager.isPaused.toggle()
+                    pauseButtonIsPaused.toggle()
+                }, label: {
+                    pauseButtonIsPaused ? Image(systemName:"play.fill") : Image(systemName:"pause.fill")
+                })
+                .help("This button pauses or resumes the audio.")
+                .disabled(manager.micOn)            // gray-out Pause/Resume button if micOn is true
+                .disabled(usingBlackHole)           // gray-out Pause/Resume button when using BlackHole
+                .padding(.trailing)
+                
+                if !usingBlackHole {
+                    
+                    // "Microphone On/Off" button
+                    // This is the only place in MuVis that micOn changes.
+                    Button(action: {
+                        manager.micOn.toggle()
+                        manager.stopMusicPlay()
+                        manager.processAudio()
+                    }, label: {
+                        manager.micOn ? Image(systemName:"mic.slash.fill") : Image(systemName:"mic.fill")
+                    })
+                    .help("This button turns the microphone on and off.")
+                    .disabled(pauseButtonIsPaused)   // gray-out MicOn/Off button if pauseButtonIsPaused is true
+                    .padding(.trailing)
+                    
+                    Button( action: {                                   // "Select Song" button
+                        previousAudioURL.stopAccessingSecurityScopedResource()
+                        if !manager.micOn { enableSongFileSelection = true }
+                    }, label: {
+                        Image(systemName: "music.note.list")
+                    })
+                    .help("This button opens a pop-up pane to select a song file.")
+                    .disabled(manager.micOn)        // gray-out "Select Song" button if mic is enabled
+                    .disabled(pauseButtonIsPaused) // gray-out SelectSong button if pauseButtonIsPaused is true
+                    .fileImporter(
+                        isPresented: $enableSongFileSelection,
+                        allowedContentTypes: [.audio],
+                        allowsMultipleSelection: false
+                    ) { result in
+                        if case .success = result {
+                            do {
+                                let audioURL: URL = try result.get().first!
+                                previousAudioURL = audioURL
+                                if audioURL.startAccessingSecurityScopedResource() {
+                                    manager.filePath = audioURL.path
+                                    if(!manager.micOn) {
+                                        manager.stopMusicPlay()
+                                        manager.processAudio()
+                                    }
+                                }
+                            } catch {
+                                let nsError = error as NSError
+                                fatalError("File Import Error \(nsError), \(nsError.userInfo)")
+                            }
+                        } else {
+                            print("File Import Failed")
+                        }
+                    }
+                    .padding(.trailing)
+                }  // end of !usingBlackHole
+                
+                Button(action: { manager.onlyPeaks.toggle() }, label: {       // "only Peaks / Normal" button
+                    // Text( (manager.onlyPeaks == true) ? "Normal" : "Peaks").font(.footnote)
+                    manager.onlyPeaks ? Image(systemName: "waveform.path") : Image(systemName: "waveform.path.badge.minus")
+                })
+                .help("This button enhances the peaks by subtracting the background spectrum.")
+                .disabled(pauseButtonIsPaused)  // gray-out "Peaks/Normal" button if pauseButtonIsPaused is true
+                .padding(.trailing)
+            }
+
+            Spacer()
+
+            Group {
+                Button(action: {                                        // "Display User Guide" button
+                    userGuideUrl = Bundle.main.url(forResource: "UserGuide", withExtension: "pdf" )
+                } ) {
+                    Text("UserG").font(.callout)
+                }
+                .overlay(
+                    RoundedRectangle(cornerRadius: 4)
+                        .strokeBorder(.blue, lineWidth: 2)
+                )
+                .help("This button displays the User Guide.")
+                .quickLookPreview($userGuideUrl)
+                // https://developer.apple.com/documentation/swiftui/view/quicklookpreview(_:)?language=objc_9
+                // https://stackoverflow.com/questions/70341461/how-to-use-quicklookpreview-modifier-in-swiftui
+                .padding(.trailing)
+
+                Button(action: {                                        // "Display Visualizations Guide" button
+                    visualizationsGuideUrl = Bundle.main.url( forResource: "Visualizations",
+                                                              withExtension: "pdf" )
+                }, label: {
+                    Text("VisG").font(.callout)
+                })
+                .overlay(
+                    RoundedRectangle(cornerRadius: 4)
+                        .strokeBorder(.blue, lineWidth: 2)
+                )
+                .help("This button displays the Visualizations Guide.")
+                .quickLookPreview($visualizationsGuideUrl)
+                .padding(.trailing)
+            }
+            
+        }  // end of HStack
+    }
 }
