@@ -50,5 +50,14 @@ let visList: [Visualization] =  [
     Visualization ("Rainbow Ellipse",         view: AnyView(RainbowEllipse() ) ),
     Visualization ("Spinning Ellipse",        view: AnyView(SpinningEllipse() ) ),
     Visualization ("Rabbit Hole",             view: AnyView(RabbitHole() ) ),
+    
+    // MARK: - Shaders
+    
     Visualization ("Audio Eclipse",           view: AnyView(AudioEclipseView())),
+    Visualization ("Sine Sound Waves",        view: AnyView(SineSoundWavesView())),
+    Visualization ("Glowing Sound Particles", view: AnyView(GlowingSoundParticlesView())),
+    Visualization ("Universe Within",         view: AnyView(UniverseWithinView())),
+    Visualization ("Galaxy Visuals",          view: AnyView(GalaxyVisualsView())),
+    Visualization ("Round Audio Specturm",    view: AnyView(RoundAudioSpecturmView())),
+    Visualization ("Waves Remix",             view: AnyView(WavesRemixView()))
 ]

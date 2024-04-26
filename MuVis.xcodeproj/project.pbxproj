@@ -52,8 +52,8 @@
 		53E9AB8D2A0980BA00672CD2 /* OverlappedHarmonics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E9AB8C2A0980BA00672CD2 /* OverlappedHarmonics.swift */; };
 		61155A742BCC16AF0046786F /* AudioVisualizers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61155A732BCC16AF0046786F /* AudioVisualizers.swift */; };
 		6123A94D2B9CF7DC0067A598 /* ViewUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6123A94C2B9CF7DC0067A598 /* ViewUtilities.swift */; };
-		615B01822BCBD96500AA785F /* AudioEclipseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615B01812BCBD96500AA785F /* AudioEclipseView.swift */; };
 		61885C462B9B98B200F85261 /* Miscellaneous.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61885C452B9B98B200F85261 /* Miscellaneous.swift */; };
+		6196D8772BDC395900C56D69 /* MuVisShaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6196D8762BDC395900C56D69 /* MuVisShaders.swift */; };
 		61A618012BD0609B006AAFA1 /* Superposition2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A618002BD0609B006AAFA1 /* Superposition2.swift */; };
 		61EF6BCD2BD1101800015EB6 /* CBass in Frameworks */ = {isa = PBXBuildFile; productRef = 61EF6BCC2BD1101800015EB6 /* CBass */; };
 		61EF6BD02BD1104600015EB6 /* AudioVisualizer in Frameworks */ = {isa = PBXBuildFile; productRef = 61EF6BCF2BD1104600015EB6 /* AudioVisualizer */; };
@@ -127,8 +127,8 @@
 		53E9AB8C2A0980BA00672CD2 /* OverlappedHarmonics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlappedHarmonics.swift; sourceTree = "<group>"; };
 		61155A732BCC16AF0046786F /* AudioVisualizers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioVisualizers.swift; sourceTree = "<group>"; };
 		6123A94C2B9CF7DC0067A598 /* ViewUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtilities.swift; sourceTree = "<group>"; };
-		615B01812BCBD96500AA785F /* AudioEclipseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEclipseView.swift; sourceTree = "<group>"; };
 		61885C452B9B98B200F85261 /* Miscellaneous.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Miscellaneous.swift; sourceTree = "<group>"; };
+		6196D8762BDC395900C56D69 /* MuVisShaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuVisShaders.swift; sourceTree = "<group>"; };
 		61A618002BD0609B006AAFA1 /* Superposition2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Superposition2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -197,6 +197,7 @@
 		53AB0A4229AECBBA002A5EC2 /* Visualizations */ = {
 			isa = PBXGroup;
 			children = (
+				6196D8752BDC37A600C56D69 /* Shaders */,
 				533712F52A04EDB800BD0188 /* PianoKeyboard.swift */,
 				53AB0A5229AECC20002A5EC2 /* Spectrum.swift */,
 				5395EC5529B004A80008575E /* MusicSpectrum.swift */,
@@ -225,7 +226,6 @@
 				53A1FBE129BD401800A8553C /* SpinningEllipse.swift */,
 				53B5DD712A0D2793008986ED /* RabbitHole.swift */,
 				53AB0A4629AECC20002A5EC2 /* VisUtilities.swift */,
-				615B01812BCBD96500AA785F /* AudioEclipseView.swift */,
 				61A618002BD0609B006AAFA1 /* Superposition2.swift */,
 			);
 			path = Visualizations;
@@ -270,6 +270,14 @@
 				6123A94C2B9CF7DC0067A598 /* ViewUtilities.swift */,
 			);
 			path = ViewExtensions;
+			sourceTree = "<group>";
+		};
+		6196D8752BDC37A600C56D69 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				6196D8762BDC395900C56D69 /* MuVisShaders.swift */,
+			);
+			path = Shaders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -376,7 +384,6 @@
 				533712F62A04EDB800BD0188 /* PianoKeyboard.swift in Sources */,
 				53AB0A6629AECC20002A5EC2 /* HarmonicAlignment.swift in Sources */,
 				53036D3329B2D9490068BE8A /* PeaksSpectrogram.swift in Sources */,
-				615B01822BCBD96500AA785F /* AudioEclipseView.swift in Sources */,
 				53AB0A8129AECFD5002A5EC2 /* AnimatableVector.swift in Sources */,
 				5335AD862AB38C42008339A2 /* PeaksSpectrogramCG.swift in Sources */,
 				53AB0A5B29AECC20002A5EC2 /* SpiralOAS.swift in Sources */,
@@ -405,6 +412,7 @@
 				53B5DD722A0D2793008986ED /* RabbitHole.swift in Sources */,
 				53AB0A2629AEC274002A5EC2 /* ContentView.swift in Sources */,
 				53AB0A2429AEC274002A5EC2 /* MuVisApp.swift in Sources */,
+				6196D8772BDC395900C56D69 /* MuVisShaders.swift in Sources */,
 				53AB0A5929AECC20002A5EC2 /* SpectrumBars.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
