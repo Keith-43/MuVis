@@ -39,7 +39,7 @@ struct RainbowSpectrum: View {
     static var colorIndex: Int = 0
     
     var body: some View {
-        Canvas { context, size in
+        Canvas(rendersAsynchronously: true) { context, size in
 
             let width: CGFloat  = size.width
             let height: CGFloat = size.height

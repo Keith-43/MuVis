@@ -37,7 +37,7 @@ struct SpinningEllipse: View {
         // Toggle between black and white as the Canvas's background color:
         let backgroundColor: Color = (colorScheme == .dark) ? Color.black : Color.white
         
-        Canvas { context, size in
+        Canvas(rendersAsynchronously: true) { context, size in
 
             let width: Double  = size.width
             let height: Double = size.height

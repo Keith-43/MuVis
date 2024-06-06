@@ -285,12 +285,13 @@ struct EllipticalNoteNames: View {    // used in EllipticalOAS and SpiralOAS vis
     }
 }
 
+// MARK: - ColorPane
 
-
-struct ColorPane: View {       // used in the TriOctSpectrum visualization
+/// used in the TriOctSpectrum visualization
+struct ColorPane: View {
     var color: Color
     var body: some View {
-        Canvas { context, size in
+        Canvas(rendersAsynchronously: true) { context, size in
 
         context.fill(
             Path(CGRect(x: 0, y: 0.0, width: size.width, height: size.height)),

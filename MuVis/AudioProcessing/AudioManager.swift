@@ -127,7 +127,7 @@ class AudioManager {
     
     init(
         filePath: String? = Bundle.main.path(forResource: "music", ofType: "mp3"),
-        fps: Double = 48
+        fps: Double = 60
     ) {
         self.filePath = filePath
         self.fps = fps

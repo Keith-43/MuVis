@@ -102,7 +102,7 @@ private struct HarmonicAlignment_Live: View {
     var body: some View {
         let option = settings.option     // Use local short name to improve code readablity.
         
-        Canvas { context, size in
+        Canvas(rendersAsynchronously: true) { context, size in
 
             /*
             This is a two-dimensional grid containing 6 rows and 12 columns.

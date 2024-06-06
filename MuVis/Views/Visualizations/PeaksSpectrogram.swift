@@ -76,7 +76,7 @@ private struct PeaksSpectrogram_Live: View {
     
     var body: some View {
 
-        Canvas { context, size in
+        Canvas(rendersAsynchronously: true) { context, size in
             let lineCount: Int = peaksHistCount         // lineCount must be <= peaksHistCount = 100
             var boxHueTemp: Double = 0.0
             var boxHue: Double = 0.0

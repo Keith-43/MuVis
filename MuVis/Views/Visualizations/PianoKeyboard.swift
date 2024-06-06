@@ -165,7 +165,7 @@ struct Notes: View {
     var noteCount: Int
     
     var body: some View {
-        Canvas { context, size in
+        Canvas(rendersAsynchronously: true) { context, size in
             let width: Double  = size.width
             let height: Double = size.height
             let columnWidth: Double = width / Double(noteCount)

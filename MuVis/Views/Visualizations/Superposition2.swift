@@ -28,7 +28,7 @@ struct Superposition2: View {
             myDataLength: myDataLength
         )
         
-        Canvas { context, size in
+        Canvas(rendersAsynchronously: true) { context, size in
             
             let width: Double  = size.width
             let height: Double = size.height

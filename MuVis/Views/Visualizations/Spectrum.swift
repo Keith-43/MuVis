@@ -231,7 +231,7 @@ private struct SpectrumPeaks: View {
     let noteProc = NoteProcessing()
     
     var body: some View {
-        Canvas { context, size in
+        Canvas(rendersAsynchronously: true) { context, size in
             let width: Double  = size.width
             let height: Double = size.height
             let halfHeight: Double = height * 0.5

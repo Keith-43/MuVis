@@ -89,7 +89,7 @@ private struct TriOctSpectrum_Live : View {
 
     var body: some View {
 
-        Canvas { context, size in
+        Canvas(rendersAsynchronously: true) { context, size in
 
             let width: Double  = size.width
             let height: Double = size.height
@@ -163,7 +163,7 @@ private struct Notes36 : View {
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        Canvas { context, size in
+        Canvas(rendersAsynchronously: true) { context, size in
             let width: Double  = size.width
             let height: Double = size.height
             let halfHeight: Double = height * 0.5
@@ -204,7 +204,7 @@ private struct Peaks36: View {
     var noteProc = NoteProcessing()
     
     var body: some View {
-        Canvas { context, size in
+        Canvas(rendersAsynchronously: true) { context, size in
             let width:  Double = size.width
             let height: Double = size.height
             var tempD : Double = 0.0

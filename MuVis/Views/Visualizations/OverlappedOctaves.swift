@@ -75,7 +75,7 @@ private struct OverlappedOctaves_Live: View {
 
     var body: some View {
         
-        Canvas { context, size in
+        Canvas(rendersAsynchronously: true) { context, size in
             let width: Double  = size.width
             let height: Double = size.height
             let halfHeight: CGFloat = height * 0.5
@@ -131,7 +131,7 @@ private struct OverlappedOctaves_Live: View {
                         path.addLine(to: CGPoint(x: x, y: y))
                     }
 
-                }else{                                                  // Use the spectrum for the upper 4 octaves:
+                } else { // Use the spectrum for the upper 4 octaves:
                     // Extend the polygon outline upward to the first sample point:
                     magY = gain * Double( spectrum[ noteProc.octBottomBin[oct] ] )
                     magY = min(max(0.0, magY), 1.0)
@@ -157,11 +157,11 @@ private struct OverlappedOctaves_Live: View {
                                 lineWidth: 1 )
 
                 let fillColor: Color = ( option==3 || option==7 ) ? teal : pomegranate
-                context.fill( path,
-                              with: (option==0 || option==2 || option==4 || option==6) ? .color(octColor) : .color(fillColor) )
+                context.fill(path,
+                    with: (option == 0 || option == 2 || option == 4 || option == 6) ? .color(octColor) : .color(fillColor)
+                )
 
             }  // end of for(oct) loop
-
         }  // end of Canvas
     }  
 }

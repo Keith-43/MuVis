@@ -45,7 +45,7 @@ struct Lissajous : View {
         
         let option = settings.option     // Use local short name to improve code readablity.
         
-        Canvas { context, size in
+        Canvas(rendersAsynchronously: true) { context, size in
 
             let width: Double  = size.width
             let height: Double = size.height

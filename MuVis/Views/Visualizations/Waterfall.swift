@@ -53,7 +53,7 @@ private struct Waterfall_Live: View {
 
     var body: some View {
 
-        Canvas { context, size in
+        Canvas(rendersAsynchronously: true) { context, size in
 
             let width: Double  = size.width
             let height: Double = size.height

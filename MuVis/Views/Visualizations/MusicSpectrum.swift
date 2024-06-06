@@ -175,7 +175,7 @@ struct MusicSpectrumPeaks: View {
     var octaveCount: Int
 
     var body: some View {
-        Canvas { context, size in
+        Canvas(rendersAsynchronously: true) { context, size in
             let width: CGFloat  = size.width
             let height: CGFloat = size.height
             let halfHeight: CGFloat = height * 0.5
