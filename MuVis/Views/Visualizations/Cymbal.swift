@@ -33,6 +33,7 @@
 
 import SwiftUI
 
+// TODO: Optimize, runs barely at 20fps fullscreen
 
 struct Cymbal: View {
     @Environment(AudioManager.self) private var manager: AudioManager
@@ -41,17 +42,17 @@ struct Cymbal: View {
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
-
-        GeometryReader { geometry in
+        GeometryReader {
+            let size = $0.size
 
             let ellipseCount: Int = 144
-            let width:  CGFloat = geometry.size.width
-            let height: CGFloat = geometry.size.height
-            let halfWidth:  CGFloat =  0.5 * width
-            let halfHeight: CGFloat =  0.5 * height
+            let width: CGFloat = size.width
+            let height: CGFloat = size.height
+            let halfWidth:  CGFloat = 0.5 * width
+            let halfHeight: CGFloat = 0.5 * height
 
-            var x : Double = 0.0        // The drawing origin is in the upper left corner.
-            var y : Double = 0.0        // The drawing origin is in the upper left corner.
+            var x: Double = 0.0        // The drawing origin is in the upper left corner.
+            var y: Double = 0.0        // The drawing origin is in the upper left corner.
             var mag: Double = 0.0       // used as a preliminary part of the audio amplitude value
 
             // Use local short name to improve code readablity:
@@ -60,17 +61,15 @@ struct Cymbal: View {
 
             // ---------------------------------------------------------------------------------------------------------
             // Render the 144 concentric ellipses:
-            ForEach( 0 ..< ellipseCount, id: \.self) { ellipseNum in      //  0 <= ellipseNum < 144
+            ForEach(0 ..< ellipseCount, id: \.self) { ellipseNum in      //  0 <= ellipseNum < 144
 
                 // As ellipseNum goes from 0 to ellipseCount, rampUp goes from 0.0 to 1.0:
-                let rampUp : Double = Double(ellipseNum) / Double(ellipseCount)
+                let rampUp = Double(ellipseNum) / Double(ellipseCount)
 
-                let hue: Double = Double( ellipseNum%12 ) / 12.0
+                let hue = CGFloat(ellipseNum % 12) / 12.0
                 let result = HtoRGB(hueValue: hue)
-                let r = result.redValue
-                let g = result.greenValue
-                let b = result.blueValue
-                let hueColor = Color(red: r, green: g, blue: b)
+
+                let hueColor = Color(red: result.redValue, green: result.greenValue, blue: result.blueValue)
 
                 Ellipse()
                     .stroke( (option==1 || option==5) ? Color.red : (option==3 || option==7) ? Color.green : hueColor,
@@ -78,12 +77,12 @@ struct Cymbal: View {
                     .frame(width: rampUp * width, height: (option > 3) ? rampUp * height : rampUp * width )
                     .position(x: halfWidth, y: halfHeight)
 
-            }  // end of ForEach() loop over ellipseNum
+            }
 
             // ---------------------------------------------------------------------------------------------------------
             // Now render a four-fold muSpectrum[] across the middle of the pane:
-            ForEach( 0 ..< 2, id: \.self) { row in          // We have a lower and an upper row.
-                ForEach( 0 ..< 2, id: \.self) { column in   // We have a left and a right column.
+            ForEach(0 ..< 2, id: \.self) { row in          // We have a lower and an upper row.
+                ForEach(0 ..< 2, id: \.self) { column in   // We have a left and a right column.
                 
                     // Make the spectrum negative for the lower row:
                     let spectrumHeight = (row == 0) ? -0.1 * height : 0.1 * height
@@ -102,10 +101,11 @@ struct Cymbal: View {
                             path.addLine(to: CGPoint(x: x, y: y))
                         }
                     }
-                    .stroke( Color( (option==0 || option==4) ? .red :
-                                    (option==1 || option==5) ? .blue :
-                                    (option==2 || option==6) ? .green : .red ),
-                             lineWidth: 2.0 )
+                    .stroke(
+                        Color((option==0 || option==4) ? .red :
+                              (option==1 || option==5) ? .blue :
+                              (option==2 || option==6) ? .green : .red),
+                        lineWidth: 2)
 
                 }  // end of ForEach() loop over column
             }  // end of ForEach() loop over row
@@ -114,7 +114,7 @@ struct Cymbal: View {
         .background(colorScheme == .dark ? .black : .white)     // Toggle between black and white background color.
         
     }  // end of var body: some View{}
-}  // end of Cymbal struct
+}
 
 #Preview("Cymbal") {
     Cymbal()

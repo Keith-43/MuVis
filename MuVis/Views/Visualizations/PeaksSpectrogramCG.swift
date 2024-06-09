@@ -80,7 +80,7 @@ private struct Pane {
     let columnWidth: Double = 1.0
     let rowHeight: Double = 1.0
 
-    func drawLine( binNumData: [Int], peakAmpData: [Double], scheme: ColorScheme, option: Int ) -> CGImage {
+    @MainActor func drawLine( binNumData: [Int], peakAmpData: [Double], scheme: ColorScheme, option: Int ) -> CGImage {
 
         // Fill drawing pane with white or black at start of every spectrogram screen:
         if( Pane.counter == 0 ) {

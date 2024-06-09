@@ -77,6 +77,7 @@ private struct DrawingPane {
     let columnWidth: Double = 1.0
     let rowHeight: Double = 1.0
 
+    @MainActor 
     func drawLine( data: [Float], scheme: ColorScheme, option: Int ) -> CGImage {
 
         // Fill drawing pane with white or black at start of every spectrogram screen:
@@ -185,5 +186,4 @@ private struct DrawingPane {
         return ( DrawingPane.cgImage! )  // A new cgImage is returned to the SpectrogramCG View 60 times per second.
 
     }  // end of DrawLine() func
-
-}  // end of DrawingPane struct
+}

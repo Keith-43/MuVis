@@ -87,14 +87,15 @@ let noteColorHI: [Color] = [  Color.noteC_ColorHI, Color.noteCsharp_ColorHI, Col
 // These colors are used in the (TBD) visualizations.
 
 
-
+// TODO: Optimize
 // Convert a hueValue to RGB colors:     // 0.0 <= hueValue <= 1.0
 // This function is used in the Cymbal visualization.
-func HtoRGB( hueValue: Double ) -> (redValue: Double, greenValue: Double, blueValue: Double) {
-    var redValue:   Double = 0.0
-    var greenValue: Double = 0.0
-    var blueValue:  Double = 0.0
-    let hue: Double = hueValue * 6.0
+@MainActor
+func HtoRGB(hueValue: CGFloat) -> (redValue: CGFloat, greenValue: CGFloat, blueValue: CGFloat) {
+    var redValue:   Float = 0.0
+    var greenValue: Float = 0.0
+    var blueValue:  Float = 0.0
+    let hue: Float = Float(hueValue * 6)
 
     if       (hue <= 1.0)   { redValue = 1.0;       greenValue = hue;       blueValue = 0.0
     }else if (hue <  2.0)   { redValue = 2.0 - hue; greenValue = 1.0;       blueValue = 0.0
@@ -103,8 +104,8 @@ func HtoRGB( hueValue: Double ) -> (redValue: Double, greenValue: Double, blueVa
     }else if (hue <  5.0)   { redValue = hue - 4.0; greenValue = 0.0;       blueValue = 1.0
     }else                   { redValue = 1.0;       greenValue = 0.0;       blueValue = 6.0 - hue
     }
-    return (redValue, greenValue, blueValue)
-}  // end of HtoRGB() func
+    return (CGFloat(redValue), CGFloat(greenValue), CGFloat(blueValue))
+}
 
 
 
